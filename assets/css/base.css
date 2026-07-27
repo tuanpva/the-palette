@@ -1,0 +1,152 @@
+/*
+  The Palette — shared base styles for all room pages + food.html.
+  Each page defines its own `:root` colour tokens (and any room-specific
+  decorative shapes like `.orb`) in a small inline <style> block, so every
+  room keeps its own palette and mood. Everything layout/behaviour-related
+  that was identical across pages lives here once.
+*/
+
+:root{
+  --radius:22px;
+  --radius-sm:14px;
+  --radius-pill:30px;
+  --shadow:0 8px 30px rgba(60,50,30,.10);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+.wrap{max-width:480px;margin:0 auto;padding:0 22px 80px}
+
+/* Bilingual content: which language shows is driven entirely by <html lang="…">,
+   which JS keeps in sync (site.js sets it on load and on every language switch).
+   Both [data-vi] and [data-en] nodes exist for every string; exactly one side is
+   hidden at a time, reactively, with no per-element inline styles to fall out of sync. */
+html[lang="vi"] [data-en]{display:none}
+html[lang="en"] [data-vi]{display:none}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+@keyframes rise{to{opacity:1;transform:translateY(0)}}
+
+/* Keyboard accessibility: visible focus ring using the page's own ink colour */
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+.gate{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at 78% 16%, var(--c1) 0%, transparent 44%),radial-gradient(circle at 16% 82%, var(--c2s) 0%, transparent 50%),var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center;transition:opacity .6s,visibility .6s;}
+.gate.hidden{opacity:0;visibility:hidden}
+.gate-brand{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--inks);font-weight:600;margin-bottom:14px;}
+.gate-name{font-family:'Fraunces',serif;font-weight:400;font-size:3.4rem;line-height:1;margin-bottom:10px;}
+.gate-tag{font-family:'Fraunces',serif;font-style:italic;font-size:1.1rem;color:var(--inks);margin-bottom:48px;}
+.gate-q{font-size:.9rem;color:var(--inks);margin-bottom:18px}
+.lang-btns{display:flex;gap:14px;width:100%;max-width:320px}
+.lang-btn{flex:1;background:var(--white);border:1.5px solid var(--c2);border-radius:18px;padding:20px 14px;cursor:pointer;font-family:inherit;transition:transform .18s,background .2s,border-color .2s;}
+.lang-btn:active{transform:scale(.95)}
+.lang-btn:hover{background:var(--c2s);border-color:var(--ink)}
+.lang-btn .flag{font-size:1.8rem;display:block;margin-bottom:6px}
+.lang-btn .lbl{font-family:'Fraunces',serif;font-size:1.15rem;color:var(--ink);display:block}
+.lang-btn .sub{font-size:.74rem;color:var(--inks);margin-top:2px;display:block}
+
+.hero{min-height:86vh;display:flex;flex-direction:column;justify-content:center;padding:60px 0 40px;position:relative;}
+.hero-bg{position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 78% 18%, var(--c1) 0%, transparent 42%),radial-gradient(circle at 14% 78%, var(--c2s) 0%, transparent 48%),var(--cream);}
+.eyebrow{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--inks);font-weight:600;margin-bottom:18px;}
+.room-name{font-family:'Fraunces',serif;font-weight:400;font-size:4.2rem;line-height:.92;letter-spacing:-.02em;margin-bottom:6px;}
+.room-tag{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:1.35rem;color:var(--inks);margin-bottom:34px;}
+.greeting{font-size:1.02rem;color:var(--ink);max-width:380px;}
+.greeting b{font-weight:600}
+.scroll-hint{margin-top:42px;font-size:.8rem;color:var(--inks);display:flex;align-items:center;gap:8px;}
+.scroll-hint .ar{animation:bob 1.8s ease-in-out infinite}
+.reveal{opacity:0;transform:translateY(14px);animation:rise .8s forwards}
+
+.section{margin-top:46px}
+.section-label{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:500;margin-bottom:4px;}
+.section-sub{font-size:.9rem;color:var(--inks);margin-bottom:20px}
+.card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin-bottom:14px;}
+
+.emo{background:linear-gradient(135deg,var(--c1s),var(--c2s));border-radius:var(--radius);padding:22px 24px;margin-bottom:26px;}
+.emo p{font-family:'Fraunces',serif;font-style:italic;font-size:1.12rem;color:var(--ink);line-height:1.5;}
+
+.palette-note{display:flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--c2s);border-radius:16px;padding:12px 16px;margin-bottom:22px;box-shadow:var(--shadow)}
+.pal-dot{width:20px;height:20px;border-radius:50%;flex-shrink:0;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.pal-text{font-size:.78rem;color:var(--inks);line-height:1.4}
+.wifi-card{background:linear-gradient(135deg,var(--c2s),var(--c1s));display:flex;align-items:center;justify-content:space-between;gap:14px;}
+.wifi-info{font-size:.86rem;color:var(--inks)}
+.wifi-info .net{font-size:1.05rem;color:var(--ink);font-weight:600;font-family:'Fraunces',serif}
+.wifi-info .pw{font-family:monospace;font-size:1.1rem;color:var(--ink);margin-top:2px;letter-spacing:.04em}
+.copy-btn{background:var(--ink);color:var(--cream);border:none;cursor:pointer;padding:12px 18px;border-radius:var(--radius-sm);font-size:.85rem;font-weight:600;white-space:nowrap;transition:transform .15s,background .2s;font-family:inherit;}
+.copy-btn:active{transform:scale(.94)}
+.copy-btn.done{background:#7BA05B}
+
+.acc{cursor:pointer;list-style:none}
+.acc summary{display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:500;font-size:1rem;}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary .chev{transition:transform .25s;color:var(--inks)}
+.acc[open] summary .chev{transform:rotate(180deg)}
+.acc-body{padding-top:14px;font-size:.92rem;color:var(--inks)}
+.acc-body p{margin-bottom:6px}
+
+.steps{counter-reset:step;list-style:none}
+.steps li{position:relative;padding:12px 0 12px 44px;border-bottom:1px solid var(--c2s);font-size:.92rem;}
+.steps li:last-child{border-bottom:none}
+.steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:11px;width:28px;height:28px;background:var(--c1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:500;font-size:.9rem;color:var(--ink);}
+
+.shuffle-card{text-align:center}
+.shuffle-out{font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;color:var(--ink);min-height:80px;display:flex;align-items:center;justify-content:center;padding:10px 6px 22px;line-height:1.4;}
+.shuffle-out.pop{animation:rise .4s}
+
+/* Location section — map embed, CTA button, and Nearby / Getting Around lists */
+.map-frame-wrap{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-bottom:14px;background:var(--white);}
+.map-frame-wrap iframe{display:block;width:100%;height:260px;border:0}
+.map-btn{display:block;text-align:center;background:var(--c1);color:var(--ink);text-decoration:none;padding:16px 24px;border-radius:var(--radius-sm);font-weight:600;font-size:.95rem;margin-bottom:22px;transition:transform .15s;}
+.map-btn:active{transform:scale(.97)}
+
+.loc-list{list-style:none}
+.loc-list li{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--c2s);}
+.loc-list li:last-child{border-bottom:none}
+.loc-icon{width:38px;height:38px;flex-shrink:0;background:var(--c1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.05rem}
+.loc-label{font-family:'Fraunces',serif;font-weight:500;font-size:1rem;color:var(--ink);margin-bottom:2px}
+.loc-text p{font-size:.86rem;color:var(--inks)}
+
+/* Reusable "edit me" callout — used by food.html's sample listings and the Location section's placeholder tips */
+.placeholder-note{background:var(--c1s);border-radius:16px;padding:16px 18px;font-size:.85rem;color:var(--ink);margin-bottom:24px;border:1px dashed var(--c1)}
+.placeholder-note b{font-weight:600}
+.shuffle-btn{background:var(--c1);border:none;cursor:pointer;padding:14px 24px;border-radius:var(--radius-sm);font-weight:600;font-size:.9rem;color:var(--ink);font-family:inherit;transition:transform .15s;}
+.shuffle-btn:active{transform:scale(.95)}
+
+.food-card{background:linear-gradient(135deg,var(--c1s),var(--c2s));border-radius:var(--radius);padding:24px;margin-top:14px;text-align:center;}
+.food-card .fc-emoji{font-size:1.8rem}
+.food-card h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.3rem;margin:8px 0 4px}
+.food-card p{font-size:.88rem;color:var(--inks);margin-bottom:16px}
+.food-card a{display:inline-block;background:var(--ink);color:var(--cream);text-decoration:none;padding:12px 24px;border-radius:var(--radius-sm);font-weight:600;font-size:.9rem;}
+
+.review{background:var(--white);border:1.5px solid var(--c2);border-radius:var(--radius);padding:26px 22px;text-align:center;}
+.review .stars{font-size:1.5rem;letter-spacing:.15em;margin-bottom:12px}
+.review h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.35rem;margin-bottom:8px}
+.review p{font-size:.9rem;color:var(--inks);margin-bottom:20px;max-width:340px;margin-left:auto;margin-right:auto}
+.review a{display:inline-block;background:var(--c1);color:var(--ink);text-decoration:none;padding:13px 28px;border-radius:var(--radius-sm);font-weight:600;font-size:.92rem;}
+
+.concierge{background:var(--ink);color:var(--cream);border-radius:var(--radius);padding:26px 24px;text-align:center;margin-top:14px;}
+.concierge h3{font-family:'Fraunces',serif;font-weight:400;font-size:1.4rem;margin-bottom:6px}
+.concierge p{font-size:.88rem;opacity:.8;margin-bottom:18px}
+.concierge .c-fb{display:inline-block;background:var(--c1);color:var(--ink);text-decoration:none;padding:13px 26px;border-radius:var(--radius-sm);font-weight:600;font-size:.9rem;}
+.c-hotline{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.15);font-size:.85rem;opacity:.85}
+.c-hotline a{color:var(--cream);text-decoration:none;font-weight:600;font-size:1.1rem;letter-spacing:.02em;display:inline-block;margin-top:4px}
+
+.footer{text-align:center;margin-top:50px;color:var(--inks);font-size:.78rem}
+.footer .slogan{font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;color:var(--ink);margin-bottom:6px}
+
+/* Fixed chrome — offset by the safe area so it clears the iPhone notch / home indicator */
+.lang-toggle{position:fixed;top:calc(16px + env(safe-area-inset-top));right:calc(16px + env(safe-area-inset-right));z-index:40;background:rgba(255,255,255,.8);backdrop-filter:blur(6px);border:1px solid var(--c2);border-radius:var(--radius-pill);padding:6px 4px;display:flex;gap:2px;box-shadow:var(--shadow);}
+.lang-toggle button{border:none;background:none;cursor:pointer;font-family:inherit;font-size:.78rem;font-weight:600;padding:5px 11px;border-radius:24px;color:var(--inks);}
+.lang-toggle button.on{background:var(--ink);color:var(--cream)}
+
+.toast{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:var(--cream);padding:13px 22px;border-radius:var(--radius-pill);font-size:.85rem;font-weight:500;transition:transform .35s;z-index:50;max-width:calc(100vw - 48px);text-align:center;}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* food.html only — "Back to room" is an action, not navigation, so it's a <button> styled as a link */
+.back{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;color:var(--inks);text-decoration:none;margin-bottom:28px;font-weight:500;border:none;background:none;padding:0;cursor:pointer;font-family:inherit;}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1!important;transform:none!important}
+  .spot{opacity:1!important;transform:none!important}
+}

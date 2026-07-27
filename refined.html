@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Hướng dẫn lưu trú phòng #refined tại The Palette — wifi, tiện nghi và gợi ý quán ăn gần đây. / Digital guide for room #refined at The Palette homestay, Hanoi.">
+<meta name="theme-color" content="#FBF7F2">
+<title>#refined · The Palette</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<style>
+  /* #refined palette — coral red & steel blue. Only this block changes per room. */
+  :root{--c1:#D73F4E;--c1s:#F1E5E5;--c2:#C9D6E2;--c2s:#DAE4ED;--cream:#FBF7F2;--ink:#41332F;--inks:#7F6F67;--white:#FFFFFF;}
+  .orb{display:none}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <div class="gate-orb" aria-hidden="true" style="width:70px;height:2px;background:var(--c1);opacity:.6;margin-bottom:40px"></div>
+  <p class="gate-brand">The Palette</p>
+  <p class="gate-name">#refined</p>
+  <p class="gate-tag" data-vi>nơi mỗi khoảnh khắc được giữ lại</p>
+  <p class="gate-tag" data-en>where every moment is kept</p>
+  <p class="gate-q">Chọn ngôn ngữ · Choose your language</p>
+  <div class="lang-btns">
+    <button class="lang-btn" onclick="setLanguage('vi')"><span class="flag" aria-hidden="true">🇻🇳</span><span class="lbl">Tiếng Việt</span><span class="sub">Vào phòng</span></button>
+    <button class="lang-btn" onclick="setLanguage('en')"><span class="flag" aria-hidden="true">🇬🇧</span><span class="lbl">English</span><span class="sub">Enter room</span></button>
+  </div>
+</div>
+
+<div class="lang-toggle" id="langToggle" style="display:none" aria-label="Language / Ngôn ngữ">
+  <button id="tg-vi" onclick="setLanguage('vi')" aria-pressed="true">VI</button>
+  <button id="tg-en" onclick="setLanguage('en')" aria-pressed="false">EN</button>
+</div>
+
+<div class="hero">
+  <div class="hero-bg"><div class="orb" aria-hidden="true"></div></div>
+  <div class="wrap">
+    <p class="eyebrow reveal" style="animation-delay:.1s">The Palette</p>
+    <h1 class="room-name reveal" style="animation-delay:.25s">#refined</h1>
+    <p class="room-tag reveal" style="animation-delay:.4s" data-vi>nơi mỗi khoảnh khắc được giữ lại</p>
+    <p class="room-tag reveal" style="animation-delay:.4s" data-en>where every moment is kept</p>
+    <p class="greeting reveal" style="animation-delay:.55s" data-vi>Chào bạn. Refined mang dáng dấp châu Âu xưa — đỏ coral, sọc kẻ, kệ ống công nghiệp. Một căn phòng có cá tính và biết kể chuyện. Ở đây, chúng tôi mời bạn <b>giữ lại những khoảnh khắc</b>: một tấm polaroid mang về làm kỷ niệm. Cuộn xuống nhé.</p>
+    <p class="greeting reveal" style="animation-delay:.55s" data-en>Hello. Refined carries the air of old Europe — coral red, stripes, industrial pipe shelving. A room with character, one that tells a story. Here, we invite you to <b>keep your moments</b>: a polaroid to take home. Scroll down.</p>
+    <div class="scroll-hint reveal" style="animation-delay:.7s"><span class="ar" aria-hidden="true">↓</span> <span data-vi>cuộn nhẹ một chút</span><span data-en>scroll gently</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="section">
+    <div class="emo">
+      <p data-vi>Refined là nơi dành cho hai người và một dịp đặc biệt. Ánh sáng ấm, không gian riêng tư, và những khoảnh khắc đáng được giữ lại thật lâu.</p>
+      <p data-en>Refined is made for two people and a special occasion. Warm light, a private space, and moments worth keeping for a long time.</p>
+    </div>
+    <div class="palette-note">
+      <span class="pal-dot" style="background:#D73F4E"></span><span class="pal-dot" style="background:#C9D6E2"></span>
+      <div class="pal-text">
+        <span data-vi>Màu của #refined: 1070-R05B đỏ coral · S 0505-R10B hồng phấn · S 0510-R80B xanh xám</span>
+        <span data-en>The colours of #refined: 1070-R05B đỏ coral · S 0505-R10B hồng phấn · S 0510-R80B xanh xám</span>
+      </div>
+    </div>
+
+    <h2 class="section-label" data-vi>Vài điều tiện tay</h2>
+    <h2 class="section-label" data-en>A few practical things</h2>
+    <p class="section-sub" data-vi>Để bạn thấy thoải mái như ở nhà.</p>
+    <p class="section-sub" data-en>So you feel right at home.</p>
+
+    <div class="card wifi-card">
+      <div class="wifi-info">Wifi<div class="net">#refined</div><div class="pw" id="pw">66668888</div></div>
+      <button class="copy-btn" onclick="copyPw(this)"><span data-vi>Sao chép</span><span data-en>Copy</span></button>
+    </div>
+
+    <details class="card acc">
+      <summary><span data-vi>Điều hòa & nhiệt độ</span><span data-en>Air conditioning & temperature</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <div class="acc-body">
+        <div data-vi><p>Điều khiển đặt trên kệ cạnh giường. Bấm nguồn, chọn 25–26°C cho dễ chịu.</p><p>Nút chế độ: hình bông tuyết là làm mát, giọt nước là hút ẩm cho ngày Hà Nội nồm.</p></div>
+        <div data-en><p>The remote is on the shelf by the bed. Press power, set it to 25–26°C for comfort.</p><p>Mode button: the snowflake cools, the water drop dehumidifies for Hanoi's damp days.</p></div>
+      </div>
+    </details>
+    <details class="card acc">
+      <summary><span data-vi>Đèn & không khí phòng</span><span data-en>Lights & atmosphere</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <div class="acc-body">
+        <div data-vi><p>Công tắc cạnh cửa bật đèn chính. Đèn đầu giường có thể chỉnh sáng — vặn nhẹ cho buổi tối dịu lại.</p></div>
+        <div data-en><p>The switch by the door turns on the main light. The bedside lamp is dimmable — turn it low to soften the evening.</p></div>
+      </div>
+    </details>
+    <details class="card acc">
+      <summary><span data-vi>TV & loa</span><span data-en>TV & speaker</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <div class="acc-body">
+        <div data-vi><p>TV đã đăng nhập sẵn Netflix & YouTube. Điều khiển trong ngăn kéo tủ. Kết nối loa Bluetooth bằng cách tìm “Refined Sound” trên điện thoại.</p></div>
+        <div data-en><p>The TV is already signed in to Netflix & YouTube. The remote is in the cabinet drawer. Connect the Bluetooth speaker by searching for “Refined Sound” on your phone.</p></div>
+      </div>
+    </details>
+  </section>
+
+  <section class="section">
+    <h2 class="section-label" data-vi>Một tấm polaroid mang về</h2>
+    <h2 class="section-label" data-en>A polaroid to take home</h2>
+    <p class="section-sub" data-vi>Máy polaroid là linh hồn của Refined. Chụp một tấm, và mang nó về làm kỷ niệm của riêng bạn.</p>
+    <p class="section-sub" data-en>The polaroid camera is the soul of Refined. Take a photo, and keep it as your own memento.</p>
+    <div class="card">
+      <ol class="steps" data-vi><li>Máy polaroid nằm trên kệ ống cạnh cửa sổ — nơi có ánh sáng đẹp nhất.</li><li>Gạt nút nguồn, đợi ống kính bật ra. Phim đã được lắp sẵn.</li><li>Đứng gần cửa sổ, ánh sáng tự nhiên cho màu đẹp nhất. Bấm nút chụp.</li><li>Đợi tấm hình hiện trong khoảng 1 phút — đừng vẫy, cứ để yên.</li><li>Tấm hình là của bạn — mang về làm kỷ niệm của ngày hôm nay.</li></ol>
+      <ol class="steps" data-en><li>The polaroid sits on the pipe shelf by the window — where the light is loveliest.</li><li>Slide the power switch, wait for the lens to pop out. Film is already loaded.</li><li>Stand near the window; natural light gives the best colour. Press the shutter.</li><li>Wait about a minute for the photo to appear — don&#x27;t shake it, just let it be.</li><li>The photo is yours — take it home as a memento of today.</li></ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-label" data-vi>Đói bụng chưa?</h2>
+    <h2 class="section-label" data-en>Hungry yet?</h2>
+    <p class="section-sub" data-vi>Chúng tôi đã chọn sẵn vài quán cà phê và quán ăn ngon quanh nhà cho bạn.</p>
+    <p class="section-sub" data-en>We've picked a few good coffee spots and eateries around the house for you.</p>
+    <div class="food-card">
+      <div class="fc-emoji" aria-hidden="true">🍜</div>
+      <h3 data-vi>Bản đồ ăn uống của The Palette</h3>
+      <h3 data-en>The Palette's food & coffee guide</h3>
+      <p data-vi>Cà phê, bữa sáng, bữa tối, ăn vặt — trong vài phút đi bộ.</p>
+      <p data-en>Coffee, breakfast, dinner, snacks — all within a short walk.</p>
+      <a href="food.html"><span data-vi>Xem gợi ý quán →</span><span data-en>See where to eat →</span></a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-label" data-vi>📍 Vị trí của The Palette</h2>
+    <h2 class="section-label" data-en>📍 Find The Palette</h2>
+    <p class="section-sub" data-vi>The Palette nằm tại trung tâm Hà Nội, thuận tiện để khám phá những quán cà phê, nhà hàng và các địa điểm nổi tiếng chỉ trong vài phút.</p>
+    <p class="section-sub" data-en>Perfectly located in the heart of Hanoi, The Palette offers easy access to cafés, local restaurants, and many of the city's most popular attractions.</p>
+
+    <div class="map-frame-wrap">
+      <iframe src="https://www.google.com/maps?q=21.0149969,105.848583&z=16&output=embed" title="The Palette – Google Maps location" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <a class="map-btn" href="https://maps.app.goo.gl/qJSwjRrWf88gBv7N6" target="_blank" rel="noopener">
+      <span data-vi>📍 Mở Google Maps</span><span data-en>📍 Open in Google Maps</span>
+    </a>
+
+    <div class="card">
+      <h3 data-vi>Gần đây</h3>
+      <h3 data-en>Nearby</h3>
+      <ul class="loc-list">
+        <li>
+          <span class="loc-icon" aria-hidden="true">☕</span>
+          <div class="loc-text">
+            <div class="loc-label" data-vi>Cà phê</div>
+            <div class="loc-label" data-en>Cafés</div>
+            <p data-vi>[Quán cà phê ấm cúng gần đây]</p>
+            <p data-en>[Cozy cafés nearby]</p>
+          </div>
+        </li>
+        <li>
+          <span class="loc-icon" aria-hidden="true">🍜</span>
+          <div class="loc-text">
+            <div class="loc-label" data-vi>Ẩm thực địa phương</div>
+            <div class="loc-label" data-en>Local Food</div>
+            <p data-vi>[Nhà hàng địa phương nổi tiếng]</p>
+            <p data-en>[Famous local restaurants]</p>
+          </div>
+        </li>
+        <li>
+          <span class="loc-icon" aria-hidden="true">🏛</span>
+          <div class="loc-text">
+            <div class="loc-label" data-vi>Điểm tham quan</div>
+            <div class="loc-label" data-en>Attractions</div>
+            <p data-vi>[Các địa điểm tham quan nổi tiếng]</p>
+            <p data-en>[Popular attractions]</p>
+          </div>
+        </li>
+        <li>
+          <span class="loc-icon" aria-hidden="true">🚶</span>
+          <div class="loc-text">
+            <div class="loc-label" data-vi>Đi bộ</div>
+            <div class="loc-label" data-en>Walking Distance</div>
+            <p data-vi>[Dễ dàng khám phá bằng đi bộ]</p>
+            <p data-en>[Easy to explore on foot]</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 data-vi>Di chuyển</h3>
+      <h3 data-en>Getting Around</h3>
+      <ul class="loc-list">
+        <li>
+          <span class="loc-icon" aria-hidden="true">🚗</span>
+          <div class="loc-text">
+            <div class="loc-label">Grab</div>
+            <p data-vi>[Đặt xe qua ứng dụng Grab, thường có mặt trong vài phút]</p>
+            <p data-en>[Book a ride via the Grab app — usually just minutes away]</p>
+          </div>
+        </li>
+        <li>
+          <span class="loc-icon" aria-hidden="true">🚕</span>
+          <div class="loc-text">
+            <div class="loc-label" data-vi>Taxi</div>
+            <div class="loc-label" data-en>Taxi</div>
+            <p data-vi>[Bắt taxi ngay trước nhà hoặc gọi hãng quen thuộc]</p>
+            <p data-en>[Hail a taxi right outside, or call a local company]</p>
+          </div>
+        </li>
+        <li>
+          <span class="loc-icon" aria-hidden="true">🚶</span>
+          <div class="loc-text">
+            <div class="loc-label" data-vi>Đi bộ</div>
+            <div class="loc-label" data-en>Walking</div>
+            <p data-vi>[Nhiều địa điểm nằm trong bán kính đi bộ]</p>
+            <p data-en>[Many spots are within easy walking distance]</p>
+          </div>
+        </li>
+        <li>
+          <span class="loc-icon" aria-hidden="true">✈️</span>
+          <div class="loc-text">
+            <div class="loc-label" data-vi>Sân bay</div>
+            <div class="loc-label" data-en>Airport</div>
+            <p data-vi>[Khoảng __ phút từ sân bay Nội Bài]</p>
+            <p data-en>[About __ minutes from Noi Bai Airport]</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="placeholder-note" data-vi>✍️ <b>Ghi chú:</b> Các mô tả trong mục "Gần đây" và "Di chuyển" là ví dụ mẫu — hãy thay bằng nội dung thật của bạn.</div>
+    <div class="placeholder-note" data-en>✍️ <b>Note:</b> The descriptions under "Nearby" and "Getting Around" are placeholder examples — replace them with your own details.</div>
+  </section>
+
+  <section class="section">
+    <div class="review">
+      <div class="stars" aria-hidden="true">★★★★★</div>
+      <h3 data-vi>Bạn thấy #refined thế nào?</h3>
+      <h3 data-en>How did #refined feel?</h3>
+      <p data-vi>Nếu căn phòng khiến bạn thấy vui, một dòng đánh giá trên Google sẽ giúp những vị khách sau tìm được đúng cảm xúc của mình. Cảm ơn bạn thật nhiều.</p>
+      <p data-en>If the room made you happy, a line of review on Google helps future guests find the feeling that fits them. Thank you so much.</p>
+      <a href="https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID" target="_blank" rel="noopener"><span data-vi>Viết đánh giá trên Google →</span><span data-en>Leave a Google review →</span></a>
+    </div>
+
+    <div class="concierge">
+      <h3 data-vi>Cần gì cứ nhắn mình</h3>
+      <h3 data-en>Need anything? Just message us</h3>
+      <p data-vi>Thêm khăn, hỏi đường, hay chỉ muốn gợi ý quán ngon gần đây.</p>
+      <p data-en>Extra towels, directions, or just a good spot to eat nearby.</p>
+      <a class="c-fb" href="https://www.facebook.com/YOUR_PAGE" target="_blank" rel="noopener"><span data-vi>Nhắn qua Facebook →</span><span data-en>Message on Facebook →</span></a>
+      <div class="c-hotline">
+        <span data-vi>Hoặc gọi trực tiếp cho chúng tôi</span><span data-en>Or call us directly</span><br>
+        <a href="tel:0000000000">0000 000 000</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div class="slogan" data-vi>Nơi cảm xúc thuộc về.</div>
+    <div class="slogan" data-en>A place feelings belong.</div>
+    The Palette · <span data-vi>Hà Nội</span><span data-en>Hanoi</span>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/site.js"></script>
+</body>
+</html>

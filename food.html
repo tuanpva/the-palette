@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Bản đồ ăn uống · The Palette" data-title-en="Food &amp; Coffee Guide · The Palette">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Gợi ý quán cà phê, bữa sáng, bữa tối và ăn vặt gần The Palette. / Nearby coffee, breakfast, dinner and snack picks from The Palette homestay, Hanoi.">
+<meta name="theme-color" content="#FBF8F2">
+<title>Bản đồ ăn uống · The Palette</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<style>
+  /* food.html palette — warm gold & sage, shared by all rooms via their food-card links. */
+  :root{--c1:#F0CE7A;--c1s:#FAEECE;--c2:#A9C4B5;--c2s:#DCEAE2;--cream:#FBF8F2;--ink:#43392E;--inks:#7D7060;--white:#FFFFFF;}
+
+  .top{padding:52px 0 12px;position:relative}
+  .eyebrow{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--inks);font-weight:600;margin-bottom:12px}
+  .title{font-family:'Fraunces',serif;font-weight:400;font-size:2.8rem;line-height:1.02;margin-bottom:10px}
+  .intro{font-size:1rem;color:var(--ink);max-width:400px}
+  .addr{font-size:.82rem;color:var(--inks);margin-top:16px;display:flex;align-items:center;gap:6px}
+
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin:28px 0 8px;position:sticky;top:0;background:var(--cream);padding:12px 0;z-index:10}
+  .filter{border:1.5px solid var(--c2);background:var(--white);cursor:pointer;padding:8px 16px;border-radius:24px;font-family:inherit;font-size:.84rem;font-weight:600;color:var(--inks);transition:all .2s}
+  .filter.on{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+
+  .group{margin-top:30px}
+  .group-label{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;margin-bottom:2px;display:flex;align-items:center;gap:8px}
+  .group-sub{font-size:.85rem;color:var(--inks);margin-bottom:16px}
+
+  .spot{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:13px;animation:rise .5s forwards;opacity:0;transform:translateY(10px)}
+  .spot-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .spot-name{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--ink);font-weight:500}
+  .spot-walk{font-size:.74rem;color:var(--inks);white-space:nowrap;background:var(--c2s);padding:4px 10px;border-radius:20px;margin-top:2px}
+  .spot-desc{font-size:.9rem;color:var(--inks);margin:8px 0 6px}
+  .spot-pick{font-size:.86rem;color:var(--ink)}
+  .spot-pick b{font-weight:600;font-family:'Fraunces',serif;font-style:italic}
+  .spot-foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px}
+  .spot-hours{font-size:.76rem;color:var(--inks)}
+  .spot-map{background:var(--c1);color:var(--ink);text-decoration:none;padding:9px 16px;border-radius:12px;font-size:.82rem;font-weight:600;white-space:nowrap}
+
+  .hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="lang-toggle" aria-label="Language / Ngôn ngữ">
+  <button id="tg-vi" class="on" onclick="setLanguage('vi')" aria-pressed="true">VI</button>
+  <button id="tg-en" onclick="setLanguage('en')" aria-pressed="false">EN</button>
+</div>
+
+<div class="wrap">
+  <div class="top">
+    <button class="back" onclick="history.back()">← <span data-vi>Về phòng</span><span data-en>Back to room</span></button>
+    <p class="eyebrow">The Palette</p>
+    <h1 class="title" data-vi>Ăn uống quanh đây</h1>
+    <h1 class="title" data-en>Coffee & food nearby</h1>
+    <p class="intro" data-vi>Vài quán cà phê và quán ăn chúng tôi thật sự hay ghé, tất cả trong vài phút đi bộ từ nhà. Chọn theo tâm trạng của bạn.</p>
+    <p class="intro" data-en>A few coffee spots and eateries we genuinely love, all a short walk from the house. Pick by your mood.</p>
+    <div class="addr" data-vi>📍 Tính từ 35 Nguyễn Bỉnh Khiêm, Hai Bà Trưng</div>
+    <div class="addr" data-en>📍 From 35 Nguyen Binh Khiem, Hai Ba Trung</div>
+  </div>
+
+  <div class="filters" role="group" data-aria-vi="Lọc theo danh mục" data-aria-en="Filter by category" aria-label="Filter by category">
+    <button class="filter on" data-cat="all" onclick="filter('all',this)" aria-pressed="true"><span data-vi>Tất cả</span><span data-en>All</span></button>
+    <button class="filter" data-cat="coffee" onclick="filter('coffee',this)" aria-pressed="false"><span data-vi>Cà phê</span><span data-en>Coffee</span></button>
+    <button class="filter" data-cat="breakfast" onclick="filter('breakfast',this)" aria-pressed="false"><span data-vi>Bữa sáng</span><span data-en>Breakfast</span></button>
+    <button class="filter" data-cat="dinner" onclick="filter('dinner',this)" aria-pressed="false"><span data-vi>Bữa tối</span><span data-en>Dinner</span></button>
+    <button class="filter" data-cat="snack" onclick="filter('snack',this)" aria-pressed="false"><span data-vi>Ăn vặt</span><span data-en>Snacks</span></button>
+  </div>
+
+  <!-- COFFEE -->
+  <div class="group" data-group="coffee">
+    <h2 class="group-label">☕ <span data-vi>Cà phê & làm việc</span><span data-en>Coffee & working</span></h2>
+    <p class="group-sub" data-vi>Cho buổi sáng chậm hoặc một buổi ngồi lâu.</p>
+    <p class="group-sub" data-en>For a slow morning or a long sit-down.</p>
+
+    <div class="spot" data-cat="coffee">
+      <div class="spot-head">
+        <div class="spot-name">May Coffee Lab</div>
+        <div class="spot-walk">~2 <span data-vi>phút</span><span data-en>min</span></div>
+      </div>
+      <p class="spot-desc" data-vi>Quán nhỏ trong ngõ, chủ quán mê cà phê và tự làm nhiều thứ. Yên tĩnh, lãng mạn.</p>
+      <p class="spot-desc" data-en>A tiny alley spot; the owner is passionate about coffee and makes a lot in-house. Quiet and romantic.</p>
+      <p class="spot-pick" data-vi><b>Thử:</b> cold brew mơ, kombucha nhà làm</p>
+      <p class="spot-pick" data-en><b>Try:</b> apricot cold brew, house kombucha</p>
+      <div class="spot-foot">
+        <span class="spot-hours">7:30–22:00</span>
+        <a class="spot-map" href="https://www.google.com/maps/search/?api=1&query=May+Coffee+Lab+Nguyen+Binh+Khiem&query_place_id=ChIJZTwVbEyrNTERPqPyh3g1AlI" target="_blank" rel="noopener"><span data-vi>Chỉ đường →</span><span data-en>Directions →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="coffee">
+      <div class="spot-head">
+        <div class="spot-name">8Chuyện Coffee</div>
+        <div class="spot-walk">~3 <span data-vi>phút</span><span data-en>min</span></div>
+      </div>
+      <p class="spot-desc" data-vi>Quán xinh, có ban công, hợp vừa làm việc vừa trò chuyện. Nhân viên dễ thương.</p>
+      <p class="spot-desc" data-en>Cute spot with a balcony, good for both working and chatting. Lovely staff.</p>
+      <p class="spot-pick" data-vi><b>Thử:</b> matcha latte</p>
+      <p class="spot-pick" data-en><b>Try:</b> matcha latte</p>
+      <div class="spot-foot">
+        <span class="spot-hours">7:00–22:00</span>
+        <a class="spot-map" href="https://www.google.com/maps/search/?api=1&query=8Chuyen+Coffee+Nguyen+Binh+Khiem&query_place_id=ChIJCRR5YgCrNTER147PNJdITHc" target="_blank" rel="noopener"><span data-vi>Chỉ đường →</span><span data-en>Directions →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="coffee">
+      <div class="spot-head">
+        <div class="spot-name">Luci Coffee House</div>
+        <div class="spot-walk">~3 <span data-vi>phút</span><span data-en>min</span></div>
+      </div>
+      <p class="spot-desc" data-vi>Cà phê ngon trong một căn nhà cũ, rộng rãi, nhiều cửa sổ đẹp để chụp hình.</p>
+      <p class="spot-desc" data-en>Good coffee in an old house — spacious, with pretty windows for photos.</p>
+      <p class="spot-pick" data-vi><b>Thử:</b> cà phê muối, mango passion</p>
+      <p class="spot-pick" data-en><b>Try:</b> salted coffee, mango passion</p>
+      <div class="spot-foot">
+        <span class="spot-hours">7:30–23:00 · <span data-vi>tiền mặt</span><span data-en>cash only</span></span>
+        <a class="spot-map" href="https://www.google.com/maps/search/?api=1&query=Luci+Coffee+House+Nguyen+Binh+Khiem&query_place_id=ChIJlV9reACrNTEROTjKu0WBn6Q" target="_blank" rel="noopener"><span data-vi>Chỉ đường →</span><span data-en>Directions →</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BREAKFAST -->
+  <div class="group" data-group="breakfast">
+    <h2 class="group-label">🥐 <span data-vi>Bữa sáng</span><span data-en>Breakfast</span></h2>
+    <p class="group-sub" data-vi>Bắt đầu ngày mới nhẹ nhàng.</p>
+    <p class="group-sub" data-en>Start the day gently.</p>
+
+    <div class="spot" data-cat="breakfast">
+      <div class="spot-head">
+        <div class="spot-name" data-vi>[Tên quán bữa sáng]</div>
+        <div class="spot-name" data-en>[Breakfast spot name]</div>
+        <div class="spot-walk">~? <span data-vi>phút</span><span data-en>min</span></div>
+      </div>
+      <p class="spot-desc" data-vi>[Mô tả ngắn: không khí, kiểu món, vì sao bạn thích quán này.]</p>
+      <p class="spot-desc" data-en>[Short description: atmosphere, type of food, why you love it.]</p>
+      <p class="spot-pick" data-vi><b>Thử:</b> [món gợi ý]</p>
+      <p class="spot-pick" data-en><b>Try:</b> [recommended dish]</p>
+      <div class="spot-foot">
+        <span class="spot-hours">[giờ mở]</span>
+        <a class="spot-map" href="#" target="_blank" rel="noopener"><span data-vi>Chỉ đường →</span><span data-en>Directions →</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DINNER -->
+  <div class="group" data-group="dinner">
+    <h2 class="group-label">🍜 <span data-vi>Bữa tối</span><span data-en>Dinner</span></h2>
+    <p class="group-sub" data-vi>Khi bụng đói và trời đã tối.</p>
+    <p class="group-sub" data-en>When you're hungry and the day is done.</p>
+
+    <div class="spot" data-cat="dinner">
+      <div class="spot-head">
+        <div class="spot-name">Nhà hàng Đỏ Beer</div>
+        <div class="spot-walk">~2 <span data-vi>phút</span><span data-en>min</span></div>
+      </div>
+      <p class="spot-desc" data-vi>Beer garden rộng, đồ ăn ngon, hợp đi nhóm. Có phòng riêng và karaoke.</p>
+      <p class="spot-desc" data-en>A big beer garden with good food, great for groups. Private rooms and karaoke available.</p>
+      <p class="spot-pick" data-vi><b>Thử:</b> cá, nộm xoài, bia tươi</p>
+      <p class="spot-pick" data-en><b>Try:</b> fish, mango salad, draft beer</p>
+      <div class="spot-foot">
+        <span class="spot-hours">9:30–24:00</span>
+        <a class="spot-map" href="https://www.google.com/maps/search/?api=1&query=Nha+Hang+Do+Beer+Nguyen+Binh+Khiem&query_place_id=ChIJxx2zJ26rNTER55ToPwcGZ8E" target="_blank" rel="noopener"><span data-vi>Chỉ đường →</span><span data-en>Directions →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="dinner">
+      <div class="spot-head">
+        <div class="spot-name" data-vi>Nhà hàng Phụng Thành</div>
+        <div class="spot-name" data-en>Phung Thanh Restaurant</div>
+        <div class="spot-walk">~3 <span data-vi>phút</span><span data-en>min</span></div>
+      </div>
+      <p class="spot-desc" data-vi>Món Việt truyền thống trong không gian đẹp, lối vào có cây và khói khá ấn tượng.</p>
+      <p class="spot-desc" data-en>Traditional Vietnamese food in a lovely setting; the tree-and-mist entrance is striking.</p>
+      <p class="spot-pick" data-vi><b>Thử:</b> [món gợi ý của bạn]</p>
+      <p class="spot-pick" data-en><b>Try:</b> [your recommended dish]</p>
+      <div class="spot-foot">
+        <span class="spot-hours">10:00–22:00</span>
+        <a class="spot-map" href="https://www.google.com/maps/search/?api=1&query=Nha+hang+Phung+Thanh+Nguyen+Binh+Khiem&query_place_id=ChIJ1xtQ5xOrNTERSu5oB-lGbB0" target="_blank" rel="noopener"><span data-vi>Chỉ đường →</span><span data-en>Directions →</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SNACK -->
+  <div class="group" data-group="snack">
+    <h2 class="group-label">🍡 <span data-vi>Ăn vặt & đêm khuya</span><span data-en>Snacks & late night</span></h2>
+    <p class="group-sub" data-vi>Cho những cơn thèm bất chợt.</p>
+    <p class="group-sub" data-en>For sudden cravings.</p>
+
+    <div class="spot" data-cat="snack">
+      <div class="spot-head">
+        <div class="spot-name" data-vi>[Tên quán ăn vặt]</div>
+        <div class="spot-name" data-en>[Snack spot name]</div>
+        <div class="spot-walk">~? <span data-vi>phút</span><span data-en>min</span></div>
+      </div>
+      <p class="spot-desc" data-vi>[Mô tả ngắn về quán.]</p>
+      <p class="spot-desc" data-en>[Short description of the spot.]</p>
+      <p class="spot-pick" data-vi><b>Thử:</b> [món gợi ý]</p>
+      <p class="spot-pick" data-en><b>Try:</b> [recommended item]</p>
+      <div class="spot-foot">
+        <span class="spot-hours">[giờ mở]</span>
+        <a class="spot-map" href="#" target="_blank" rel="noopener"><span data-vi>Chỉ đường →</span><span data-en>Directions →</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="slogan" data-vi>Nơi cảm xúc thuộc về.</div>
+    <div class="slogan" data-en>A place feelings belong.</div>
+    The Palette · <span data-vi>Hà Nội</span><span data-en>Hanoi</span>
+  </div>
+</div>
+
+<script src="assets/js/site.js"></script>
+</body>
+</html>

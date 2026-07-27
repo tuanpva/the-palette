@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Hướng dẫn lưu trú phòng #playful tại The Palette — wifi, tiện nghi và gợi ý quán ăn gần đây. / Digital guide for room #playful at The Palette homestay, Hanoi.">
+<meta name="theme-color" content="#FFFDF8">
+<title>#playful · The Palette</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<style>
+  /* #playful palette — pastel pink & mint. Only this block changes per room. */
+  :root{--c1:#FBE382;--c1s:#FCF1C4;--c2:#BEE3DE;--c2s:#DCEDED;--cream:#FFFDF8;--ink:#55474A;--inks:#80726F;--white:#FFFFFF;}
+  .orb{position:absolute;top:10%;right:-20px;width:120px;height:120px;background:var(--c2);border-radius:50%;filter:blur(1px);opacity:.5;animation:float 7s ease-in-out infinite;}
+  .orb::after{content:'';position:absolute;top:-60px;left:-50px;width:70px;height:70px;background:var(--c1);border-radius:50%;filter:blur(1px);opacity:.55;animation:float 9s ease-in-out infinite reverse;}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <div class="gate-orb" aria-hidden="true" style="width:90px;height:90px;background:var(--c2);border-radius:50%;filter:blur(1px);opacity:.6;margin-bottom:34px;animation:float 7s ease-in-out infinite"></div>
+  <p class="gate-brand">The Palette</p>
+  <p class="gate-name">#playful</p>
+  <p class="gate-tag" data-vi>nơi niềm vui không cần lý do</p>
+  <p class="gate-tag" data-en>where fun needs no reason</p>
+  <p class="gate-q">Chọn ngôn ngữ · Choose your language</p>
+  <div class="lang-btns">
+    <button class="lang-btn" onclick="setLanguage('vi')"><span class="flag" aria-hidden="true">🇻🇳</span><span class="lbl">Tiếng Việt</span><span class="sub">Vào phòng</span></button>
+    <button class="lang-btn" onclick="setLanguage('en')"><span class="flag" aria-hidden="true">🇬🇧</span><span class="lbl">English</span><span class="sub">Enter room</span></button>
+  </div>
+</div>
+
+<div class="lang-toggle" id="langToggle" style="display:none" aria-label="Language / Ngôn ngữ">
+  <button id="tg-vi" onclick="setLanguage('vi')" aria-pressed="true">VI</button>
+  <button id="tg-en" onclick="setLanguage('en')" aria-pressed="false">EN</button>
+</div>
+
+<div class="hero">
+  <div class="hero-bg"><div class="orb" aria-hidden="true"></div></div>
+  <div class="wrap">
+    <p class="eyebrow reveal" style="animation-delay:.1s">The Palette</p>
+    <h1 class="room-name reveal" style="animation-delay:.25s">#playful</h1>
+    <p class="room-tag reveal" style="animation-delay:.4s" data-vi>nơi niềm vui không cần lý do</p>
+    <p class="room-tag reveal" style="animation-delay:.4s" data-en>where fun needs no reason</p>
+    <p class="greeting reveal" style="animation-delay:.55s" data-vi>Chào bạn! Phòng này màu hồng pastel và bạc hà — kiểu màu khiến người ta tự nhiên cười. Đây là nơi để bạn <b>chơi, cười lớn và không nghiêm túc</b> một chút nào. Board game, PS5, và đủ trò đang đợi. Cuộn xuống xem có gì vui nhé.</p>
+    <p class="greeting reveal" style="animation-delay:.55s" data-en>Hey there! This room is pastel pink and mint — the kind of colours that make you smile without trying. This is a place to <b>play, laugh loud and not be serious</b> at all. Board games, a PS5, and plenty to do are waiting. Scroll down and see.</p>
+    <div class="scroll-hint reveal" style="animation-delay:.7s"><span class="ar" aria-hidden="true">↓</span> <span data-vi>cuộn nhẹ một chút</span><span data-en>scroll gently</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="section">
+    <div class="emo">
+      <p data-vi>Playful là nơi bạn được bỏ lại sự nghiêm túc ngoài cửa. Rủ thêm người, bật nhạc lớn, và để căn phòng này ồn ào theo cách vui nhất.</p>
+      <p data-en>Playful is where you leave seriousness at the door. Bring people over, turn the music up, and let this room get loud in the best way.</p>
+    </div>
+    <div class="palette-note">
+      <span class="pal-dot" style="background:#FBE382"></span><span class="pal-dot" style="background:#BEE3DE"></span>
+      <div class="pal-text">
+        <span data-vi>Màu của #playful: S 0530-G90Y vàng · S 0510-B50G mint · S 0505-Y40R hồng đào</span>
+        <span data-en>The colours of #playful: S 0530-G90Y vàng · S 0510-B50G mint · S 0505-Y40R hồng đào</span>
+      </div>
+    </div>
+
+    <h2 class="section-label" data-vi>Vài điều tiện tay</h2>
+    <h2 class="section-label" data-en>A few practical things</h2>
+    <p class="section-sub" data-vi>Để bạn thấy thoải mái như ở nhà.</p>
+    <p class="section-sub" data-en>So you feel right at home.</p>
+
+    <div class="card wifi-card">
+      <div class="wifi-info">Wifi<div class="net">#playful</div><div class="pw" id="pw">66668888</div></div>
+      <button class="copy-btn" onclick="copyPw(this)"><span data-vi>Sao chép</span><span data-en>Copy</span></button>
+    </div>
+
+    <details class="card acc">
+      <summary><span data-vi>Điều hòa & nhiệt độ</span><span data-en>Air conditioning & temperature</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <div class="acc-body">
+        <div data-vi><p>Điều khiển đặt trên kệ cạnh giường. Bấm nguồn, chọn 25–26°C cho dễ chịu.</p><p>Nút chế độ: hình bông tuyết là làm mát, giọt nước là hút ẩm cho ngày Hà Nội nồm.</p></div>
+        <div data-en><p>The remote is on the shelf by the bed. Press power, set it to 25–26°C for comfort.</p><p>Mode button: the snowflake cools, the water drop dehumidifies for Hanoi's damp days.</p></div>
+      </div>
+    </details>
+    <details class="card acc">
+      <summary><span data-vi>Đèn & không khí phòng</span><span data-en>Lights & atmosphere</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <div class="acc-body">
+        <div data-vi><p>Công tắc cạnh cửa bật đèn chính. Đèn đầu giường có thể chỉnh sáng — vặn nhẹ cho buổi tối dịu lại.</p></div>
+        <div data-en><p>The switch by the door turns on the main light. The bedside lamp is dimmable — turn it low to soften the evening.</p></div>
+      </div>
+    </details>
+    <details class="card acc">
+      <summary><span data-vi>TV & loa</span><span data-en>TV & speaker</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <div class="acc-body">
+        <div data-vi><p>TV đã đăng nhập sẵn Netflix & YouTube. Điều khiển trong ngăn kéo tủ. Kết nối loa Bluetooth bằng cách tìm “Playful Sound” trên điện thoại.</p></div>
+        <div data-en><p>The TV is already signed in to Netflix & YouTube. The remote is in the cabinet drawer. Connect the Bluetooth speaker by searching for “Playful Sound” on your phone.</p></div>
+      </div>
+    </details>
+  </section>
+
+  <section class="section">
+    <h2 class="section-label" data-vi>Tối nay chơi gì?</h2>
+    <h2 class="section-label" data-en>What shall we play tonight?</h2>
+    <p class="section-sub" data-vi>Phòng này có board game và PS5. Bí ý tưởng thì bấm nút, để phòng chọn giúp bạn.</p>
+    <p class="section-sub" data-en>This room has board games and a PS5. Out of ideas? Tap the button and let the room pick.</p>
+    <div class="card shuffle-card">
+      <div class="shuffle-out" id="shuffleOut" role="status" aria-live="polite" data-vi-list='["Cờ tỷ phú — nhưng cấm nhường nhau 😏", "Uno, và ai thua rửa cốc cà phê sáng mai", "Bật PS5 lên đấu một ván đối kháng", "Jenga — tay ai run người đó thua", "Cá ngựa, ván cuối quyết định tất cả", "Đoán chữ: một người diễn, một người đoán", "Mở co-op game trên PS5 và cùng phá đảo"]' data-en-list='["Monopoly — but no mercy allowed 😏", "Uno, and the loser washes tomorrow&#39;s coffee cups", "Fire up the PS5 for a fighting match", "Jenga — shaky hands lose", "Ludo, last round decides everything", "Charades: one acts, one guesses", "Start a co-op game on the PS5 and beat it together"]'></div>
+      <button class="shuffle-btn" onclick="rollShuffle()"><span data-vi>Bấm để chọn ngẫu nhiên</span><span data-en>Tap for a random pick</span></button>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-label" data-vi>Đói bụng chưa?</h2>
+    <h2 class="section-label" data-en>Hungry yet?</h2>
+    <p class="section-sub" data-vi>Chúng tôi đã chọn sẵn vài quán cà phê và quán ăn ngon quanh nhà cho bạn.</p>
+    <p class="section-sub" data-en>We've picked a few good coffee spots and eateries around the house for you.</p>
+    <div class="food-card">
+      <div class="fc-emoji" aria-hidden="true">🍜</div>
+      <h3 data-vi>Bản đồ ăn uống của The Palette</h3>
+      <h3 data-en>The Palette's food & coffee guide</h3>
+      <p data-vi>Cà phê, bữa sáng, bữa tối, ăn vặt — trong vài phút đi bộ.</p>
+      <p data-en>Coffee, breakfast, dinner, snacks — all within a short walk.</p>
+      <a href="food.html"><span data-vi>Xem gợi ý quán →</span><span data-en>See where to eat →</span></a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-label" data-vi>📍 Vị trí của The Palette</h2>
+    <h2 class="section-label" data-en>📍 Find The Palette</h2>
+    <p class="section-sub" data-vi>The Palette nằm tại trung tâm Hà Nội, thuận tiện để khám phá những quán cà phê, nhà hàng và các địa điểm nổi tiếng chỉ trong vài phút.</p>
+    <p class="section-sub" data-en>Perfectly located in the heart of Hanoi, The Palette offers easy access to cafés, local restaurants, and many of the city's most popular attractions.</p>
+
+    <div class="map-frame-wrap">
+      <iframe src="https://www.google.com/maps?q=21.0149969,105.848583&z=16&output=embed" title="The Palette – Google Maps location" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <a class="map-btn" href="https://maps.app.goo.gl/qJSwjRrWf88gBv7N6" target="_blank" rel="noopener">
+      <span data-vi>📍 Mở Google Maps</span><span data-en>📍 Open in Google Maps</span>
+    </a>
+
+    <div class="card">
+      <h3 data-vi>Gần đây</h3>
+      <h3 data-en>Nearby</h3>
+      <ul class="loc-list">
+        <li>
+          <span class="loc-icon" aria-hidden="true">☕</span>
+          <div class="loc-text">
+            <div class="loc-label" data-vi>Cà phê</div>
+            <div class="loc-label" data-en>Cafés</div>
+            <p data-vi>[Quán cà phê ấm cúng gần đây]</p>
+            <p data-en>[Cozy cafés nearby]</p>
+          </div>
+        </li>
+        <li>
+          <span class="loc-icon" aria-hidden="true">🍜</span>
+          <div class="loc-text">
+            <div class="loc-label" data-vi>Ẩm thực địa phương</div>
+            <div class="loc-label" data-en>Local Food</div>
+            <p data-vi>[Nhà hàng địa phương nổi tiếng]</p>
+            <p data-en>[Famous local restaurants]</p>
+          </div>
+        </li>
+        <li>
+          <span class="loc-icon" aria-hidden="true">🏛</span>
+          <div class="loc-text">
+            <div class="loc-label" data-vi>Điểm tham quan</div>
+            <div class="loc-label" data-en>Attractions</div>
+            <p data-vi>[Các địa điểm tham quan nổi tiếng]</p>
+            <p data-en>[Popular attractions]</p>
+          </div>
+        </li>
+        <li>
+          <span class="loc-icon" aria-hidden="true">🚶</span>
+          <div class="loc-text">
+            <div class="loc-label" data-vi>Đi bộ</div>
+            <div class="loc-label" data-en>Walking Distance</div>
+            <p data-vi>[Dễ dàng khám phá bằng đi bộ]</p>
+            <p data-en>[Easy to explore on foot]</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 data-vi>Di chuyển</h3>
+      <h3 data-en>Getting Around</h3>
+      <ul class="loc-list">
+        <li>
+          <span class="loc-icon" aria-hidden="true">🚗</span>
+          <div class="loc-text">
+            <div class="loc-label">Grab</div>
+            <p data-vi>[Đặt xe qua ứng dụng Grab, thường có mặt trong vài phút]</p>
+            <p data-en>[Book a ride via the Grab app — usually just minutes away]</p>
+          </div>
+        </li>
+        <li>
+          <span class="loc-icon" aria-hidden="true">🚕</span>
+          <div class="loc-text">
+            <div class="loc-label" data-vi>Taxi</div>
+            <div class="loc-label" data-en>Taxi</div>
+            <p data-vi>[Bắt taxi ngay trước nhà hoặc gọi hãng quen thuộc]</p>
+            <p data-en>[Hail a taxi right outside, or call a local company]</p>
+          </div>
+        </li>
+        <li>
+          <span class="loc-icon" aria-hidden="true">🚶</span>
+          <div class="loc-text">
+            <div class="loc-label" data-vi>Đi bộ</div>
+            <div class="loc-label" data-en>Walking</div>
+            <p data-vi>[Nhiều địa điểm nằm trong bán kính đi bộ]</p>
+            <p data-en>[Many spots are within easy walking distance]</p>
+          </div>
+        </li>
+        <li>
+          <span class="loc-icon" aria-hidden="true">✈️</span>
+          <div class="loc-text">
+            <div class="loc-label" data-vi>Sân bay</div>
+            <div class="loc-label" data-en>Airport</div>
+            <p data-vi>[Khoảng __ phút từ sân bay Nội Bài]</p>
+            <p data-en>[About __ minutes from Noi Bai Airport]</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="placeholder-note" data-vi>✍️ <b>Ghi chú:</b> Các mô tả trong mục "Gần đây" và "Di chuyển" là ví dụ mẫu — hãy thay bằng nội dung thật của bạn.</div>
+    <div class="placeholder-note" data-en>✍️ <b>Note:</b> The descriptions under "Nearby" and "Getting Around" are placeholder examples — replace them with your own details.</div>
+  </section>
+
+  <section class="section">
+    <div class="review">
+      <div class="stars" aria-hidden="true">★★★★★</div>
+      <h3 data-vi>Bạn thấy #playful thế nào?</h3>
+      <h3 data-en>How did #playful feel?</h3>
+      <p data-vi>Nếu căn phòng khiến bạn thấy vui, một dòng đánh giá trên Google sẽ giúp những vị khách sau tìm được đúng cảm xúc của mình. Cảm ơn bạn thật nhiều.</p>
+      <p data-en>If the room made you happy, a line of review on Google helps future guests find the feeling that fits them. Thank you so much.</p>
+      <a href="https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID" target="_blank" rel="noopener"><span data-vi>Viết đánh giá trên Google →</span><span data-en>Leave a Google review →</span></a>
+    </div>
+
+    <div class="concierge">
+      <h3 data-vi>Cần gì cứ nhắn mình</h3>
+      <h3 data-en>Need anything? Just message us</h3>
+      <p data-vi>Thêm khăn, hỏi đường, hay chỉ muốn gợi ý quán ngon gần đây.</p>
+      <p data-en>Extra towels, directions, or just a good spot to eat nearby.</p>
+      <a class="c-fb" href="https://www.facebook.com/YOUR_PAGE" target="_blank" rel="noopener"><span data-vi>Nhắn qua Facebook →</span><span data-en>Message on Facebook →</span></a>
+      <div class="c-hotline">
+        <span data-vi>Hoặc gọi trực tiếp cho chúng tôi</span><span data-en>Or call us directly</span><br>
+        <a href="tel:0000000000">0000 000 000</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div class="slogan" data-vi>Nơi cảm xúc thuộc về.</div>
+    <div class="slogan" data-en>A place feelings belong.</div>
+    The Palette · <span data-vi>Hà Nội</span><span data-en>Hanoi</span>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/site.js"></script>
+</body>
+</html>
