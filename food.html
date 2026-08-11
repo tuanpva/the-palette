@@ -6,32 +6,38 @@
 <meta name="description" content="Danh sách quán ăn ngon gần The Palette: món Việt, cơm bình dân, nướng & lẩu, ẩm thực quốc tế, ăn vặt và tráng miệng. / A curated list of great places to eat near The Palette: Vietnamese classics, everyday meals, BBQ & hotpot, international food, street snacks and desserts.">
 <meta name="theme-color" content="#FBF8F2">
 <title>Bản đồ ăn uống · The Palette</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/DarleySans-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/base.css">
 <style>
   /* food.html palette — warm gold & sage, shared by all rooms via their food-card links. */
   :root{--c1:#F0CE7A;--c1s:#FAEECE;--c2:#A9C4B5;--c2s:#DCEAE2;--cream:#FBF8F2;--ink:#43392E;--inks:#7D7060;--white:#FFFFFF;}
 
   .top{padding:52px 0 12px;position:relative}
-  .eyebrow{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--inks);font-weight:600;margin-bottom:12px}
-  .title{font-family:'Fraunces',serif;font-weight:400;font-size:2.8rem;line-height:1.02;margin-bottom:10px}
+  /* Brand signature above the title. The logo asset is white, so it sits on a small
+     ink chip to stay legible on the cream page — same ink surface as .concierge. */
+  .brandmark{display:flex;width:fit-content;background:var(--ink);border-radius:13px;padding:9px 14px;margin-bottom:18px}
+  .brandmark img{height:24px;width:auto;display:block}
+  .title{font-family:var(--font-display);font-weight:400;font-size:2.8rem;line-height:1.02;margin-bottom:10px}
   .intro{font-size:1rem;color:var(--ink);max-width:400px}
   .addr{font-size:.82rem;color:var(--inks);margin-top:16px;display:flex;align-items:center;gap:6px}
 
-  .filters{display:flex;gap:8px;flex-wrap:wrap;margin:28px 0 8px;position:sticky;top:0;background:var(--cream);padding:12px 0;z-index:10}
+  /* The longer category names wrap to four rows on a phone. Sticking that bar to the
+     top would cover a fifth of the screen and run the first pill under the fixed
+     VI/EN toggle, so it only sticks from tablet up, where it clears the toggle. */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin:28px 0 8px;background:var(--cream);padding:12px 0;z-index:10}
+  @media(min-width:768px){.filters{position:sticky;top:0}}
   .filter{border:1.5px solid var(--c2);background:var(--white);cursor:pointer;padding:8px 16px;border-radius:24px;font-family:inherit;font-size:.84rem;font-weight:600;color:var(--inks);transition:all .2s}
   .filter.on{background:var(--ink);color:var(--cream);border-color:var(--ink)}
 
   .group{margin-top:38px}
-  .group-label{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;margin-bottom:2px;display:flex;align-items:center;gap:8px}
-  .group-sub{font-size:.85rem;color:var(--inks);margin-bottom:16px}
-  .group-count{font-size:.72rem;color:var(--inks);background:var(--c2s);padding:3px 10px;border-radius:20px;margin-left:auto;font-weight:600}
+  /* Category names now run to two lines on mobile, so the emoji and the count
+     badge align to the first line rather than floating to the vertical middle. */
+  .group-label{font-family:var(--font-display);font-size:1.4rem;font-weight:500;line-height:1.25;margin-bottom:16px;display:flex;align-items:flex-start;gap:8px}
+  .group-count{font-size:.72rem;color:var(--inks);background:var(--c2s);padding:3px 10px;border-radius:20px;margin-left:auto;font-weight:600;flex-shrink:0;margin-top:3px}
 
   .spot{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin-bottom:13px;animation:rise .5s forwards;opacity:0;transform:translateY(10px)}
   .spot-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-  .spot-name{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--ink);font-weight:500}
+  .spot-name{font-family:var(--font-display);font-size:1.2rem;color:var(--ink);font-weight:500}
   .spot-addr{font-size:.8rem;color:var(--inks);margin-top:6px;display:flex;align-items:flex-start;gap:6px}
   .spot-desc{font-size:.9rem;color:var(--inks);margin:8px 0 0}
   .spot-foot{display:flex;justify-content:flex-end;align-items:center;margin-top:14px;gap:10px}
@@ -49,30 +55,23 @@
 
 <div class="wrap">
   <div class="top">
-    <button class="back" onclick="history.back()">← <span data-vi>Về phòng</span><span data-en>Back to room</span></button>
-    <p class="eyebrow">The Palette</p>
+    <button class="back" onclick="history.back()">← <span data-vi>Quay lại</span><span data-en>Go Back</span></button>
+    <div class="brandmark"><img src="assets/img/logo-white.png" alt="The Palette" width="600" height="334"></div>
     <h1 class="title" data-vi>Ăn uống quanh đây</h1>
-    <h1 class="title" data-en>Food nearby</h1>
-    <p class="intro" data-vi>Những quán ăn chúng tôi thật sự hay ghé, quanh khu Hai Bà Trưng và Cửa Nam, Hà Nội. Chọn theo tâm trạng của bạn.</p>
-    <p class="intro" data-en>Places we genuinely love to eat, around Hai Ba Trung and Cua Nam, Hanoi. Pick by your mood.</p>
-    <div class="addr"><span data-vi>📍 21 quán được tuyển chọn</span><span data-en>📍 21 handpicked places</span></div>
+    <h1 class="title" data-en>Food & Drinks Nearby</h1>
+    <p class="intro" data-vi>Những quán "ruột" mà The Palette thường lui tới, hy vọng mang đến cho bạn thêm nhiều lựa chọn thú vị trong chuyến đi.</p>
+    <p class="intro" data-en>Some of The Palette’s favorite local spots, carefully chosen to give you a few more delightful options to explore during your stay.</p>
   </div>
 
   <div class="filters" role="group" data-aria-vi="Lọc theo danh mục" data-aria-en="Filter by category" aria-label="Filter by category">
     <button class="filter on" data-cat="all" onclick="filter('all',this)" aria-pressed="true"><span data-vi>Tất cả</span><span data-en>All</span></button>
-    <button class="filter" data-cat="viet" onclick="filter('viet',this)" aria-pressed="false">🍜 <span data-vi>Món Việt</span><span data-en>Vietnamese</span></button>
-    <button class="filter" data-cat="rice" onclick="filter('rice',this)" aria-pressed="false">🍚 <span data-vi>Cơm & bữa ăn</span><span data-en>Rice & Meals</span></button>
-    <button class="filter" data-cat="bbq" onclick="filter('bbq',this)" aria-pressed="false">🍖 <span data-vi>Nướng & lẩu</span><span data-en>BBQ & Hotpot</span></button>
-    <button class="filter" data-cat="intl" onclick="filter('intl',this)" aria-pressed="false">🍔 <span data-vi>Món quốc tế</span><span data-en>International</span></button>
-    <button class="filter" data-cat="street" onclick="filter('street',this)" aria-pressed="false">🥪 <span data-vi>Ăn vặt</span><span data-en>Street & Snacks</span></button>
-    <button class="filter" data-cat="dessert" onclick="filter('dessert',this)" aria-pressed="false">🍧 <span data-vi>Tráng miệng</span><span data-en>Desserts</span></button>
+    <button class="filter" data-cat="viet" onclick="filter('viet',this)" aria-pressed="false">🍜 <span data-vi>Đặc sản & Món ngon Việt Nam</span><span data-en>Vietnamese Specialties & Favorites</span></button>
+    <button class="filter" data-cat="home" onclick="filter('home',this)" aria-pressed="false">🍚 <span data-vi>Cơm nhà & Món chính chắc bụng</span><span data-en>Home-style Meals & Hearty Dishes</span></button>
+    <button class="filter" data-cat="snack" onclick="filter('snack',this)" aria-pressed="false">🍧 <span data-vi>Ăn vặt & Tráng miệng</span><span data-en>Snacks & Desserts</span></button>
   </div>
 
-  <!-- VIETNAMESE LOCAL FOOD -->
   <div class="group" data-group="viet">
-    <h2 class="group-label">🍜 <span data-vi>Món Việt địa phương</span><span data-en>Vietnamese Local Food</span><span class="group-count">5</span></h2>
-    <p class="group-sub" data-vi>Phở, bún, hủ tiếu — hương vị quen thuộc của Hà Nội.</p>
-    <p class="group-sub" data-en>Phở, bún, hủ tiếu — the familiar flavors of Hanoi.</p>
+    <h2 class="group-label">🍜 <span data-vi>Đặc sản & Món ngon Việt Nam</span><span data-en>Vietnamese Specialties &amp; Favorites</span><span class="group-count">7</span></h2>
 
     <div class="spot" data-cat="viet">
       <div class="spot-head"><div class="spot-name">Hủ Tiếu Minh Châu</div></div>
@@ -118,92 +117,8 @@
         <a class="spot-map" href="https://share.google/x7jGcl5o8md8WY7JW" target="_blank" rel="noopener"><span data-vi>Mở Google Maps ↗</span><span data-en>Open Google Maps ↗</span></a>
       </div>
     </div>
-  </div>
 
-  <!-- RICE & EVERYDAY MEALS -->
-  <div class="group" data-group="rice">
-    <h2 class="group-label">🍚 <span data-vi>Cơm & bữa ăn hàng ngày</span><span data-en>Rice & Everyday Meals</span><span class="group-count">3</span></h2>
-    <p class="group-sub" data-vi>Đơn giản, no bụng, hợp ăn mỗi ngày.</p>
-    <p class="group-sub" data-en>Simple, filling, good for every day.</p>
-
-    <div class="spot" data-cat="rice">
-      <div class="spot-head"><div class="spot-name">Nhà Hàng 123</div></div>
-      <div class="spot-addr">📍 55 Phố Huế, Hà Nội</div>
-      <p class="spot-desc">Nhà hàng phục vụ các món cơm gia đình đơn giản, thích hợp cho bữa ăn nhanh gọn trong ngày.</p>
-      <div class="spot-foot">
-        <a class="spot-map" href="https://share.google/8nZKMZGarqHK7DKT7" target="_blank" rel="noopener"><span data-vi>Mở Google Maps ↗</span><span data-en>Open Google Maps ↗</span></a>
-      </div>
-    </div>
-
-    <div class="spot" data-cat="rice">
-      <div class="spot-head"><div class="spot-name">Kampong</div></div>
-      <div class="spot-addr">📍 107 Lò Đúc, Hai Bà Trưng, Hà Nội</div>
-      <p class="spot-desc">Chuyên các món cơm gà theo phong cách Đông Nam Á, phù hợp cho bữa trưa nhẹ nhàng và nhanh gọn.</p>
-      <div class="spot-foot">
-        <a class="spot-map" href="https://share.google/x0Fqfqzff3e1KkqPD" target="_blank" rel="noopener"><span data-vi>Mở Google Maps ↗</span><span data-en>Open Google Maps ↗</span></a>
-      </div>
-    </div>
-
-    <div class="spot" data-cat="rice">
-      <div class="spot-head"><div class="spot-name">Bếp Hoa Cuisine</div></div>
-      <div class="spot-addr">📍 11A Thể Giao, Hai Bà Trưng, Hà Nội</div>
-      <p class="spot-desc">Phục vụ đa dạng món ăn Việt Nam trong không gian ấm cúng, phù hợp cho bữa ăn gia đình hoặc bạn bè.</p>
-      <div class="spot-foot">
-        <a class="spot-map" href="https://share.google/Iyus9F4zVtXnEHbhR" target="_blank" rel="noopener"><span data-vi>Mở Google Maps ↗</span><span data-en>Open Google Maps ↗</span></a>
-      </div>
-    </div>
-  </div>
-
-  <!-- BBQ, HOTPOT & MEAT -->
-  <div class="group" data-group="bbq">
-    <h2 class="group-label">🍖 <span data-vi>Nướng, lẩu & các món thịt</span><span data-en>BBQ, Hotpot & Meat</span><span class="group-count">2</span></h2>
-    <p class="group-sub" data-vi>Cho bữa ăn nhiều người, nhiều thịt.</p>
-    <p class="group-sub" data-en>For a hearty meal with friends.</p>
-
-    <div class="spot" data-cat="bbq">
-      <div class="spot-head"><div class="spot-name">Bò Nhúng Dấm Huyền Xẩm</div></div>
-      <div class="spot-addr">📍 19 - 40 Đoàn Trần Nghiệp, Hai Bà Trưng, Hà Nội</div>
-      <p class="spot-desc">Quán chuyên món bò nhúng dấm truyền thống, phù hợp cho những ai muốn thử hương vị dân dã của Hà Nội.</p>
-      <div class="spot-foot">
-        <a class="spot-map" href="https://share.google/uCEzJXYhrzCgpkHiD" target="_blank" rel="noopener"><span data-vi>Mở Google Maps ↗</span><span data-en>Open Google Maps ↗</span></a>
-      </div>
-    </div>
-
-    <div class="spot" data-cat="bbq">
-      <div class="spot-head"><div class="spot-name">Dúng</div></div>
-      <div class="spot-addr">📍 87 Triệu Việt Vương, Hai Bà Trưng, Hà Nội</div>
-      <p class="spot-desc">Nhà hàng phục vụ lẩu bò nhúng dấm theo phong cách chuyên nghiệp, không gian rộng rãi phù hợp cho nhóm bạn hoặc gia đình.</p>
-      <div class="spot-foot">
-        <a class="spot-map" href="https://share.google/5pPa4Eassqbb2Ly7K" target="_blank" rel="noopener"><span data-vi>Mở Google Maps ↗</span><span data-en>Open Google Maps ↗</span></a>
-      </div>
-    </div>
-  </div>
-
-  <!-- INTERNATIONAL CUISINE -->
-  <div class="group" data-group="intl">
-    <h2 class="group-label">🍔 <span data-vi>Ẩm thực quốc tế</span><span data-en>International Cuisine</span><span class="group-count">4</span></h2>
-    <p class="group-sub" data-vi>Khi bạn muốn đổi vị.</p>
-    <p class="group-sub" data-en>When you want something different.</p>
-
-    <div class="spot" data-cat="intl">
-      <div class="spot-head"><div class="spot-name">Chops</div></div>
-      <div class="spot-addr">📍 119 Triệu Việt Vương, Hai Bà Trưng, Hà Nội</div>
-      <p class="spot-desc">Nhà hàng chuyên burger phong cách Mỹ với nhiều lựa chọn thịt bò nướng và khoai tây chiên, phù hợp cho những ai yêu thích ẩm thực phương Tây.</p>
-      <div class="spot-foot">
-        <a class="spot-map" href="https://share.google/AFYKmktCx7z3sPYhM" target="_blank" rel="noopener"><span data-vi>Mở Google Maps ↗</span><span data-en>Open Google Maps ↗</span></a>
-      </div>
-    </div>
-
-    <div class="spot" data-cat="intl">
-      <div class="spot-head"><div class="spot-name">Me Me Bistro</div></div>
-      <div class="spot-addr">📍 51A Mai Hắc Đế, Hai Bà Trưng, Hà Nội</div>
-      <p class="spot-desc">Phục vụ các món ăn Thái Lan truyền thống với hương vị đậm đà, nổi bật cùng các món cà ri, tom yum và cơm.</p>
-      <div class="spot-foot">
-        <a class="spot-map" href="https://share.google/80I6ADBvJoFgWueQk" target="_blank" rel="noopener"><span data-vi>Mở Google Maps ↗</span><span data-en>Open Google Maps ↗</span></a>
-      </div>
-    </div>
-
-    <div class="spot" data-cat="intl">
+    <div class="spot" data-cat="viet">
       <div class="spot-head"><div class="spot-name">Hà Thành Mansion</div></div>
       <div class="spot-addr">📍 14 Ngô Văn Sở, Cửa Nam, Hà Nội</div>
       <p class="spot-desc">Nhà hàng phục vụ ẩm thực Việt Nam trong không gian sang trọng, được Michelin Selected ghi nhận nhờ chất lượng món ăn ổn định.</p>
@@ -212,7 +127,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="intl">
+    <div class="spot" data-cat="viet">
       <div class="spot-head"><div class="spot-name">Luk Lak Vietnamese Restaurant</div></div>
       <div class="spot-addr">📍 4A Lê Thánh Tông, Cửa Nam, Hà Nội</div>
       <p class="spot-desc">Nhà hàng chuyên ẩm thực Việt Nam, nhiều năm liền được Michelin Selected vinh danh và là điểm đến quen thuộc của thực khách quốc tế.</p>
@@ -222,13 +137,77 @@
     </div>
   </div>
 
-  <!-- STREET FOOD & SNACKS -->
-  <div class="group" data-group="street">
-    <h2 class="group-label">🥪 <span data-vi>Đồ ăn đường phố & ăn vặt</span><span data-en>Street Food & Snacks</span><span class="group-count">5</span></h2>
-    <p class="group-sub" data-vi>Cho những cơn thèm bất chợt.</p>
-    <p class="group-sub" data-en>For sudden cravings.</p>
+  <div class="group" data-group="home">
+    <h2 class="group-label">🍚 <span data-vi>Cơm nhà & Món chính chắc bụng</span><span data-en>Home-style Meals &amp; Hearty Dishes</span><span class="group-count">7</span></h2>
 
-    <div class="spot" data-cat="street">
+    <div class="spot" data-cat="home">
+      <div class="spot-head"><div class="spot-name">Nhà Hàng 123</div></div>
+      <div class="spot-addr">📍 55 Phố Huế, Hà Nội</div>
+      <p class="spot-desc">Nhà hàng phục vụ các món cơm gia đình đơn giản, thích hợp cho bữa ăn nhanh gọn trong ngày.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://share.google/8nZKMZGarqHK7DKT7" target="_blank" rel="noopener"><span data-vi>Mở Google Maps ↗</span><span data-en>Open Google Maps ↗</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="home">
+      <div class="spot-head"><div class="spot-name">Kampong</div></div>
+      <div class="spot-addr">📍 107 Lò Đúc, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc">Chuyên các món cơm gà theo phong cách Đông Nam Á, phù hợp cho bữa trưa nhẹ nhàng và nhanh gọn.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://share.google/x0Fqfqzff3e1KkqPD" target="_blank" rel="noopener"><span data-vi>Mở Google Maps ↗</span><span data-en>Open Google Maps ↗</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="home">
+      <div class="spot-head"><div class="spot-name">Bếp Hoa Cuisine</div></div>
+      <div class="spot-addr">📍 11A Thể Giao, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc">Phục vụ đa dạng món ăn Việt Nam trong không gian ấm cúng, phù hợp cho bữa ăn gia đình hoặc bạn bè.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://share.google/Iyus9F4zVtXnEHbhR" target="_blank" rel="noopener"><span data-vi>Mở Google Maps ↗</span><span data-en>Open Google Maps ↗</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="home">
+      <div class="spot-head"><div class="spot-name">Bò Nhúng Dấm Huyền Xẩm</div></div>
+      <div class="spot-addr">📍 19 - 40 Đoàn Trần Nghiệp, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc">Quán chuyên món bò nhúng dấm truyền thống, phù hợp cho những ai muốn thử hương vị dân dã của Hà Nội.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://share.google/uCEzJXYhrzCgpkHiD" target="_blank" rel="noopener"><span data-vi>Mở Google Maps ↗</span><span data-en>Open Google Maps ↗</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="home">
+      <div class="spot-head"><div class="spot-name">Dúng</div></div>
+      <div class="spot-addr">📍 87 Triệu Việt Vương, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc">Nhà hàng phục vụ lẩu bò nhúng dấm theo phong cách chuyên nghiệp, không gian rộng rãi phù hợp cho nhóm bạn hoặc gia đình.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://share.google/5pPa4Eassqbb2Ly7K" target="_blank" rel="noopener"><span data-vi>Mở Google Maps ↗</span><span data-en>Open Google Maps ↗</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="home">
+      <div class="spot-head"><div class="spot-name">Chops</div></div>
+      <div class="spot-addr">📍 119 Triệu Việt Vương, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc">Nhà hàng chuyên burger phong cách Mỹ với nhiều lựa chọn thịt bò nướng và khoai tây chiên, phù hợp cho những ai yêu thích ẩm thực phương Tây.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://share.google/AFYKmktCx7z3sPYhM" target="_blank" rel="noopener"><span data-vi>Mở Google Maps ↗</span><span data-en>Open Google Maps ↗</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="home">
+      <div class="spot-head"><div class="spot-name">Me Me Bistro</div></div>
+      <div class="spot-addr">📍 51A Mai Hắc Đế, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc">Phục vụ các món ăn Thái Lan truyền thống với hương vị đậm đà, nổi bật cùng các món cà ri, tom yum và cơm.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://share.google/80I6ADBvJoFgWueQk" target="_blank" rel="noopener"><span data-vi>Mở Google Maps ↗</span><span data-en>Open Google Maps ↗</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="group" data-group="snack">
+    <h2 class="group-label">🍧 <span data-vi>Ăn vặt & Tráng miệng</span><span data-en>Snacks &amp; Desserts</span><span class="group-count">7</span></h2>
+
+    <div class="spot" data-cat="snack">
       <div class="spot-head"><div class="spot-name">Bánh Mì 118 Phố Huế</div></div>
       <div class="spot-addr">📍 118 Phố Huế, Hai Bà Trưng, Hà Nội</div>
       <p class="spot-desc">Tiệm bánh mì truyền thống lâu năm, được nhiều thực khách địa phương và du khách tin chọn khi ghé khu Phố Huế.</p>
@@ -237,7 +216,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="street">
+    <div class="spot" data-cat="snack">
       <div class="spot-head"><div class="spot-name">Bánh Mỳ Chảo</div></div>
       <div class="spot-addr">📍 170 Triệu Việt Vương, Hai Bà Trưng, Hà Nội</div>
       <p class="spot-desc">Chuyên bánh mỳ chảo với trứng, pate và các loại nhân đa dạng, ăn kèm bánh mì nóng giòn theo kiểu Hà Nội.</p>
@@ -246,7 +225,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="street">
+    <div class="spot" data-cat="snack">
       <div class="spot-head"><div class="spot-name">Bánh Đa Trộn Cô Lan</div></div>
       <div class="spot-addr">📍 235 Lạc Nghiệp, Bạch Mai, Hà Nội</div>
       <p class="spot-desc">Quán bánh đa trộn được nhiều người biết đến qua mạng xã hội, do mẹ của một TikToker nổi tiếng đứng bán.</p>
@@ -255,7 +234,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="street">
+    <div class="spot" data-cat="snack">
       <div class="spot-head"><div class="spot-name">Bánh Tráng Bé My</div></div>
       <div class="spot-addr">📍 33 Quang Trung, Cửa Nam, Hà Nội</div>
       <p class="spot-desc">Chuyên các món bánh tráng nướng, cuộn và trộn theo phong cách miền Nam, phù hợp cho bữa ăn vặt buổi chiều.</p>
@@ -264,7 +243,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="street">
+    <div class="spot" data-cat="snack">
       <div class="spot-head"><div class="spot-name">Thịt Xiên Nướng Bà Ngà</div></div>
       <div class="spot-addr">📍 31 Quang Trung, Cửa Nam, Hà Nội</div>
       <p class="spot-desc">Quán ăn vặt chuyên thịt xiên nướng thơm lừng, là điểm dừng chân quen thuộc cho các buổi tối cuối tuần.</p>
@@ -272,15 +251,8 @@
         <a class="spot-map" href="https://share.google/BEvqAar68vAUtl5ky" target="_blank" rel="noopener"><span data-vi>Mở Google Maps ↗</span><span data-en>Open Google Maps ↗</span></a>
       </div>
     </div>
-  </div>
 
-  <!-- DESSERTS -->
-  <div class="group" data-group="dessert">
-    <h2 class="group-label">🍧 <span data-vi>Tráng miệng</span><span data-en>Desserts</span><span class="group-count">2</span></h2>
-    <p class="group-sub" data-vi>Ngọt nhẹ để kết thúc bữa ăn.</p>
-    <p class="group-sub" data-en>A little something sweet to finish.</p>
-
-    <div class="spot" data-cat="dessert">
+    <div class="spot" data-cat="snack">
       <div class="spot-head"><div class="spot-name">Chè Nhà Suvy</div></div>
       <div class="spot-addr">📍 33 Quang Trung, Cửa Nam, Hà Nội</div>
       <p class="spot-desc">Tiệm chè nhỏ với nhiều loại chè truyền thống, thích hợp để thưởng thức món tráng miệng mát lạnh sau bữa ăn.</p>
@@ -289,7 +261,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="dessert">
+    <div class="spot" data-cat="snack">
       <div class="spot-head"><div class="spot-name">Chè Thập Cẩm Cũ 1976</div></div>
       <div class="spot-addr">📍 72G Trần Hưng Đạo, Cửa Nam, Hà Nội</div>
       <p class="spot-desc">Quán chè thập cẩm lâu đời, giữ nguyên công thức truyền thống từ nhiều thập kỷ, quen thuộc với người dân khu phố cổ.</p>

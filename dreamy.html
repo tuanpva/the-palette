@@ -6,14 +6,46 @@
 <meta name="description" content="Hướng dẫn lưu trú phòng #dreamy tại The Palette — wifi, tiện nghi và gợi ý quán ăn gần đây. / Digital guide for room #dreamy at The Palette homestay, Hanoi.">
 <meta name="theme-color" content="#FFFDF6">
 <title>#dreamy · The Palette</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/DarleySans-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/base.css">
 <style>
   /* #dreamy palette — soft butter yellow & sky blue. Only this block changes per room. */
   :root{--c1:#FDECA4;--c1s:#FBF3D2;--c2:#B9DCEA;--c2s:#DCEAF0;--cream:#FFFDF6;--ink:#4A4433;--inks:#7D755D;--white:#FFFFFF;}
-  .orb{position:absolute;top:8%;right:-30px;width:150px;height:150px;background:var(--c1);border-radius:50%;filter:blur(2px);opacity:.65;animation:float 9s ease-in-out infinite;}
+  .orb{position:absolute;top:8%;right:-30px;width:150px;height:150px;background:var(--c1);border-radius:50%;filter:blur(26px);opacity:.3;animation:float 9s ease-in-out infinite;}
+
+  /* Hero — room photo behind a warm scrim, so the white logo and text stay legible.
+     Position 22% keeps the mirror/pouf corner of the room in frame on narrow screens;
+     the last stop fades into --cream so the hero meets the light sections below softly. */
+  .hero-bg{background:
+    linear-gradient(180deg,transparent 86%,var(--cream) 100%),
+    linear-gradient(180deg,rgba(38,30,16,.50) 0%,rgba(38,30,16,.70) 20%,rgba(38,30,16,.72) 66%,rgba(38,30,16,.52) 92%),
+    url('assets/img/hero-dreamy.jpg') 22% center/cover no-repeat;}
+
+  /* Header row — the logo shares a horizontal band with the fixed VI/EN switcher.
+     Same top offset and row height as .lang-toggle, so their centres line up. */
+  .hero-head{position:absolute;top:calc(16px + env(safe-area-inset-top));left:calc(22px + env(safe-area-inset-left));height:41px;display:flex;align-items:center;z-index:5;}
+  .hero-logo{height:26px;width:auto;display:block}
+
+  /* Hero copy sits on the photo, so it flips to white here only — sections below are unchanged. */
+  .hero .room-name{color:var(--white);text-shadow:0 2px 24px rgba(38,30,16,.45)}
+  .hero .room-tag{color:rgba(255,255,255,.9);text-shadow:0 1px 16px rgba(38,30,16,.4)}
+  .hero .greeting{color:rgba(255,255,255,.94);max-width:360px;line-height:1.72;text-shadow:0 1px 16px rgba(38,30,16,.45)}
+  .hero .greeting b{color:var(--white)}
+  .hero .scroll-hint{color:rgba(255,255,255,.85);text-shadow:0 1px 14px rgba(38,30,16,.4)}
+
+  /* Facebook mark is a text glyph, not a colour emoji like its neighbours —
+     size it up so all five contact icons carry the same optical weight. */
+  .loc-icon.ico-fb{font-size:1.5rem;line-height:1}
+
+  /* Thank-you line between the review heading and its buttons. */
+  .connect-reviews-head{margin-bottom:8px}
+  .connect-reviews-note{font-size:.85rem;color:var(--inks);line-height:1.65;margin-bottom:16px;max-width:340px}
+
+  @media(min-width:768px){
+    .hero-bg{background-position:center}
+    .hero-head{left:calc(34px + env(safe-area-inset-left))}
+    .hero-logo{height:30px}
+  }
 </style>
 </head>
 <body>
@@ -38,13 +70,13 @@
 
 <div class="hero">
   <div class="hero-bg"><div class="orb" aria-hidden="true"></div></div>
+  <div class="hero-head">
+    <img class="hero-logo reveal" style="animation-delay:.1s" src="assets/img/logo-white.png" alt="The Palette" width="600" height="334">
+  </div>
   <div class="wrap">
-    <p class="eyebrow reveal" style="animation-delay:.1s">The Palette</p>
-    <h1 class="room-name reveal" style="animation-delay:.25s">#dreamy</h1>
-    <p class="room-tag reveal" style="animation-delay:.4s" data-vi>nơi buổi sáng đến thật chậm</p>
-    <p class="room-tag reveal" style="animation-delay:.4s" data-en>where mornings arrive slowly</p>
-    <p class="greeting reveal" style="animation-delay:.55s" data-vi>Chào bạn. Căn phòng này được sơn màu bơ và xanh trời — hai sắc màu của những buổi sáng không vội vàng. Chúng tôi mong những ngày bạn ở đây cũng <b>mềm mại và đầy mơ màng</b> như thế. Mọi thứ trong phòng đều ở đây vì một lý do. Cuộn xuống để mình kể bạn nghe.</p>
-    <p class="greeting reveal" style="animation-delay:.55s" data-en>Hello. This room is painted in butter and sky blue — the colours of mornings that are in no hurry. We hope your days here feel just as <b>soft and dreamy</b>. Everything in this room is here for a reason. Scroll down and let us tell you.</p>
+    <h1 class="room-name reveal" style="animation-delay:.25s">Chào mừng bạn đến với #dreamy</h1>
+    <p class="greeting reveal" style="animation-delay:.55s" data-vi>Tại #dreamy, thời gian dường như trôi chậm lại để nhường chỗ cho những rung cảm tinh tế và sự bình yên nơi tâm hồn. Được thiết kế với gam màu nhẹ nhàng cùng ánh sáng tự nhiên vỗ về, căn phòng là chốn trú ẩn hoàn hảo cho những ai muốn thả mình vào cõi mộng mơ, nhâm nhi một tách cà phê thơm, hay đơn giản là tận hưởng sự kết nối sâu sắc với tâm hồn.</p>
+    <p class="greeting reveal" style="animation-delay:.55s" data-en>At #dreamy, time seems to slow down to make way for subtle feelings and peace in the soul. Designed with a gentle color palette and natural light that embraces, the room is the perfect sanctuary for those who want to immerse themselves in a dreamy world, savor a fragrant cup of coffee, or simply enjoy a deep connection with their inner self.</p>
     <div class="scroll-hint reveal" style="animation-delay:.7s"><span class="ar" aria-hidden="true">↓</span> <span data-vi>cuộn nhẹ một chút</span><span data-en>scroll gently</span></div>
   </div>
 </div>
@@ -52,8 +84,8 @@
 <div class="wrap">
   <section class="section">
     <div class="emo">
-      <p data-vi>Dreamy là nơi để bạn được chậm lại. Không chuông báo, không deadline — chỉ có nắng qua ô cửa lớn và một buổi sáng thuộc về riêng bạn.</p>
-      <p data-en>Dreamy is a place to slow down. No alarms, no deadlines — just light through the big windows and a morning that belongs to you.</p>
+      <p data-vi>Giữa thế giới vội vã này, đôi khi ta chỉ cần một khoảng lặng để vỗ về mộng mơ và ôm ấp những rung cảm dịu êm. Và #dreamy chính là chốn bình yên được tạo ra cho những phút giây như thế...</p>
+      <p data-en>In this fast-paced world, sometimes all we need is a quiet moment to nurture our dreams and embrace the gentle emotions within. And #dreamy is the peaceful retreat created for moments just like these...</p>
     </div>
     <div class="palette-note">
       <span class="pal-dot" style="background:#FDECA4"></span><span class="pal-dot" style="background:#B9DCEA"></span>
@@ -63,10 +95,10 @@
       </div>
     </div>
 
-    <h2 class="section-label" data-vi>Vài điều tiện tay</h2>
-    <h2 class="section-label" data-en>A few practical things</h2>
-    <p class="section-sub" data-vi>Để bạn thấy thoải mái như ở nhà.</p>
-    <p class="section-sub" data-en>So you feel right at home.</p>
+    <h2 class="section-label" data-vi>Góc nhỏ tiện nghi</h2>
+    <h2 class="section-label" data-en>A Cozy Corner</h2>
+    <p class="section-sub" data-vi>Từng tiện ích được chăm chút tỉ mỉ để nâng niu những mộng mơ và ôm ấp từng phút giây thư thái tại #dreamy</p>
+    <p class="section-sub" data-en>Each amenity has been thoughtfully curated to nurture your dreams and embrace every moment of relaxation at #dreamy.</p>
 
     <div class="card wifi-card">
       <div class="wifi-info">Wifi<div class="net">#dreamy</div><div class="pw" id="pw">66668888</div></div>
@@ -97,10 +129,10 @@
   </section>
 
   <section class="section">
-    <h2 class="section-label" data-vi>Ly cà phê của buổi sáng Dreamy</h2>
-    <h2 class="section-label" data-en>A coffee for your Dreamy morning</h2>
-    <p class="section-sub" data-vi>Máy pha cà phê là trái tim của căn phòng này. Đây là cách pha một ly vừa vặn.</p>
-    <p class="section-sub" data-en>The coffee machine is the heart of this room. Here's how to make a perfect cup.</p>
+    <h2 class="section-label" data-vi>Góc cà phê mộng mơ</h2>
+    <h2 class="section-label" data-en>A Dreamy Coffee Corne</h2>
+    <p class="section-sub" data-vi>Dưới đây là cách tự tay pha một tách cà phê thơm ngát để ôm trọn buổi sáng dịu ngọt tại #dreamy</p>
+    <p class="section-sub" data-en>Here’s how to brew yourself a fragrant cup of coffee and embrace the gentle sweetness of the morning at #dreamy.</p>
     <div class="card">
       <ol class="steps" data-vi><li>Đổ nước lọc vào ngăn chứa phía sau máy, đến vạch 2 tách.</li><li>Đặt viên cà phê vào khay (hộp viên nằm trong ngăn kéo, có cả vị đậm và vị nhẹ).</li><li>Đặt cốc bên dưới, bấm nút một tách. Đợi khoảng 40 giây.</li><li>Sữa tươi và mật ong ở trong tủ lạnh mini — pha thêm nếu bạn thích vị ngọt dịu.</li><li>Mang ra ban công, ngồi xuống, và đừng vội đi đâu cả.</li></ol>
       <ol class="steps" data-en><li>Pour filtered water into the tank behind the machine, up to the 2-cup line.</li><li>Place a coffee pod in the tray (the box is in the drawer — both bold and mild).</li><li>Put your cup underneath, press the single-cup button. Wait about 40 seconds.</li><li>Fresh milk and honey are in the mini fridge — add some if you like it gently sweet.</li><li>Take it to the balcony, sit down, and don&#x27;t rush off anywhere.</li></ol>
@@ -108,40 +140,24 @@
   </section>
 
   <section class="section">
-    <h2 class="section-label" data-vi>Đói bụng chưa?</h2>
-    <h2 class="section-label" data-en>Hungry yet?</h2>
-    <p class="section-sub" data-vi>Chúng tôi đã chọn sẵn vài quán cà phê và quán ăn ngon quanh nhà cho bạn.</p>
-    <p class="section-sub" data-en>We've picked a few good coffee spots and eateries around the house for you.</p>
+    <h2 class="section-label" data-vi>Quán ngon gần nhà</h2>
+    <h2 class="section-label" data-en>Delicious Eats Nearby</h2>
+    <p class="section-sub" data-vi>Những quán nhỏ ấm cúng gần kề, nơi mỗi món ăn đều mang lại dư vị dịu ngọt cho chuyến đi của bạn.</p>
+    <p class="section-sub" data-en>Charming little eateries nearby, where every dish adds a gentle and memorable touch to your journey.
+</p>
     <div class="food-card">
       <div class="fc-emoji" aria-hidden="true">🍜</div>
       <h3 data-vi>Bản đồ ăn uống của The Palette</h3>
       <h3 data-en>The Palette's food & coffee guide</h3>
-      <p data-vi>Cà phê, bữa sáng, bữa tối, ăn vặt — trong vài phút đi bộ.</p>
-      <p data-en>Coffee, breakfast, dinner, snacks — all within a short walk.</p>
       <a href="food.html"><span data-vi>Xem gợi ý quán →</span><span data-en>See where to eat →</span></a>
     </div>
   </section>
 
   <section class="section">
-    <h2 class="section-label" data-vi>📍 Vị trí của The Palette</h2>
-    <h2 class="section-label" data-en>📍 Find The Palette</h2>
-    <p class="section-sub" data-vi>The Palette nằm tại trung tâm Hà Nội, thuận tiện để khám phá những quán cà phê, nhà hàng và các địa điểm nổi tiếng chỉ trong vài phút.</p>
-    <p class="section-sub" data-en>Perfectly located in the heart of Hanoi, The Palette offers easy access to cafés, local restaurants, and many of the city's most popular attractions.</p>
-
-    <div class="map-frame-wrap">
-      <iframe src="https://www.google.com/maps?q=21.0149969,105.848583&z=16&output=embed" title="The Palette – Google Maps location" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-
-    <a class="map-btn" href="https://maps.app.goo.gl/qJSwjRrWf88gBv7N6" target="_blank" rel="noopener">
-      <span data-vi>📍 Mở Google Maps</span><span data-en>📍 Open in Google Maps</span>
-    </a>
-  </section>
-
-  <section class="section">
-    <h2 class="section-label" data-vi>Kết nối với chúng tôi</h2>
-    <h2 class="section-label" data-en>Stay Connected</h2>
-    <p class="section-sub" data-vi>Có câu hỏi trước hoặc trong kỳ nghỉ của bạn? Chúng tôi luôn sẵn lòng hỗ trợ — hãy liên hệ bất cứ lúc nào, hoặc theo dõi hành trình của chúng tôi trên mạng xã hội.</p>
-    <p class="section-sub" data-en>Have a question before or during your stay? We're always happy to help — reach out anytime, or follow our journey on social media.</p>
+    <h2 class="section-label" data-vi>Kết nối với The Palette</h2>
+    <h2 class="section-label" data-en>Stay Connected with The Palette</h2>
+    <p class="section-sub" data-vi>Cần giúp đỡ bất cứ điều gì trong thời gian lưu trú, hay muốn giữ liên lạc cho những chuyến đi sau? Bạn cứ nhắn The Palette qua đây nhé</p>
+    <p class="section-sub" data-en>Need anything during your stay, or simply want to stay in touch for your next getaway? Feel free to reach out to The Palette anytime.</p>
 
     <div class="card connect">
       <ul class="loc-list">
@@ -161,6 +177,15 @@
             <div class="loc-text">
               <div class="loc-label">Email</div>
               <p>thepalette.homestay@gmail.com</p>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.facebook.com/people/The-Palette-Homestay-H%C3%A0-N%E1%BB%99i/61591327494341/#" target="_blank" rel="noopener" aria-label="The Palette on Facebook (opens in a new tab)">
+            <span class="loc-icon ico-fb" aria-hidden="true">ⓕ</span>
+            <div class="loc-text">
+              <div class="loc-label">Facebook</div>
+              <p>@The Palette - Homestay Hà Nội</p>
             </div>
           </a>
         </li>
@@ -187,19 +212,21 @@
       <div class="connect-reviews">
         <div class="connect-reviews-head">
           <span aria-hidden="true">⭐</span>
-          <span data-vi>Đánh giá của khách</span><span data-en>Guest Reviews</span>
+          <span data-vi>Góc review cho The Palette</span><span data-en>Share Your Experience</span>
         </div>
+        <p class="connect-reviews-note" data-vi>Cảm ơn bạn đã chọn The Palette làm trạm dừng chân. Nếu có thể, hãy dành chút thời gian để lại đánh giá trên Google và Facebook giúp The Palette nhé!</p>
+        <p class="connect-reviews-note" data-en>Thank you for choosing The Palette as your stop along the way. If you have a moment, a few words on Google or Facebook would mean the world to us.</p>
         <div class="review-btns">
           <a class="review-btn" href="https://share.google/IRmTa4k5tqgM6xN73" target="_blank" rel="noopener" aria-label="Read our Google reviews (opens in a new tab)"><span data-vi>Google Reviews →</span><span data-en>Google Reviews →</span></a>
-          <a class="review-btn review-btn-outline" href="https://www.facebook.com/YOUR_PAGE/reviews" target="_blank" rel="noopener" aria-label="Read our Facebook reviews (opens in a new tab)"><span data-vi>Facebook Reviews →</span><span data-en>Facebook Reviews →</span></a>
+          <a class="review-btn review-btn-outline" href="https://www.facebook.com/YOUR_PAGE/reviews" target="_blank" rel="noopener" aria-label="Read our Facebook reviews (opens in a new tab)"><span data-vi>Facebook →</span><span data-en>Facebook →</span></a>
         </div>
       </div>
     </div>
   </section>
 
   <div class="footer">
-    <div class="slogan" data-vi>Nơi cảm xúc thuộc về.</div>
-    <div class="slogan" data-en>A place feelings belong.</div>
+    <div class="slogan" data-vi>Chúc bạn có một hành trình thật trọn vẹn và nhiều niềm vui cùng #dreamy</div>
+    <div class="slogan" data-en>Wishing you a beautiful, joyful, and truly memorable stay at #dreamy.</div>
     The Palette · <span data-vi>Hà Nội</span><span data-en>Hanoi</span>
   </div>
 </div>
