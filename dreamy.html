@@ -26,16 +26,34 @@
   .hero-head{position:absolute;top:calc(16px + env(safe-area-inset-top));left:calc(22px + env(safe-area-inset-left));height:41px;display:flex;align-items:center;z-index:5;}
   .hero-logo{height:26px;width:auto;display:block}
 
-  /* Hero copy sits on the photo, so it flips to white here only — sections below are unchanged. */
-  .hero .room-name{color:var(--white);text-shadow:0 2px 24px rgba(38,30,16,.45)}
+  /* Hero copy sits on the photo, so it flips to white here only — sections below are unchanged.
+     This hero skips .room-tag (no italic subtitle line), so .room-name's own 6px bottom margin
+     is the only gap before .greeting by default — too tight. Widened here, scoped to the hero. */
+  .hero .room-name{color:var(--white);text-shadow:0 2px 24px rgba(38,30,16,.45);margin-bottom:26px}
   .hero .room-tag{color:rgba(255,255,255,.9);text-shadow:0 1px 16px rgba(38,30,16,.4)}
   .hero .greeting{color:rgba(255,255,255,.94);max-width:360px;line-height:1.72;text-shadow:0 1px 16px rgba(38,30,16,.45)}
   .hero .greeting b{color:var(--white)}
   .hero .scroll-hint{color:rgba(255,255,255,.85);text-shadow:0 1px 14px rgba(38,30,16,.4)}
 
-  /* Facebook mark is a text glyph, not a colour emoji like its neighbours —
-     size it up so all five contact icons carry the same optical weight. */
-  .loc-icon.ico-fb{font-size:1.5rem;line-height:1}
+  /* Gate splash logo — .gate's background is a light cream gradient (unlike .hero's
+     dark photo scrim), so the white logo asset needs a dark chip to stay legible.
+     Same treatment as food.html's .brandmark, for a consistent pattern site-wide. */
+  .gate-logo{display:inline-flex;background:var(--ink);border-radius:14px;padding:11px 18px;margin-bottom:28px}
+  .gate-logo img{height:40px;width:auto;display:block}
+
+  /* Palette note, this page only — title + two colour circles, no code/text.
+     .palette-note/.pal-dot are shared with the other room pages, so this stays scoped here. */
+  .palette-note{flex-direction:column;align-items:flex-start;gap:12px}
+  .pal-title{font-family:var(--font-display);font-weight:500;font-size:.95rem;color:var(--ink)}
+  .pal-dots{display:flex;align-items:center;gap:12px}
+  .palette-note .pal-dot{width:30px;height:30px}
+
+  /* Footer contact block, this page only — replaces the old plain "The Palette · Hà Nội"
+     line. Inherits .footer's centered text-align/colour/size; only resets <p> margins
+     down to a tight, deliberate gap between the three lines. */
+  .footer-meta{margin-top:14px}
+  .footer-meta p{margin:0 0 4px}
+  .footer-meta p:last-child{margin-bottom:0}
 
   /* Thank-you line between the review heading and its buttons. */
   .connect-reviews-head{margin-bottom:8px}
@@ -52,14 +70,14 @@
 
 <div class="gate" id="gate">
   <div class="gate-orb" aria-hidden="true" style="width:96px;height:96px;background:var(--c1);border-radius:50%;filter:blur(1px);opacity:.7;margin-bottom:34px;animation:float 9s ease-in-out infinite"></div>
-  <p class="gate-brand">The Palette</p>
+  <div class="gate-logo"><img src="assets/img/logo-white.png" alt="The Palette" width="600" height="334"></div>
   <p class="gate-name">#dreamy</p>
-  <p class="gate-tag" data-vi>nơi buổi sáng đến thật chậm</p>
-  <p class="gate-tag" data-en>where mornings arrive slowly</p>
+  <p class="gate-tag" data-vi>nơi vỗ về những mộng mơ</p>
+  <p class="gate-tag" data-en>a place that cradles your dreams</p>
   <p class="gate-q">Chọn ngôn ngữ · Choose your language</p>
   <div class="lang-btns">
-    <button class="lang-btn" onclick="setLanguage('vi')"><span class="flag" aria-hidden="true">🇻🇳</span><span class="lbl">Tiếng Việt</span><span class="sub">Vào phòng</span></button>
-    <button class="lang-btn" onclick="setLanguage('en')"><span class="flag" aria-hidden="true">🇬🇧</span><span class="lbl">English</span><span class="sub">Enter room</span></button>
+    <button class="lang-btn" onclick="setLanguage('vi')"><span class="flag" aria-hidden="true">🇻🇳</span><span class="lbl">Tiếng Việt</span></button>
+    <button class="lang-btn" onclick="setLanguage('en')"><span class="flag" aria-hidden="true">🇬🇧</span><span class="lbl">English</span></button>
   </div>
 </div>
 
@@ -88,10 +106,10 @@
       <p data-en>In this fast-paced world, sometimes all we need is a quiet moment to nurture our dreams and embrace the gentle emotions within. And #dreamy is the peaceful retreat created for moments just like these...</p>
     </div>
     <div class="palette-note">
-      <span class="pal-dot" style="background:#FDECA4"></span><span class="pal-dot" style="background:#B9DCEA"></span>
-      <div class="pal-text">
-        <span data-vi>Màu của #dreamy: Tường vàng bơ (xưởng pha) · S 0510-R90B xanh · S 0505-Y kem</span>
-        <span data-en>The colours of #dreamy: Tường vàng bơ (xưởng pha) · S 0510-R90B xanh · S 0505-Y kem</span>
+      <div class="pal-title" data-vi>Màu sắc chủ đạo</div>
+      <div class="pal-title" data-en>Signature Colours</div>
+      <div class="pal-dots">
+        <span class="pal-dot" style="background:#FDECA4"></span><span class="pal-dot" style="background:#B9DCEA"></span>
       </div>
     </div>
 
@@ -163,7 +181,7 @@
       <ul class="loc-list">
         <li>
           <a href="tel:0839898633" aria-label="Call The Palette">
-            <span class="loc-icon" aria-hidden="true">📞</span>
+            <span class="loc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
             <div class="loc-text">
               <div class="loc-label" data-vi>Điện thoại</div>
               <div class="loc-label" data-en>Phone</div>
@@ -173,7 +191,7 @@
         </li>
         <li>
           <a href="mailto:thepalette.homestay@gmail.com" aria-label="Email The Palette">
-            <span class="loc-icon" aria-hidden="true">✉️</span>
+            <span class="loc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
             <div class="loc-text">
               <div class="loc-label">Email</div>
               <p>thepalette.homestay@gmail.com</p>
@@ -182,7 +200,7 @@
         </li>
         <li>
           <a href="https://www.facebook.com/people/The-Palette-Homestay-H%C3%A0-N%E1%BB%99i/61591327494341/#" target="_blank" rel="noopener" aria-label="The Palette on Facebook (opens in a new tab)">
-            <span class="loc-icon ico-fb" aria-hidden="true">ⓕ</span>
+            <span class="loc-icon" aria-hidden="true"><svg viewBox="0 0 320 512" fill="currentColor" width="16" height="18"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></span>
             <div class="loc-text">
               <div class="loc-label">Facebook</div>
               <p>@The Palette - Homestay Hà Nội</p>
@@ -191,7 +209,7 @@
         </li>
         <li>
           <a href="https://www.instagram.com/thepalette.homestay" target="_blank" rel="noopener" aria-label="The Palette on Instagram (opens in a new tab)">
-            <span class="loc-icon" aria-hidden="true">📷</span>
+            <span class="loc-icon" aria-hidden="true"><svg viewBox="0 0 448 512" fill="currentColor" width="18" height="18"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></span>
             <div class="loc-text">
               <div class="loc-label">Instagram</div>
               <p>@thepalette.homestay</p>
@@ -200,7 +218,7 @@
         </li>
         <li>
           <a href="https://www.tiktok.com/@thepalette.homestay" target="_blank" rel="noopener" aria-label="The Palette on TikTok (opens in a new tab)">
-            <span class="loc-icon" aria-hidden="true">🎵</span>
+            <span class="loc-icon" aria-hidden="true"><svg viewBox="0 0 448 512" fill="currentColor" width="18" height="18"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></span>
             <div class="loc-text">
               <div class="loc-label">TikTok</div>
               <p>@thepalette.homestay</p>
@@ -227,7 +245,11 @@
   <div class="footer">
     <div class="slogan" data-vi>Chúc bạn có một hành trình thật trọn vẹn và nhiều niềm vui cùng #dreamy</div>
     <div class="slogan" data-en>Wishing you a beautiful, joyful, and truly memorable stay at #dreamy.</div>
-    The Palette · <span data-vi>Hà Nội</span><span data-en>Hanoi</span>
+    <div class="footer-meta">
+      <p>The Palette Homestay - A Collection of Moods 🌈</p>
+      <p>📍 35 Nguyen Binh Khiem, Hai Ba Trung, Hanoi</p>
+      <p>☎ +84 839 898 633</p>
+    </div>
   </div>
 </div>
 
