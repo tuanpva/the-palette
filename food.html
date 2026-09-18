@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="vi" data-title-vi="Bản đồ ăn uống · The Palette" data-title-en="Food Guide · The Palette">
+<html lang="vi" data-title-vi="Bản đồ Ăn – Chơi – Cà phê · The Palette" data-title-en="Eat – Play – Coffee Map · The Palette">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Danh sách quán ăn ngon gần The Palette: món Việt, cơm bình dân, nướng & lẩu, ẩm thực quốc tế, ăn vặt và tráng miệng. / A curated list of great places to eat near The Palette: Vietnamese classics, everyday meals, BBQ & hotpot, international food, street snacks and desserts.">
+<meta name="description" content="Quán ăn, quán cà phê và địa điểm vui chơi The Palette gợi ý quanh khu vực. / Restaurants, coffee shops, and things to do around The Palette, curated by us.">
 <meta name="theme-color" content="#FBF8F2">
-<title>Bản đồ ăn uống · The Palette</title>
+<title>Bản đồ Ăn – Chơi – Cà phê · The Palette</title>
 <link rel="preload" href="assets/fonts/DarleySans-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/base.css">
 <style>
@@ -18,7 +18,6 @@
   .brandmark{display:flex;width:fit-content;background:var(--ink);border-radius:13px;padding:9px 14px;margin-bottom:18px}
   .brandmark img{height:24px;width:auto;display:block}
   .title{font-family:var(--font-display);font-weight:400;font-size:2.8rem;line-height:1.02;margin-bottom:10px}
-  .intro{font-size:1rem;color:var(--ink);max-width:400px}
   .addr{font-size:.82rem;color:var(--inks);margin-top:16px;display:flex;align-items:center;gap:6px}
 
   /* The longer category names wrap to four rows on a phone. Sticking that bar to the
@@ -43,6 +42,12 @@
   .spot-foot{display:flex;justify-content:flex-end;align-items:center;margin-top:14px;gap:10px}
   .spot-map{background:var(--c1);color:var(--ink);text-decoration:none;padding:9px 16px;border-radius:12px;font-size:.82rem;font-weight:600;white-space:nowrap}
 
+  /* Footer contact block — reused verbatim from dreamy.html's own footer-meta,
+     so both pages share the exact same footer implementation. */
+  .footer-meta{margin-top:14px}
+  .footer-meta p{margin:0 0 4px}
+  .footer-meta p:last-child{margin-bottom:0}
+
   .hidden{display:none!important}
 </style>
 </head>
@@ -57,23 +62,21 @@
   <div class="top">
     <button class="back" onclick="history.back()">← <span data-vi>Quay lại</span><span data-en>Go Back</span></button>
     <div class="brandmark"><img src="assets/img/logo-white.png" alt="The Palette" width="600" height="334"></div>
-    <h1 class="title" data-vi>Ăn uống quanh đây</h1>
-    <h1 class="title" data-en>Food & Drinks Nearby</h1>
-    <p class="intro" data-vi>Những quán "ruột" mà The Palette thường lui tới, hy vọng mang đến cho bạn thêm nhiều lựa chọn thú vị trong chuyến đi.</p>
-    <p class="intro" data-en>Some of The Palette’s favorite local spots, carefully chosen to give you a few more delightful options to explore during your stay.</p>
+    <h1 class="title" data-vi>Bản đồ Ăn – Chơi – Cà phê</h1>
+    <h1 class="title" data-en>Eat – Play – Coffee Map</h1>
   </div>
 
   <div class="filters" role="group" data-aria-vi="Lọc theo danh mục" data-aria-en="Filter by category" aria-label="Filter by category">
     <button class="filter on" data-cat="all" onclick="filter('all',this)" aria-pressed="true"><span data-vi>Tất cả</span><span data-en>All</span></button>
-    <button class="filter" data-cat="viet" onclick="filter('viet',this)" aria-pressed="false">🍜 <span data-vi>Đặc sản & Món ngon Việt Nam</span><span data-en>Vietnamese Specialties & Favorites</span></button>
-    <button class="filter" data-cat="home" onclick="filter('home',this)" aria-pressed="false">🍚 <span data-vi>Cơm nhà & Món chính chắc bụng</span><span data-en>Home-style Meals & Hearty Dishes</span></button>
-    <button class="filter" data-cat="snack" onclick="filter('snack',this)" aria-pressed="false">🍧 <span data-vi>Ăn vặt & Tráng miệng</span><span data-en>Snacks & Desserts</span></button>
+    <button class="filter" data-cat="food" onclick="filter('food',this)" aria-pressed="false">🍜 <span data-vi>Quán ăn</span><span data-en>Food</span></button>
+    <button class="filter" data-cat="cafe" onclick="filter('cafe',this)" aria-pressed="false">☕ <span data-vi>Quán cà phê</span><span data-en>Coffee Shops</span></button>
+    <button class="filter" data-cat="play" onclick="filter('play',this)" aria-pressed="false">🎡 <span data-vi>Địa điểm vui chơi</span><span data-en>Things to Do</span></button>
   </div>
 
-  <div class="group" data-group="viet">
-    <h2 class="group-label">🍜 <span data-vi>Đặc sản & Món ngon Việt Nam</span><span data-en>Vietnamese Specialties &amp; Favorites</span><span class="group-count">7</span></h2>
+  <div class="group" data-group="food">
+    <h2 class="group-label">🍜 <span data-vi>Quán ăn</span><span data-en>Food</span><span class="group-count">21</span></h2>
 
-    <div class="spot" data-cat="viet">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Hủ Tiếu Minh Châu</div></div>
       <div class="spot-addr">📍 67 Tuệ Tĩnh, Hai Bà Trưng, Hà Nội</div>
       <p class="spot-desc">Quán phục vụ hủ tiếu, bánh canh, nem cuốn và cơm tấm theo phong cách miền Nam, phù hợp cho bữa trưa hoặc bữa tối nhẹ nhàng.</p>
@@ -82,7 +85,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="viet">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Phở Thìn Lò Đúc</div></div>
       <div class="spot-addr">📍 13 Lò Đúc, Hai Bà Trưng, Hà Nội</div>
       <p class="spot-desc">Địa chỉ quen thuộc cho những ai yêu thích phở bò Hà Nội, với nước dùng đậm đà và thịt bò xào tái đặc trưng.</p>
@@ -91,7 +94,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="viet">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Bún Chả Hương Liên</div></div>
       <div class="spot-addr">📍 14 Lê Văn Hưu, Cửa Nam, Hà Nội</div>
       <p class="spot-desc">Quán bún chả từng được cựu Tổng thống Mỹ Barack Obama ghé thăm, nổi tiếng với nước chấm đậm đà và thịt nướng thơm.</p>
@@ -100,7 +103,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="viet">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Phở Bò Thanh Béo</div></div>
       <div class="spot-addr">📍 36 Nguyễn Du, Hai Bà Trưng, Hà Nội</div>
       <p class="spot-desc">Quán phở bò lâu năm trong khu Hai Bà Trưng, được người dân quanh vùng lựa chọn cho bữa sáng quen thuộc.</p>
@@ -109,7 +112,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="viet">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Bánh Cuốn Bà Hoành</div></div>
       <div class="spot-addr">📍 66 Tô Hiến Thành, Hai Bà Trưng, Hà Nội</div>
       <p class="spot-desc">Nổi bật với bánh cuốn nóng và bánh cuốn Thanh Trì ăn kèm cà cuống, mang đậm hương vị truyền thống Hà Nội.</p>
@@ -118,7 +121,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="viet">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Hà Thành Mansion</div></div>
       <div class="spot-addr">📍 14 Ngô Văn Sở, Cửa Nam, Hà Nội</div>
       <p class="spot-desc">Nhà hàng phục vụ ẩm thực Việt Nam trong không gian sang trọng, được Michelin Selected ghi nhận nhờ chất lượng món ăn ổn định.</p>
@@ -127,7 +130,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="viet">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Luk Lak Vietnamese Restaurant</div></div>
       <div class="spot-addr">📍 4A Lê Thánh Tông, Cửa Nam, Hà Nội</div>
       <p class="spot-desc">Nhà hàng chuyên ẩm thực Việt Nam, nhiều năm liền được Michelin Selected vinh danh và là điểm đến quen thuộc của thực khách quốc tế.</p>
@@ -135,12 +138,8 @@
         <a class="spot-map" href="https://share.google/IPKKqIyyNIHBucRxE" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
       </div>
     </div>
-  </div>
 
-  <div class="group" data-group="home">
-    <h2 class="group-label">🍚 <span data-vi>Cơm nhà & Món chính chắc bụng</span><span data-en>Home-style Meals &amp; Hearty Dishes</span><span class="group-count">7</span></h2>
-
-    <div class="spot" data-cat="home">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Nhà Hàng 123</div></div>
       <div class="spot-addr">📍 55 Phố Huế, Hà Nội</div>
       <p class="spot-desc">Nhà hàng phục vụ các món cơm gia đình đơn giản, thích hợp cho bữa ăn nhanh gọn trong ngày.</p>
@@ -149,7 +148,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="home">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Kampong</div></div>
       <div class="spot-addr">📍 107 Lò Đúc, Hai Bà Trưng, Hà Nội</div>
       <p class="spot-desc">Chuyên các món cơm gà theo phong cách Đông Nam Á, phù hợp cho bữa trưa nhẹ nhàng và nhanh gọn.</p>
@@ -158,7 +157,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="home">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Bếp Hoa Cuisine</div></div>
       <div class="spot-addr">📍 11A Thể Giao, Hai Bà Trưng, Hà Nội</div>
       <p class="spot-desc">Phục vụ đa dạng món ăn Việt Nam trong không gian ấm cúng, phù hợp cho bữa ăn gia đình hoặc bạn bè.</p>
@@ -167,7 +166,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="home">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Bò Nhúng Dấm Huyền Xẩm</div></div>
       <div class="spot-addr">📍 19 - 40 Đoàn Trần Nghiệp, Hai Bà Trưng, Hà Nội</div>
       <p class="spot-desc">Quán chuyên món bò nhúng dấm truyền thống, phù hợp cho những ai muốn thử hương vị dân dã của Hà Nội.</p>
@@ -176,7 +175,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="home">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Dúng</div></div>
       <div class="spot-addr">📍 87 Triệu Việt Vương, Hai Bà Trưng, Hà Nội</div>
       <p class="spot-desc">Nhà hàng phục vụ lẩu bò nhúng dấm theo phong cách chuyên nghiệp, không gian rộng rãi phù hợp cho nhóm bạn hoặc gia đình.</p>
@@ -185,7 +184,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="home">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Chops</div></div>
       <div class="spot-addr">📍 119 Triệu Việt Vương, Hai Bà Trưng, Hà Nội</div>
       <p class="spot-desc">Nhà hàng chuyên burger phong cách Mỹ với nhiều lựa chọn thịt bò nướng và khoai tây chiên, phù hợp cho những ai yêu thích ẩm thực phương Tây.</p>
@@ -194,7 +193,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="home">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Me Me Bistro</div></div>
       <div class="spot-addr">📍 51A Mai Hắc Đế, Hai Bà Trưng, Hà Nội</div>
       <p class="spot-desc">Phục vụ các món ăn Thái Lan truyền thống với hương vị đậm đà, nổi bật cùng các món cà ri, tom yum và cơm.</p>
@@ -202,12 +201,8 @@
         <a class="spot-map" href="https://share.google/80I6ADBvJoFgWueQk" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
       </div>
     </div>
-  </div>
 
-  <div class="group" data-group="snack">
-    <h2 class="group-label">🍧 <span data-vi>Ăn vặt & Tráng miệng</span><span data-en>Snacks &amp; Desserts</span><span class="group-count">7</span></h2>
-
-    <div class="spot" data-cat="snack">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Bánh Mì 118 Phố Huế</div></div>
       <div class="spot-addr">📍 118 Phố Huế, Hai Bà Trưng, Hà Nội</div>
       <p class="spot-desc">Tiệm bánh mì truyền thống lâu năm, được nhiều thực khách địa phương và du khách tin chọn khi ghé khu Phố Huế.</p>
@@ -216,7 +211,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="snack">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Bánh Mỳ Chảo</div></div>
       <div class="spot-addr">📍 170 Triệu Việt Vương, Hai Bà Trưng, Hà Nội</div>
       <p class="spot-desc">Chuyên bánh mỳ chảo với trứng, pate và các loại nhân đa dạng, ăn kèm bánh mì nóng giòn theo kiểu Hà Nội.</p>
@@ -225,7 +220,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="snack">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Bánh Đa Trộn Cô Lan</div></div>
       <div class="spot-addr">📍 235 Lạc Nghiệp, Bạch Mai, Hà Nội</div>
       <p class="spot-desc">Quán bánh đa trộn được nhiều người biết đến qua mạng xã hội, do mẹ của một TikToker nổi tiếng đứng bán.</p>
@@ -234,7 +229,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="snack">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Bánh Tráng Bé My</div></div>
       <div class="spot-addr">📍 33 Quang Trung, Cửa Nam, Hà Nội</div>
       <p class="spot-desc">Chuyên các món bánh tráng nướng, cuộn và trộn theo phong cách miền Nam, phù hợp cho bữa ăn vặt buổi chiều.</p>
@@ -243,7 +238,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="snack">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Thịt Xiên Nướng Bà Ngà</div></div>
       <div class="spot-addr">📍 31 Quang Trung, Cửa Nam, Hà Nội</div>
       <p class="spot-desc">Quán ăn vặt chuyên thịt xiên nướng thơm lừng, là điểm dừng chân quen thuộc cho các buổi tối cuối tuần.</p>
@@ -252,7 +247,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="snack">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Chè Nhà Suvy</div></div>
       <div class="spot-addr">📍 33 Quang Trung, Cửa Nam, Hà Nội</div>
       <p class="spot-desc">Tiệm chè nhỏ với nhiều loại chè truyền thống, thích hợp để thưởng thức món tráng miệng mát lạnh sau bữa ăn.</p>
@@ -261,7 +256,7 @@
       </div>
     </div>
 
-    <div class="spot" data-cat="snack">
+    <div class="spot" data-cat="food">
       <div class="spot-head"><div class="spot-name">Chè Thập Cẩm Cũ 1976</div></div>
       <div class="spot-addr">📍 72G Trần Hưng Đạo, Cửa Nam, Hà Nội</div>
       <p class="spot-desc">Quán chè thập cẩm lâu đời, giữ nguyên công thức truyền thống từ nhiều thập kỷ, quen thuộc với người dân khu phố cổ.</p>
@@ -271,13 +266,254 @@
     </div>
   </div>
 
+  <div class="group" data-group="cafe">
+    <h2 class="group-label">☕ <span data-vi>Quán cà phê</span><span data-en>Coffee Shops</span><span class="group-count">15</span></h2>
+
+    <div class="spot" data-cat="cafe">
+      <div class="spot-head"><div class="spot-name">MONO Coffee Lab</div></div>
+      <div class="spot-addr">📍 3 Hồ Xuân Hương, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc" data-vi>Quán cà phê kiểu "phòng thí nghiệm", không gian công nghiệp pha nét Hà Nội xưa với gạch mộc và gỗ tái chế, có ban công ngồi ngoài trời.</p>
+      <p class="spot-desc" data-en>A coffee "lab" blending an industrial look with old-Hanoi touches like raw brick and reclaimed wood, plus an outdoor balcony.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/MONO+Coffee+Lab+-+H%E1%BB%93+Xu%C3%A2n+H%C6%B0%C6%A1ng/@21.0182095,105.8462099,1503m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab5279f9caf7:0x28e7e7eccaa87a9a!8m2!3d21.0182045!4d105.8487902!16s%2Fg%2F11hy9hmsb6?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="cafe">
+      <div class="spot-head"><div class="spot-name">NÂU</div></div>
+      <div class="spot-addr">📍 3-5 Ngõ Lê Đại Hành, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc" data-vi>Quán nhỏ nằm trong ngõ, tông nâu ấm áp, có gác lửng yên tĩnh, hợp để ngồi làm việc hoặc đọc sách một mình.</p>
+      <p class="spot-desc" data-en>A cozy alley café in warm brown tones with a quiet loft upstairs — good for working or reading solo.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/N%C3%A2u+cafe/@21.0101748,105.8476752,866m/data=!3m1!1e3!4m6!3m5!1s0x3135ab9dd066bf53:0xb3b5634dbae2f850!8m2!3d21.0101698!4d105.8502555!16s%2Fg%2F11sj2g2_0b?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="cafe">
+      <div class="spot-head"><div class="spot-name">186 Coffee Roasters</div></div>
+      <div class="spot-addr">📍 Ngõ Trần Quốc Toản, Cửa Nam, Hà Nội</div>
+      <p class="spot-desc" data-vi>Xưởng rang cà phê nhỏ trong ngõ, tự rang hạt từ nhiều vùng, không gian mang chất nghệ thuật hoài cổ.</p>
+      <p class="spot-desc" data-en>A micro-roastery tucked in an alley, roasting its own beans from several regions in a vintage, art-filled space.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/186+Coffee+Roasters/@21.0201587,105.844572,1733m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135abae39c34f2f:0xc16a5ffd33e7904e!8m2!3d21.0201587!4d105.8471469!16s%2Fg%2F11l6l4k09d?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="cafe">
+      <div class="spot-head"><div class="spot-name">AN café</div></div>
+      <div class="spot-addr">📍 133 Nguyễn Đình Chiểu, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc" data-vi>Quán cà phê mang phong cách Kinh Bắc, có mái ngói và sân vườn nhỏ, nhìn ra mảng xanh của Công viên Thống Nhất.</p>
+      <p class="spot-desc" data-en>A café with Kinh Bắc-style tiled roofs and a small garden, overlooking the greenery of Thống Nhất Park.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/AN+caf%C3%A9+%E2%80%93+Th%E1%BB%91ng+Nh%E1%BA%A5t/@21.0098203,105.8431629,866m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135abe47646bba7:0x15ac24ff9c75495a!8m2!3d21.0098203!4d105.8457378!16s%2Fg%2F11q9zxff3z?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="cafe">
+      <div class="spot-head"><div class="spot-name">80plus Coffee Roastery</div></div>
+      <div class="spot-addr">📍 49 Nguyễn Đình Chiểu, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc" data-vi>Không gian tối giản, hiện đại, wifi ổn định, hợp để ngồi làm việc hoặc gặp gỡ bạn bè.</p>
+      <p class="spot-desc" data-en>A modern, minimalist space with reliable wifi — good for working or catching up with friends.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/80plus+Coffee+Roastery+Nguy%E1%BB%85n+%C4%90%C3%ACnh+Chi%E1%BB%83u/@21.0124762,105.8435362,1733m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab8a483e11fd:0x125eece1068ede2a!8m2!3d21.0124762!4d105.8461111!16s%2Fg%2F11y41x592r?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="cafe">
+      <div class="spot-head"><div class="spot-name">Cheese Coffee</div></div>
+      <div class="spot-addr">📍 50A Lê Đại Hành, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc" data-vi>Quán 3 tầng rộng rãi, thực đơn đa dạng từ cà phê phin truyền thống đến trà sữa và bánh ngọt.</p>
+      <p class="spot-desc" data-en>A spacious three-floor café with a varied menu, from traditional Vietnamese drip coffee to milk tea and pastries.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/Cheese+Coffee/@21.0117701,105.8456916,866m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135aba8426f9299:0xa612e7402c731168!8m2!3d21.0117701!4d105.8482665!16s%2Fg%2F11tdhspddq?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="cafe">
+      <div class="spot-head"><div class="spot-name">Phê La</div></div>
+      <div class="spot-addr">📍 318 Phố Huế, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc" data-vi>Thương hiệu trà sữa Ô Long đặc sản Đà Lạt nổi tiếng cả nước, nổi bật với món Ô Long Sữa signature.</p>
+      <p class="spot-desc" data-en>A nationally popular Vietnamese chain built around Đà Lạt oolong tea, best known for its signature Oolong Milk Tea.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/Ph%C3%AA+La+-+Ph%E1%BB%91+Hu%E1%BA%BF/@21.0106907,105.8488743,752m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab0e494c475d:0x54689268097e0ce0!8m2!3d21.0106857!4d105.8514546!16s%2Fg%2F11zhdwbgc5?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="cafe">
+      <div class="spot-head"><div class="spot-name">SOLUS - brew &amp; tea</div></div>
+      <div class="spot-addr">📍 70 Phố Huế, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc" data-vi>Không gian nhỏ, tối giản, phục vụ trà pha máy, matcha Nhật và cold brew, hợp để ngồi yên tĩnh làm việc hoặc đọc sách.</p>
+      <p class="spot-desc" data-en>A small, minimalist spot serving brewed tea, Japanese matcha and cold brew — quiet enough for work or reading.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/SOLUS+-+brew+%26+tea/@21.0175677,105.8487423,752m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab12cc966209:0x2b3aa364e9013d28!8m2!3d21.0175627!4d105.8513226!16s%2Fg%2F11zbcwqdvf?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="cafe">
+      <div class="spot-head"><div class="spot-name">THREE O&#x27;CLOCK</div></div>
+      <div class="spot-addr">📍 9 Trần Nhân Tông, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc" data-vi>Chuỗi cà phê - trà - bánh có gốc từ Sài Gòn, mở cửa 24/24, tiện cho những lúc cần một ly đồ uống bất kể giờ giấc.</p>
+      <p class="spot-desc" data-en>A 24-hour coffee, tea and bakery chain from Ho Chi Minh City — handy whenever you need a drink, day or night.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/THREE+O&#x27;CLOCK+-+Tr%E1%BA%A7n+Nh%C3%A2n+T%C3%B4ng/@21.0167454,105.8481944,752m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab0005b529f1:0x9fd8ff6e5815ca59!8m2!3d21.0167404!4d105.8507747!16s%2Fg%2F11x5spphh1?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="cafe">
+      <div class="spot-head"><div class="spot-name">CaCa FeFe Cafe</div></div>
+      <div class="spot-addr">📍 82 Triệu Việt Vương, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc" data-vi>Không gian xanh mát, yên tĩnh, chuyên cà phê nguyên chất mới rang, hợp để ngồi trò chuyện vào buổi chiều.</p>
+      <p class="spot-desc" data-en>A calm, green space specializing in freshly roasted pure coffee — nice for an easy afternoon chat.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/CacaFeFe+Cafe+82+Tri%E1%BB%87u+Vi%E1%BB%87t+V%C6%B0%C6%A1ng/@21.016114,105.8476757,752m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135abaa1a3e2cd3:0xc0c57591dac7f0d3!8m2!3d21.016109!4d105.850256!16s%2Fg%2F11z35mjtsz?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="cafe">
+      <div class="spot-head"><div class="spot-name">Ka Coffee</div></div>
+      <div class="spot-addr">📍 34 Nguyễn Du, Cửa Nam, Hà Nội</div>
+      <p class="spot-desc" data-vi>Quán quen thuộc trong khu phố cổ, được yêu thích với các món matcha, có view nhìn ra phố Nguyễn Du.</p>
+      <p class="spot-desc" data-en>A well-loved Old Quarter café known for its matcha drinks, with a view over Nguyễn Du street.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/Ka+Coffee/@21.0188449,105.8466367,1503m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135abc46d5d2e29:0x87b2e12ee3afb92a!8m2!3d21.0188399!4d105.849217!16s%2Fg%2F11y8453j2z?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="cafe">
+      <div class="spot-head"><div class="spot-name">Nương Náu Coffee</div></div>
+      <div class="spot-addr">📍 13B Nguyễn Gia Thiều, Cửa Nam, Hà Nội</div>
+      <p class="spot-desc" data-vi>Quán cà phê kết hợp không gian nghệ thuật, nằm khuất trong một ngõ nhỏ, yên tĩnh và có phần riêng tư.</p>
+      <p class="spot-desc" data-en>A café doubling as a small art space, tucked down a quiet alley — peaceful and a little hidden away.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/N%C6%B0%C6%A1ng+N%C3%A1u+Coffee/@21.0198874,105.8436992,1503m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab002cc78281:0x46ef1238cf3eb6c1!8m2!3d21.0198824!4d105.8462795!16s%2Fg%2F11vqs8v36n?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="cafe">
+      <div class="spot-head"><div class="spot-name">All Day Coffee</div></div>
+      <div class="spot-addr">📍 37 Quang Trung, Cửa Nam, Hà Nội</div>
+      <p class="spot-desc" data-vi>Không gian mang phong cách châu Âu cổ điển với tông màu nâu đỏ, có sân thượng và món cà phê trứng đặc trưng.</p>
+      <p class="spot-desc" data-en>A European-style café in warm reddish-brown tones, with a rooftop and its own take on Hanoi egg coffee.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/All+Day+Coffee/@21.0205844,105.8457806,752m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab00461c9e1b:0xe1d3929b1f819e55!8m2!3d21.0205794!4d105.8483609!16s%2Fg%2F11w3knmyl0?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="cafe">
+      <div class="spot-head"><div class="spot-name">LAST SIP Coffee &amp; Brews</div></div>
+      <div class="spot-addr">📍 57 Hàm Long, Cửa Nam, Hà Nội</div>
+      <p class="spot-desc" data-vi>Quán cà phê nhỏ trên phố Hàm Long, điểm dừng chân tiện đường cho một ly cà phê nhanh gọn.</p>
+      <p class="spot-desc" data-en>A small coffee spot on Hàm Long street, a convenient stop for a quick cup along the way.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/LAST+SIP+Coffee+%26+Brews/@21.020092,105.8484213,1503m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab0003bf1789:0xd129bb7ab9e74523!8m2!3d21.020087!4d105.8510016!16s%2Fg%2F11nvcy70ty?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="cafe">
+      <div class="spot-head"><div class="spot-name">Cafe Tòte</div></div>
+      <div class="spot-addr">📍 1A Đặng Thái Thân, Cửa Nam, Hà Nội</div>
+      <p class="spot-desc" data-vi>Quán cà phê nhỏ xinh gần Hồ Gươm, không gian ấm cúng, hợp ghé vào buổi sáng hoặc đầu giờ chiều.</p>
+      <p class="spot-desc" data-en>A charming little café near Hoàn Kiếm Lake, cozy and best enjoyed in the morning or early afternoon.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/Cafe+T%C3%B2te+-+%C4%90%E1%BA%B7ng+Th%C3%A1i+Th%C3%A2n/@21.0230743,105.8564864,1503m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab0dbea92c99:0xa0f68b1c8dd4abad!8m2!3d21.0230693!4d105.8590667!16s%2Fg%2F11rgbm8gwc?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="group" data-group="play">
+    <h2 class="group-label">🎡 <span data-vi>Địa điểm vui chơi</span><span data-en>Things to Do</span><span class="group-count">7</span></h2>
+
+    <div class="spot" data-cat="play">
+      <div class="spot-head"><div class="spot-name">Công viên Thống Nhất</div></div>
+      <div class="spot-addr">📍 Trần Nhân Tông, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc" data-vi>Công viên lớn nhất Hà Nội, xây dựng trong giai đoạn 1958-1961 quanh một hồ nước rộng, hợp để đi bộ, đạp xe hoặc hóng gió buổi chiều.</p>
+      <p class="spot-desc" data-en>Hanoi's largest park, built between 1958 and 1961 around a wide lake — great for a walk, a bike ride, or an evening breeze.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/C%C3%B4ng+vi%C3%AAn+Th%E1%BB%91ng+Nh%E1%BA%A5t/@21.0172083,105.8430875,1733m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab000586df33:0x797d864688f1d92a!8m2!3d21.0172083!4d105.8456624!16s%2Fg%2F11y0g_4zt1?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="play">
+      <div class="spot-head"><div class="spot-name">Di tích Nhà tù Hoả Lò</div></div>
+      <div class="spot-addr">📍 1 Hoả Lò, Cửa Nam, Hà Nội</div>
+      <p class="spot-desc" data-vi>Di tích từng là nhà tù thời Pháp thuộc, sau này giam giữ phi công Mỹ, nay là bảo tàng kể lại một giai đoạn lịch sử Việt Nam.</p>
+      <p class="spot-desc" data-en>A former French colonial prison, later used to hold American POWs, now a museum recounting a chapter of Vietnamese history.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/Hoa+Lo+Prison+Relic/@21.0253297,105.8439032,1733m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab96aa51de95:0x9701e10bee31af54!8m2!3d21.0253297!4d105.8464781!16zL20vMG45d3A?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="play">
+      <div class="spot-head"><div class="spot-name">Hồ Hoàn Kiếm</div></div>
+      <div class="spot-addr">📍 Phường Hoàn Kiếm, Hà Nội</div>
+      <p class="spot-desc" data-vi>Hồ nước biểu tượng giữa lòng Hà Nội, gắn với truyền thuyết trả gươm thần, có Tháp Rùa và đền Ngọc Sơn.</p>
+      <p class="spot-desc" data-en>Hanoi's iconic central lake, tied to the legend of the returned magic sword, home to Turtle Tower and Ngọc Sơn Temple.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/Ho%C3%A0n+Ki%E1%BA%BFm+Lake/@21.0253297,105.8439032,1733m/data=!3m1!1e3!4m6!3m5!1s0x3135ab953357c995:0x1babf6bb4f9a20e!8m2!3d21.0286669!4d105.8521484!16zL20vMGdwNjV3?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="play">
+      <div class="spot-head"><div class="spot-name">Rạp Xiếc Trung Ương</div></div>
+      <div class="spot-addr">📍 67-69 Trần Nhân Tông, Hai Bà Trưng, Hà Nội</div>
+      <p class="spot-desc" data-vi>Rạp xiếc lâu đời của Việt Nam, thành lập từ năm 1956, với sân khấu tròn đặc trưng và các suất diễn phù hợp cho cả gia đình.</p>
+      <p class="spot-desc" data-en>One of Vietnam's oldest circuses, founded in 1956, with a signature round stage and family-friendly shows.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/Central+Circus/@21.016755,105.8398481,866m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135abc654b563c9:0x9bcb7dfff2b12124!8m2!3d21.016755!4d105.842423!16s%2Fg%2F1tnpbx71?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="play">
+      <div class="spot-head"><div class="spot-name">Bảo Tàng I-Museum</div></div>
+      <div class="spot-addr">📍 Tầng 5 TTTM Tràng Tiền Plaza, 24 Hai Bà Trưng, Cửa Nam, Hà Nội</div>
+      <p class="spot-desc" data-vi>Bảo tàng nghệ thuật đa giác quan đầu tiên tại Việt Nam, kết hợp ánh sáng, âm thanh và công nghệ tương tác.</p>
+      <p class="spot-desc" data-en>Vietnam's first multi-sensory art museum, blending light, sound and interactive technology.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/B%E1%BA%A3o+T%C3%A0ng+I-Museum/@21.0251125,105.850897,866m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab006f73ca01:0x34c0116b8812c24a!8m2!3d21.0251125!4d105.8534719!16s%2Fg%2F11vycvbpmk?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="play">
+      <div class="spot-head"><div class="spot-name">Nhà Hát Lớn Hà Nội</div></div>
+      <div class="spot-addr">📍 1 Tràng Tiền, Cửa Nam, Hà Nội</div>
+      <p class="spot-desc" data-vi>Công trình kiến trúc Pháp cổ xây dựng đầu thế kỷ 20 theo phong cách Nhà hát Opera Paris, nơi tổ chức hòa nhạc và các buổi biểu diễn nghệ thuật.</p>
+      <p class="spot-desc" data-en>A grand early-20th-century French building modeled after the Paris Opera House, hosting concerts and performing arts.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/Hanoi+Opera+House/@21.0242501,105.85505,866m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135abebf87e0011:0x647af200da508d2b!8m2!3d21.0242501!4d105.8576249!16s%2Fm%2F02pxggv?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+
+    <div class="spot" data-cat="play">
+      <div class="spot-head"><div class="spot-name">Nhà hát Kịch Hà Nội</div></div>
+      <div class="spot-addr">📍 42 Tràng Tiền, Cửa Nam, Hà Nội</div>
+      <p class="spot-desc" data-vi>Nhà hát kịch thành lập từ năm 1959, biểu diễn tại rạp Công Nhân — một công trình kiến trúc Pháp cổ xây dựng từ năm 1917.</p>
+      <p class="spot-desc" data-en>Hanoi's drama theatre, founded in 1959, performing inside the Rạp Công Nhân building dating back to 1917.</p>
+      <div class="spot-foot">
+        <a class="spot-map" href="https://www.google.com/maps/place/Nh%C3%A0+H%C3%A1t+K%E1%BB%8Bch+H%C3%A0+N%E1%BB%99i/@21.0252016,105.8522312,866m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135abeb7012a58d:0x46c1dc8955f98f0b!8m2!3d21.0252016!4d105.8548061!16s%2Fg%2F11vhqmw9w5?entry=ttu&amp;g_ep=EgoyMDI2MDkxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener"><span data-vi>Mở Google Maps →</span><span data-en>Open Google Maps →</span></a>
+      </div>
+    </div>
+  </div>
+
   <div class="footer">
-    <div class="slogan" data-vi>Nơi cảm xúc thuộc về.</div>
-    <div class="slogan" data-en>A place feelings belong.</div>
-    The Palette · <span data-vi>Hà Nội</span><span data-en>Hanoi</span>
+    <div class="slogan" data-vi>Chúc bạn có một hành trình thật trọn vẹn và nhiều niềm vui cùng #dreamy</div>
+    <div class="slogan" data-en>Wishing you a beautiful, joyful, and truly memorable stay at #dreamy.</div>
+    <div class="footer-meta">
+      <p>The Palette Homestay - A Collection of Moods 🌈</p>
+      <p>📍 35 Nguyen Binh Khiem, Hai Ba Trung, Hanoi</p>
+      <p>☎ +84 839 898 633</p>
+    </div>
   </div>
 </div>
 
 <script src="assets/js/site.js"></script>
+<script>
+  // Category counts are computed from the actual cards on the page, not hard-coded,
+  // so a badge never drifts out of sync if a spot is added or removed later.
+  document.querySelectorAll('.group[data-group]').forEach(function(group){
+    var badge = group.querySelector('.group-count');
+    if (!badge) return;
+    badge.textContent = group.querySelectorAll('.spot[data-cat="' + group.dataset.group + '"]').length;
+  });
+</script>
 </body>
 </html>
