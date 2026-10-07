@@ -4,29 +4,102 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="Hướng dẫn lưu trú phòng #thoughtful tại The Palette — wifi, tiện nghi và gợi ý quán ăn gần đây. / Digital guide for room #thoughtful at The Palette homestay, Hanoi.">
-<meta name="theme-color" content="#FBFAF3">
+<meta name="theme-color" content="#FFFDF6">
 <title>#thoughtful · The Palette</title>
 <link rel="preload" href="assets/fonts/DarleySans-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/base.css">
 <style>
-  /* #thoughtful palette — olive green & warm plum. Only this block changes per room. */
-  :root{--c1:#AD5F69;--c1s:#E6D2D2;--c2:#C8D493;--c2s:#E1E8C6;--cream:#FBFAF3;--ink:#3F3A33;--inks:#797366;--white:#FFFFFF;}
-  .orb{position:absolute;top:9%;right:-10px;width:160px;height:60px;background:var(--c2s);border-radius:40px;filter:blur(3px);opacity:.8;animation:float 11s ease-in-out infinite;}
-  .orb::after{content:'';position:absolute;top:-26px;left:34px;width:90px;height:70px;background:var(--c2s);border-radius:50%;filter:blur(3px);}
+  /* #thoughtful palette — soft cream & sage olive, pulled from the room photo (the pale
+     linens/sofa/walls vs. the olive-green shelving unit). */
+  :root{--c1:#F6EDE4;--c1s:#FCF9F1;--c2:#919361;--c2s:#E0DFCC;--cream:#FFFDF6;--ink:#4A4433;--inks:#7D755D;--white:#FFFFFF;}
+  .orb{position:absolute;top:8%;right:-30px;width:150px;height:150px;background:var(--c1);border-radius:50%;filter:blur(26px);opacity:.3;animation:float 9s ease-in-out infinite;}
+
+  /* Hero — room photo behind a warm scrim, so the white logo and text stay legible.
+     The source photo is a tall 4500x8000 portrait shot. On mobile (where the hero's
+     ~86vh box is itself tall/narrow) a plain cover fills it with barely any crop.
+     On wider boxes (tablet/desktop) cover would zoom in brutally, so ::after switches
+     to "contain" there — the full photo stays visible, centered — while ::before holds
+     a blurred, oversized copy of the same photo behind it so there's no bare gap at
+     the sides. The fade-to-cream + dark scrim live on ::after, on top of both. */
+  .hero-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;}
+  .hero-bg::before{content:"";position:absolute;inset:-8%;background:url('assets/img/thoughtful.png') center/cover no-repeat;filter:blur(46px) saturate(1.1) brightness(.85);transform:scale(1.08);z-index:0;}
+  .hero-bg::after{content:"";position:absolute;inset:0;z-index:2;background:
+    linear-gradient(180deg,transparent 86%,var(--cream) 100%),
+    linear-gradient(180deg,rgba(38,30,16,.50) 0%,rgba(38,30,16,.70) 20%,rgba(38,30,16,.72) 66%,rgba(38,30,16,.52) 92%),
+    url('assets/img/thoughtful.png') center 22%/cover no-repeat;}
+  .hero-bg .orb{z-index:1}
+
+  @media(min-width:1024px){
+    .hero-bg::after{background:
+      linear-gradient(180deg,transparent 86%,var(--cream) 100%),
+      linear-gradient(180deg,rgba(38,30,16,.42) 0%,rgba(38,30,16,.58) 28%,rgba(38,30,16,.60) 70%,rgba(38,30,16,.46) 92%),
+      url('assets/img/thoughtful.png') center/contain no-repeat;}
+
+    /* The photo now renders at "contain" width (narrower than the full hero), centred
+       in the middle of the viewport. .wrap's own text stays left-aligned sitewide, which
+       reads as lopsided against that narrower centred photo — so here, desktop-only, the
+       hero copy centres itself instead, to sit balanced in the middle of the image. */
+    .hero .wrap{text-align:center}
+    .hero .greeting{margin-left:auto;margin-right:auto}
+    .hero .scroll-hint{justify-content:center}
+  }
+
+  /* Header row — the logo shares a horizontal band with the fixed VI/EN switcher.
+     Same top offset and row height as .lang-toggle, so their centres line up. */
+  .hero-head{position:absolute;top:calc(16px + env(safe-area-inset-top));left:calc(22px + env(safe-area-inset-left));height:41px;display:flex;align-items:center;z-index:5;}
+  .hero-logo{height:26px;width:auto;display:block}
+
+  /* Hero copy sits on the photo, so it flips to white here only — sections below are unchanged.
+     This hero skips .room-tag (no italic subtitle line), so .room-name's own 6px bottom margin
+     is the only gap before .greeting by default — too tight. Widened here, scoped to the hero. */
+  .hero .room-name{color:var(--white);text-shadow:0 2px 24px rgba(38,30,16,.45);margin-bottom:26px}
+  .hero .room-tag{color:rgba(255,255,255,.9);text-shadow:0 1px 16px rgba(38,30,16,.4)}
+  .hero .greeting{color:rgba(255,255,255,.94);max-width:360px;line-height:1.72;text-shadow:0 1px 16px rgba(38,30,16,.45)}
+  .hero .greeting b{color:var(--white)}
+  .hero .scroll-hint{color:rgba(255,255,255,.85);text-shadow:0 1px 14px rgba(38,30,16,.4)}
+
+  /* Gate splash logo — .gate's background is a light cream gradient (unlike .hero's
+     dark photo scrim), so the white logo asset needs a dark chip to stay legible.
+     Same treatment as food.html's .brandmark, for a consistent pattern site-wide. */
+  .gate-logo{display:inline-flex;background:var(--ink);border-radius:14px;padding:11px 18px;margin-bottom:28px}
+  .gate-logo img{height:40px;width:auto;display:block}
+
+  /* Palette note, this page only — title + two colour circles, no code/text.
+     .palette-note/.pal-dot are shared with the other room pages, so this stays scoped here. */
+  .palette-note{flex-direction:column;align-items:flex-start;gap:12px}
+  .pal-title{font-family:var(--font-display);font-weight:500;font-size:.95rem;color:var(--ink)}
+  .pal-dots{display:flex;align-items:center;gap:12px}
+  .palette-note .pal-dot{width:30px;height:30px}
+
+  /* Footer contact block, this page only — replaces the old plain "The Palette · Hà Nội"
+     line. Inherits .footer's centered text-align/colour/size; only resets <p> margins
+     down to a tight, deliberate gap between the three lines. */
+  .footer-meta{margin-top:14px}
+  .footer-meta p{margin:0 0 4px}
+  .footer-meta p:last-child{margin-bottom:0}
+
+  /* Thank-you line between the review heading and its buttons. */
+  .connect-reviews-head{margin-bottom:8px}
+  .connect-reviews-note{font-size:.85rem;color:var(--inks);line-height:1.65;margin-bottom:16px;max-width:340px}
+
+  @media(min-width:768px){
+    .hero-head{left:calc(34px + env(safe-area-inset-left))}
+    .hero-logo{height:30px}
+  }
 </style>
 </head>
 <body>
 
 <div class="gate" id="gate">
-  <div class="gate-orb" aria-hidden="true" style="width:130px;height:50px;background:var(--c2s);border-radius:34px;filter:blur(2px);opacity:.85;margin-bottom:34px;animation:float 10s ease-in-out infinite"></div>
-  <p class="gate-brand">The Palette</p>
+  <div class="gate-orb" aria-hidden="true" style="width:96px;height:96px;background:var(--c1);border-radius:50%;filter:blur(1px);opacity:.7;margin-bottom:34px;animation:float 9s ease-in-out infinite"></div>
+  <div class="gate-logo"><img src="assets/img/logo-white.png" alt="The Palette" width="600" height="334"></div>
   <p class="gate-name">#thoughtful</p>
-  <p class="gate-tag" data-vi>nơi bạn được là chính mình</p>
-  <p class="gate-tag" data-en>where you get to be yourself</p>
+  <p class="gate-tag" data-vi>nơi tìm về những khoảng lặng an yên</p>
+  <p class="gate-tag" data-en>a place that cradles your dreams</p>
   <p class="gate-q">Chọn ngôn ngữ · Choose your language</p>
   <div class="lang-btns">
-    <button class="lang-btn" onclick="setLanguage('vi')"><span class="flag" aria-hidden="true">🇻🇳</span><span class="lbl">Tiếng Việt</span><span class="sub">Vào phòng</span></button>
-    <button class="lang-btn" onclick="setLanguage('en')"><span class="flag" aria-hidden="true">🇬🇧</span><span class="lbl">English</span><span class="sub">Enter room</span></button>
+    <button class="lang-btn" onclick="setLanguage('vi')"><span class="flag" aria-hidden="true">🇻🇳</span><span class="lbl">Tiếng Việt</span></button>
+    <button class="lang-btn" onclick="setLanguage('en')"><span class="flag" aria-hidden="true">🇬🇧</span><span class="lbl">English</span></button>
   </div>
 </div>
 
@@ -37,13 +110,13 @@
 
 <div class="hero">
   <div class="hero-bg"><div class="orb" aria-hidden="true"></div></div>
+  <div class="hero-head">
+    <img class="hero-logo reveal" style="animation-delay:.1s" src="assets/img/logo-white.png" alt="The Palette" width="600" height="334">
+  </div>
   <div class="wrap">
-    <p class="eyebrow reveal" style="animation-delay:.1s">The Palette</p>
-    <h1 class="room-name reveal" style="animation-delay:.25s">#thoughtful</h1>
-    <p class="room-tag reveal" style="animation-delay:.4s" data-vi>nơi bạn được là chính mình</p>
-    <p class="room-tag reveal" style="animation-delay:.4s" data-en>where you get to be yourself</p>
-    <p class="greeting reveal" style="animation-delay:.55s" data-vi>Chào bạn. Thoughtful ấm và sáng — xanh ô liu, ghế lười hình mây, đèn nấm nhỏ. Một nơi để thở chậm lại. Chúng tôi để sẵn sổ, bút và những tấm thẻ trò chuyện, để bạn <b>viết ra điều mình nghĩ</b>, một mình hoặc cùng người bên cạnh. Cuộn xuống nhé.</p>
-    <p class="greeting reveal" style="animation-delay:.55s" data-en>Hello. Thoughtful is warm and bright — olive green, cloud bean bags, little mushroom lamps. A place to slow your breath. We've left a journal, pens and conversation cards, so you can <b>write down what you feel</b>, alone or with someone beside you. Scroll down.</p>
+    <h1 class="room-name reveal" style="animation-delay:.25s">Chào mừng bạn đến với #thoughtful</h1>
+    <p class="greeting reveal" style="animation-delay:.55s" data-vi>Tại #thoughtful, nhịp sống hối hả dường như lùi bước để tâm trí được thảnh thơi tìm về những khoảng lặng an yên. Được bao bọc bởi sắc xanh cùng ánh đèn dịu nhẹ, căn phòng là chốn nương náu hoàn hảo cho những ai muốn chậm lại một nhịp, lắng nghe những thanh âm sâu bên trong tâm hồn, hay đơn giản là tận hưởng một thế giới trọn vẹn của riêng mình.</p>
+    <p class="greeting reveal" style="animation-delay:.55s" data-en>At #thoughtful, the rush of daily life seems to fade, giving the mind room to drift toward calm and quiet. Wrapped in soft blue tones and gentle light, the room is the perfect retreat for anyone who wants to slow down, listen to the quieter voices within, or simply enjoy a world that's entirely their own.</p>
     <div class="scroll-hint reveal" style="animation-delay:.7s"><span class="ar" aria-hidden="true">↓</span> <span data-vi>cuộn nhẹ một chút</span><span data-en>scroll gently</span></div>
   </div>
 </div>
@@ -51,21 +124,21 @@
 <div class="wrap">
   <section class="section">
     <div class="emo">
-      <p data-vi>Thoughtful là nơi để bạn ngồi lại với chính mình. Một góc yên tĩnh, một trang giấy trắng, và đủ không gian để lắng nghe điều bạn đang nghĩ.</p>
-      <p data-en>Thoughtful is a place to sit with yourself. A quiet corner, a blank page, and enough space to hear what you're thinking.</p>
+      <p data-vi>Sẽ có những thời điểm ta cần lùi lại một bước khỏi những ồn ào vội vã, để trút bỏ mọi bận tâm và thực sự quay về kết nối với chính mình. Và #thoughtful chính là không gian an yên được tạo ra cho những khoảng lặng trọn vẹn như thế.</p>
+      <p data-en>There will be times when we need to step back from the noise and rush, let go of every worry, and truly reconnect with ourselves. And #thoughtful is the peaceful space created for exactly those complete, quiet moments.</p>
     </div>
     <div class="palette-note">
-      <span class="pal-dot" style="background:#AD5F69"></span><span class="pal-dot" style="background:#C8D493"></span>
-      <div class="pal-text">
-        <span data-vi>Màu của #thoughtful: S 1030-G50Y ô liu · S 3040-R10B đỏ mận · S 0502-Y kem</span>
-        <span data-en>The colours of #thoughtful: S 1030-G50Y ô liu · S 3040-R10B đỏ mận · S 0502-Y kem</span>
+      <div class="pal-title" data-vi>Màu sắc chủ đạo</div>
+      <div class="pal-title" data-en>Signature Colours</div>
+      <div class="pal-dots">
+        <span class="pal-dot" style="background:#F6EDE4"></span><span class="pal-dot" style="background:#919361"></span>
       </div>
     </div>
 
-    <h2 class="section-label" data-vi>Vài điều tiện tay</h2>
-    <h2 class="section-label" data-en>A few practical things</h2>
-    <p class="section-sub" data-vi>Để bạn thấy thoải mái như ở nhà.</p>
-    <p class="section-sub" data-en>So you feel right at home.</p>
+    <h2 class="section-label" data-vi>Góc nhỏ tiện nghi</h2>
+    <h2 class="section-label" data-en>A Cozy Corner</h2>
+    <p class="section-sub" data-vi>Từng tiện ích được chăm chút tỉ mỉ để nâng niu những giây phút tĩnh tại, những khoảng lặng an yên tại #thoughtful</p>
+    <p class="section-sub" data-en>Each amenity has been thoughtfully curated to nurture moments of stillness and quiet calm at #thoughtful.</p>
 
     <div class="card wifi-card">
       <div class="wifi-info">Wifi<div class="net">#thoughtful</div><div class="pw" id="pw">66668888</div></div>
@@ -73,80 +146,91 @@
     </div>
 
     <details class="card acc">
-      <summary><span data-vi>Điều hòa & nhiệt độ</span><span data-en>Air conditioning & temperature</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <summary><span data-vi>❄️ Điều hòa & nhiệt độ</span><span data-en>❄️ Air conditioning & temperature</span> <span class="chev" aria-hidden="true">⌄</span></summary>
       <div class="acc-body">
-        <div data-vi><p>Điều khiển đặt trên kệ cạnh giường. Bấm nguồn, chọn 25–26°C cho dễ chịu.</p><p>Nút chế độ: hình bông tuyết là làm mát, giọt nước là hút ẩm cho ngày Hà Nội nồm.</p></div>
-        <div data-en><p>The remote is on the shelf by the bed. Press power, set it to 25–26°C for comfort.</p><p>Mode button: the snowflake cools, the water drop dehumidifies for Hanoi's damp days.</p></div>
+        <div data-vi><p>Điều khiển nằm trên kệ TV. Khi mới bật, bạn hãy để khoảng 25–26°C trước, sau đó tăng hoặc giảm dần cho đến khi thấy vừa ý nhé.</p><p>Chế độ: ❄️ Làm mát · 💧 Hút ẩm (hợp với những ngày Hà Nội nồm)</p></div>
+        <div data-en><p>The remote is on the TV cabinet. When you first turn it on, set it to around 25–26°C, then adjust up or down until it feels just right.</p><p>Modes: ❄️ Cool · 💧 Dehumidify (great for Hanoi's humid days)</p></div>
       </div>
     </details>
     <details class="card acc">
-      <summary><span data-vi>Đèn & không khí phòng</span><span data-en>Lights & atmosphere</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <summary><span data-vi>💡 Đèn & không khí phòng</span><span data-en>💡 Lights & atmosphere</span> <span class="chev" aria-hidden="true">⌄</span></summary>
       <div class="acc-body">
-        <div data-vi><p>Công tắc cạnh cửa bật đèn chính. Đèn đầu giường có thể chỉnh sáng — vặn nhẹ cho buổi tối dịu lại.</p></div>
-        <div data-en><p>The switch by the door turns on the main light. The bedside lamp is dimmable — turn it low to soften the evening.</p></div>
+        <div data-vi><p>Công tắc đèn chính và đèn thả nằm ngay cạnh cửa ra vào. Đèn trang trí có thể tùy chỉnh được độ sáng. Buổi tối bạn vặn dịu xuống một chút để căn phòng thêm ấm áp, thư giãn hơn nhé.</p></div>
+        <div data-en><p>The switch for the main light and the pendant light is right by the door. The decorative lamp is dimmable — in the evening, turn it down a little to make the room feel warmer and more relaxing.</p></div>
       </div>
     </details>
     <details class="card acc">
-      <summary><span data-vi>TV & loa</span><span data-en>TV & speaker</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <summary><span data-vi>📺 Máy chiếu & giải trí</span><span data-en>📺 TV & entertainment</span> <span class="chev" aria-hidden="true">⌄</span></summary>
       <div class="acc-body">
-        <div data-vi><p>TV đã đăng nhập sẵn Netflix & YouTube. Điều khiển trong ngăn kéo tủ. Kết nối loa Bluetooth bằng cách tìm “Thoughtful Sound” trên điện thoại.</p></div>
-        <div data-en><p>The TV is already signed in to Netflix & YouTube. The remote is in the cabinet drawer. Connect the Bluetooth speaker by searching for “Thoughtful Sound” on your phone.</p></div>
+        <div data-vi><p>Điều khiển nằm trên bàn. Netflix và YouTube Premium đã đăng nhập sẵn, bạn chọn đúng profile có tên phòng mình nhé.</p><p>💡 Mẹo: Bấm nút 🖱️ ngay dưới nút nguồn trên điều khiển để bật chế độ chuột. Bạn sẽ chọn profile và tìm phim dễ hơn nhiều đó.</p><p>Nếu tài khoản bị đăng xuất, bạn nhắn Fanpage hoặc gọi hotline để được hỗ trợ ngay.</p></div>
+        <div data-en><p>The remote is on the TV cabinet. Netflix and YouTube Premium are already signed in — just pick the profile with your room's name.</p><p>If an account gets logged out, message our Fanpage or call the hotline and we'll help right away.</p></div>
       </div>
     </details>
   </section>
 
   <section class="section">
-    <h2 class="section-label" data-vi>Một tấm thẻ trò chuyện</h2>
-    <h2 class="section-label" data-en>A conversation card</h2>
-    <p class="section-sub" data-vi>Bộ thẻ trò chuyện ở trên bàn. Bí thì bấm nút, để phòng rút giúp bạn một câu hỏi.</p>
-    <p class="section-sub" data-en>The conversation cards are on the desk. Stuck? Tap the button and let the room draw one for you.</p>
-    <div class="card shuffle-card">
-      <div class="shuffle-out" id="shuffleOut" role="status" aria-live="polite" data-vi-list='["Lần gần nhất bạn thấy thật sự bình yên là khi nào?", "Nếu được nói với bạn của 5 năm trước một câu, bạn sẽ nói gì?", "Điều nhỏ nào hôm nay khiến bạn mỉm cười?", "Bạn đang mong chờ điều gì nhất trong tháng tới?", "Một nơi nào khiến bạn luôn thấy như được trở về?", "Điều gì bạn biết ơn nhưng ít khi nói ra?", "Nếu ngày mai trống lịch hoàn toàn, bạn sẽ làm gì?"]' data-en-list='["When did you last feel truly at peace?", "If you could tell yourself from 5 years ago one thing, what would it be?", "What small thing made you smile today?", "What are you looking forward to most next month?", "Is there a place that always feels like coming home?", "What are you grateful for but rarely say out loud?", "If tomorrow were completely free, what would you do?"]'></div>
-      <button class="shuffle-btn" onclick="rollShuffle()"><span data-vi>Bấm để chọn ngẫu nhiên</span><span data-en>Tap for a random pick</span></button>
-    </div>
+    <h2 class="section-label" data-vi>Góc boardgame</h2>
+    <h2 class="section-label" data-en>The Board Game Corner</h2>
+    <p class="section-sub" data-vi>Nơi bạn cùng người thương hay bạn bè quây quần bên những ván game "cân não", sẻ chia tiếng cười và tìm lại những niềm vui thuần khiết nhất</p>
+    <p class="section-sub" data-en>Where you and your loved one or friends gather for a few "brain-racking" rounds, share some laughs, and rediscover the purest kind of fun.</p>
+
+    <details class="card acc">
+      <summary><span data-vi>🐴 Cờ cá ngựa</span><span data-en>🐴 Ludo</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <div class="acc-body">
+        <div data-vi><p>Luật đơn giản, nhiều bất ngờ, chơi vui ngay từ ván đầu.</p></div>
+        <div data-en><p>Simple rules, plenty of surprises — fun from the very first round.</p></div>
+      </div>
+    </details>
+
+    <details class="card acc">
+      <summary><span data-vi>♟️ Cờ vua</span><span data-en>♟️ Chess</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <div class="acc-body">
+        <div data-vi><p>Dành cho những ai thích đấu trí, từng nước đi đều đáng suy ngẫm.</p></div>
+        <div data-en><p>For those who love a battle of wits, where every move is worth thinking over.</p></div>
+      </div>
+    </details>
+
+    <details class="card acc">
+      <summary><span data-vi>💰 Cờ tỷ phú</span><span data-en>💰 Monopoly</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <div class="acc-body">
+        <div data-vi><p>Mua nhà, thu tiền thuê để tìm ra tỷ phú của trò chơi.</p></div>
+        <div data-en><p>Buy properties, collect rent, and find out who becomes the game's billionaire.</p></div>
+      </div>
+    </details>
+
+    <details class="card acc">
+      <summary><span data-vi>💡 Lưu ý</span><span data-en>💡 A few notes</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <div class="acc-body">
+        <div data-vi><p>Chơi xong, bạn giúp tụi mình kiểm tra đủ quân cờ, xúc xắc, tiền và thẻ, rồi cất gọn vào hộp để khách sau cũng có một ván thật trọn vẹn nhé 💛</p></div>
+        <div data-en><p>After playing, please help us check that all pieces, dice, money, and cards are there, then pack everything neatly back into the box so the next guest can enjoy a complete game too 💛</p></div>
+      </div>
+    </details>
   </section>
 
   <section class="section">
-    <h2 class="section-label" data-vi>Đói bụng chưa?</h2>
-    <h2 class="section-label" data-en>Hungry yet?</h2>
-    <p class="section-sub" data-vi>Chúng tôi đã chọn sẵn vài quán cà phê và quán ăn ngon quanh nhà cho bạn.</p>
-    <p class="section-sub" data-en>We've picked a few good coffee spots and eateries around the house for you.</p>
+    <h2 class="section-label" data-vi>Ăn – Chơi – Cà phê quanh đây</h2>
+    <h2 class="section-label" data-en>Eat – Play – Coffee Nearby</h2>
+    <p class="section-sub" data-vi>Một vài địa điểm chúng mình yêu thích quanh The Palette — từ những quán ăn ngon, góc cà phê xinh đến những nơi để đi chơi và khám phá.</p>
+    <p class="section-sub" data-en>A few of our favorite spots around The Palette — from great places to eat and cute coffee corners, to places to go out and explore.</p>
     <div class="food-card">
       <div class="fc-emoji" aria-hidden="true">🍜</div>
-      <h3 data-vi>Bản đồ ăn uống của The Palette</h3>
-      <h3 data-en>The Palette's food & coffee guide</h3>
-      <p data-vi>Cà phê, bữa sáng, bữa tối, ăn vặt — trong vài phút đi bộ.</p>
-      <p data-en>Coffee, breakfast, dinner, snacks — all within a short walk.</p>
-      <a href="food.html"><span data-vi>Xem gợi ý quán →</span><span data-en>See where to eat →</span></a>
+      <h3 data-vi>Bản đồ Ăn – Chơi – Cà phê</h3>
+      <h3 data-en>Eat – Play – Coffee Map</h3>
+      <a href="food.html"><span data-vi>Xem bản đồ →</span><span data-en>View the map →</span></a>
     </div>
   </section>
 
   <section class="section">
-    <h2 class="section-label" data-vi>📍 Vị trí của The Palette</h2>
-    <h2 class="section-label" data-en>📍 Find The Palette</h2>
-    <p class="section-sub" data-vi>The Palette nằm tại trung tâm Hà Nội, thuận tiện để khám phá những quán cà phê, nhà hàng và các địa điểm nổi tiếng chỉ trong vài phút.</p>
-    <p class="section-sub" data-en>Perfectly located in the heart of Hanoi, The Palette offers easy access to cafés, local restaurants, and many of the city's most popular attractions.</p>
-
-    <div class="map-frame-wrap">
-      <iframe src="https://www.google.com/maps?q=21.0149969,105.848583&z=16&output=embed" title="The Palette – Google Maps location" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-
-    <a class="map-btn" href="https://maps.app.goo.gl/qJSwjRrWf88gBv7N6" target="_blank" rel="noopener">
-      <span data-vi>📍 Mở Google Maps</span><span data-en>📍 Open in Google Maps</span>
-    </a>
-  </section>
-
-  <section class="section">
-    <h2 class="section-label" data-vi>Kết nối với chúng tôi</h2>
-    <h2 class="section-label" data-en>Stay Connected</h2>
-    <p class="section-sub" data-vi>Có câu hỏi trước hoặc trong kỳ nghỉ của bạn? Chúng tôi luôn sẵn lòng hỗ trợ — hãy liên hệ bất cứ lúc nào, hoặc theo dõi hành trình của chúng tôi trên mạng xã hội.</p>
-    <p class="section-sub" data-en>Have a question before or during your stay? We're always happy to help — reach out anytime, or follow our journey on social media.</p>
+    <h2 class="section-label" data-vi>Kết nối với The Palette</h2>
+    <h2 class="section-label" data-en>Stay Connected with The Palette</h2>
+    <p class="section-sub" data-vi>Cần giúp đỡ bất cứ điều gì trong thời gian lưu trú, hay muốn giữ liên lạc cho những chuyến đi sau? Bạn cứ nhắn The Palette qua đây nhé</p>
+    <p class="section-sub" data-en>Need anything during your stay, or simply want to stay in touch for your next getaway? Feel free to reach out to The Palette anytime.</p>
 
     <div class="card connect">
       <ul class="loc-list">
         <li>
           <a href="tel:0839898633" aria-label="Call The Palette">
-            <span class="loc-icon" aria-hidden="true">📞</span>
+            <span class="loc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
             <div class="loc-text">
               <div class="loc-label" data-vi>Điện thoại</div>
               <div class="loc-label" data-en>Phone</div>
@@ -156,7 +240,7 @@
         </li>
         <li>
           <a href="mailto:thepalette.homestay@gmail.com" aria-label="Email The Palette">
-            <span class="loc-icon" aria-hidden="true">✉️</span>
+            <span class="loc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
             <div class="loc-text">
               <div class="loc-label">Email</div>
               <p>thepalette.homestay@gmail.com</p>
@@ -164,8 +248,17 @@
           </a>
         </li>
         <li>
+          <a href="https://www.facebook.com/people/The-Palette-Homestay-H%C3%A0-N%E1%BB%99i/61591327494341/#" target="_blank" rel="noopener" aria-label="The Palette on Facebook (opens in a new tab)">
+            <span class="loc-icon" aria-hidden="true"><svg viewBox="0 0 320 512" fill="currentColor" width="16" height="18"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></span>
+            <div class="loc-text">
+              <div class="loc-label">Facebook</div>
+              <p>@The Palette - Homestay Hà Nội</p>
+            </div>
+          </a>
+        </li>
+        <li>
           <a href="https://www.instagram.com/thepalette.homestay" target="_blank" rel="noopener" aria-label="The Palette on Instagram (opens in a new tab)">
-            <span class="loc-icon" aria-hidden="true">📷</span>
+            <span class="loc-icon" aria-hidden="true"><svg viewBox="0 0 448 512" fill="currentColor" width="18" height="18"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></span>
             <div class="loc-text">
               <div class="loc-label">Instagram</div>
               <p>@thepalette.homestay</p>
@@ -174,7 +267,7 @@
         </li>
         <li>
           <a href="https://www.tiktok.com/@thepalette.homestay" target="_blank" rel="noopener" aria-label="The Palette on TikTok (opens in a new tab)">
-            <span class="loc-icon" aria-hidden="true">🎵</span>
+            <span class="loc-icon" aria-hidden="true"><svg viewBox="0 0 448 512" fill="currentColor" width="18" height="18"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></span>
             <div class="loc-text">
               <div class="loc-label">TikTok</div>
               <p>@thepalette.homestay</p>
@@ -186,20 +279,26 @@
       <div class="connect-reviews">
         <div class="connect-reviews-head">
           <span aria-hidden="true">⭐</span>
-          <span data-vi>Đánh giá của khách</span><span data-en>Guest Reviews</span>
+          <span data-vi>Góc review cho The Palette</span><span data-en>Share Your Experience</span>
         </div>
+        <p class="connect-reviews-note" data-vi>Cảm ơn bạn đã chọn The Palette làm trạm dừng chân. Nếu có thể, hãy dành chút thời gian để lại đánh giá trên Google và Facebook giúp The Palette nhé!</p>
+        <p class="connect-reviews-note" data-en>Thank you for choosing The Palette as your stop along the way. If you have a moment, a few words on Google or Facebook would mean the world to us.</p>
         <div class="review-btns">
           <a class="review-btn" href="https://share.google/IRmTa4k5tqgM6xN73" target="_blank" rel="noopener" aria-label="Read our Google reviews (opens in a new tab)"><span data-vi>Google Reviews →</span><span data-en>Google Reviews →</span></a>
-          <a class="review-btn review-btn-outline" href="https://www.facebook.com/YOUR_PAGE/reviews" target="_blank" rel="noopener" aria-label="Read our Facebook reviews (opens in a new tab)"><span data-vi>Facebook Reviews →</span><span data-en>Facebook Reviews →</span></a>
+          <a class="review-btn review-btn-outline" href="https://www.facebook.com/YOUR_PAGE/reviews" target="_blank" rel="noopener" aria-label="Read our Facebook reviews (opens in a new tab)"><span data-vi>Facebook →</span><span data-en>Facebook →</span></a>
         </div>
       </div>
     </div>
   </section>
 
   <div class="footer">
-    <div class="slogan" data-vi>Nơi cảm xúc thuộc về.</div>
-    <div class="slogan" data-en>A place feelings belong.</div>
-    The Palette · <span data-vi>Hà Nội</span><span data-en>Hanoi</span>
+    <div class="slogan" data-vi>Chúc bạn có một hành trình thật trọn vẹn và nhiều niềm vui cùng #thoughtful</div>
+    <div class="slogan" data-en>Wishing you a beautiful, joyful, and truly memorable stay at #thoughtful.</div>
+    <div class="footer-meta">
+      <p>The Palette Homestay - A Collection of Moods 🌈</p>
+      <p>📍 35 Nguyen Binh Khiem, Hai Ba Trung, Hanoi</p>
+      <p>☎ +84 839 898 633</p>
+    </div>
   </div>
 </div>
 

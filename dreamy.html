@@ -14,12 +14,34 @@
   .orb{position:absolute;top:8%;right:-30px;width:150px;height:150px;background:var(--c1);border-radius:50%;filter:blur(26px);opacity:.3;animation:float 9s ease-in-out infinite;}
 
   /* Hero — room photo behind a warm scrim, so the white logo and text stay legible.
-     Position 22% keeps the mirror/pouf corner of the room in frame on narrow screens;
-     the last stop fades into --cream so the hero meets the light sections below softly. */
-  .hero-bg{background:
+     The source photo is a tall 4500x8000 portrait shot. On mobile (where the hero's
+     ~86vh box is itself tall/narrow) a plain cover fills it with barely any crop.
+     On wider boxes (tablet/desktop) cover would zoom in brutally, so ::after switches
+     to "contain" there — the full photo stays visible, centered — while ::before holds
+     a blurred, oversized copy of the same photo behind it so there's no bare gap at
+     the sides. The fade-to-cream + dark scrim live on ::after, on top of both. */
+  .hero-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;}
+  .hero-bg::before{content:"";position:absolute;inset:-8%;background:url('assets/img/dreamy.png') center/cover no-repeat;filter:blur(46px) saturate(1.1) brightness(.85);transform:scale(1.08);z-index:0;}
+  .hero-bg::after{content:"";position:absolute;inset:0;z-index:2;background:
     linear-gradient(180deg,transparent 86%,var(--cream) 100%),
     linear-gradient(180deg,rgba(38,30,16,.50) 0%,rgba(38,30,16,.70) 20%,rgba(38,30,16,.72) 66%,rgba(38,30,16,.52) 92%),
-    url('assets/img/hero-dreamy.jpg') 22% center/cover no-repeat;}
+    url('assets/img/dreamy.png') center 22%/cover no-repeat;}
+  .hero-bg .orb{z-index:1}
+
+  @media(min-width:1024px){
+    .hero-bg::after{background:
+      linear-gradient(180deg,transparent 86%,var(--cream) 100%),
+      linear-gradient(180deg,rgba(38,30,16,.42) 0%,rgba(38,30,16,.58) 28%,rgba(38,30,16,.60) 70%,rgba(38,30,16,.46) 92%),
+      url('assets/img/dreamy.png') center/contain no-repeat;}
+
+    /* The photo now renders at "contain" width (narrower than the full hero), centred
+       in the middle of the viewport. .wrap's own text stays left-aligned sitewide, which
+       reads as lopsided against that narrower centred photo — so here, desktop-only, the
+       hero copy centres itself instead, to sit balanced in the middle of the image. */
+    .hero .wrap{text-align:center}
+    .hero .greeting{margin-left:auto;margin-right:auto}
+    .hero .scroll-hint{justify-content:center}
+  }
 
   /* Header row — the logo shares a horizontal band with the fixed VI/EN switcher.
      Same top offset and row height as .lang-toggle, so their centres line up. */
@@ -60,7 +82,6 @@
   .connect-reviews-note{font-size:.85rem;color:var(--inks);line-height:1.65;margin-bottom:16px;max-width:340px}
 
   @media(min-width:768px){
-    .hero-bg{background-position:center}
     .hero-head{left:calc(34px + env(safe-area-inset-left))}
     .hero-logo{height:30px}
   }

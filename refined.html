@@ -4,28 +4,108 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="Hướng dẫn lưu trú phòng #refined tại The Palette — wifi, tiện nghi và gợi ý quán ăn gần đây. / Digital guide for room #refined at The Palette homestay, Hanoi.">
-<meta name="theme-color" content="#FBF7F2">
+<meta name="theme-color" content="#FFFDF6">
 <title>#refined · The Palette</title>
 <link rel="preload" href="assets/fonts/DarleySans-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/base.css">
 <style>
-  /* #refined palette — coral red & steel blue. Only this block changes per room. */
-  :root{--c1:#D73F4E;--c1s:#F1E5E5;--c2:#C9D6E2;--c2s:#DAE4ED;--cream:#FBF7F2;--ink:#41332F;--inks:#7F6F67;--white:#FFFFFF;}
-  .orb{display:none}
+  /* #refined palette — deep terracotta red & espresso brown, pulled from the room photo
+     (curtains/desk = rust red, vase/chairs = dark espresso wood). */
+  :root{--c1:#9D3E22;--c1s:#E8C8BB;--c2:#572C1B;--c2s:#D0C2B9;--cream:#FFFDF6;--ink:#4A4433;--inks:#7D755D;--white:#FFFFFF;}
+  .orb{position:absolute;top:8%;right:-30px;width:150px;height:150px;background:var(--c1);border-radius:50%;filter:blur(26px);opacity:.3;animation:float 9s ease-in-out infinite;}
+
+  /* --c1 here is a dark rust red, too dark for the sitewide --ink text/icon colour used
+     on buttons and icon circles in the paler rooms — switch those to cream for contrast.
+     .review-btn-outline is excluded: it's a transparent/bordered button, not a solid
+     --c1 fill, so it keeps the sitewide dark --ink text for contrast against the page. */
+  .map-btn,.shuffle-btn,.review a,.review-btn:not(.review-btn-outline),.concierge .c-fb,.steps li::before,.loc-icon{color:var(--cream)}
+
+  /* Hero — room photo behind a warm scrim, so the white logo and text stay legible.
+     The source photo is a tall 4500x8000 portrait shot. On mobile (where the hero's
+     ~86vh box is itself tall/narrow) a plain cover fills it with barely any crop.
+     On wider boxes (tablet/desktop) cover would zoom in brutally, so ::after switches
+     to "contain" there — the full photo stays visible, centered — while ::before holds
+     a blurred, oversized copy of the same photo behind it so there's no bare gap at
+     the sides. The fade-to-cream + dark scrim live on ::after, on top of both. */
+  .hero-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;}
+  .hero-bg::before{content:"";position:absolute;inset:-8%;background:url('assets/img/refined.png') center/cover no-repeat;filter:blur(46px) saturate(1.1) brightness(.85);transform:scale(1.08);z-index:0;}
+  .hero-bg::after{content:"";position:absolute;inset:0;z-index:2;background:
+    linear-gradient(180deg,transparent 86%,var(--cream) 100%),
+    linear-gradient(180deg,rgba(38,30,16,.50) 0%,rgba(38,30,16,.70) 20%,rgba(38,30,16,.72) 66%,rgba(38,30,16,.52) 92%),
+    url('assets/img/refined.png') center 22%/cover no-repeat;}
+  .hero-bg .orb{z-index:1}
+
+  @media(min-width:1024px){
+    .hero-bg::after{background:
+      linear-gradient(180deg,transparent 86%,var(--cream) 100%),
+      linear-gradient(180deg,rgba(38,30,16,.42) 0%,rgba(38,30,16,.58) 28%,rgba(38,30,16,.60) 70%,rgba(38,30,16,.46) 92%),
+      url('assets/img/refined.png') center/contain no-repeat;}
+
+    /* The photo now renders at "contain" width (narrower than the full hero), centred
+       in the middle of the viewport. .wrap's own text stays left-aligned sitewide, which
+       reads as lopsided against that narrower centred photo — so here, desktop-only, the
+       hero copy centres itself instead, to sit balanced in the middle of the image. */
+    .hero .wrap{text-align:center}
+    .hero .greeting{margin-left:auto;margin-right:auto}
+    .hero .scroll-hint{justify-content:center}
+  }
+
+  /* Header row — the logo shares a horizontal band with the fixed VI/EN switcher.
+     Same top offset and row height as .lang-toggle, so their centres line up. */
+  .hero-head{position:absolute;top:calc(16px + env(safe-area-inset-top));left:calc(22px + env(safe-area-inset-left));height:41px;display:flex;align-items:center;z-index:5;}
+  .hero-logo{height:26px;width:auto;display:block}
+
+  /* Hero copy sits on the photo, so it flips to white here only — sections below are unchanged.
+     This hero skips .room-tag (no italic subtitle line), so .room-name's own 6px bottom margin
+     is the only gap before .greeting by default — too tight. Widened here, scoped to the hero. */
+  .hero .room-name{color:var(--white);text-shadow:0 2px 24px rgba(38,30,16,.45);margin-bottom:26px}
+  .hero .room-tag{color:rgba(255,255,255,.9);text-shadow:0 1px 16px rgba(38,30,16,.4)}
+  .hero .greeting{color:rgba(255,255,255,.94);max-width:360px;line-height:1.72;text-shadow:0 1px 16px rgba(38,30,16,.45)}
+  .hero .greeting b{color:var(--white)}
+  .hero .scroll-hint{color:rgba(255,255,255,.85);text-shadow:0 1px 14px rgba(38,30,16,.4)}
+
+  /* Gate splash logo — .gate's background is a light cream gradient (unlike .hero's
+     dark photo scrim), so the white logo asset needs a dark chip to stay legible.
+     Same treatment as food.html's .brandmark, for a consistent pattern site-wide. */
+  .gate-logo{display:inline-flex;background:var(--ink);border-radius:14px;padding:11px 18px;margin-bottom:28px}
+  .gate-logo img{height:40px;width:auto;display:block}
+
+  /* Palette note, this page only — title + two colour circles, no code/text.
+     .palette-note/.pal-dot are shared with the other room pages, so this stays scoped here. */
+  .palette-note{flex-direction:column;align-items:flex-start;gap:12px}
+  .pal-title{font-family:var(--font-display);font-weight:500;font-size:.95rem;color:var(--ink)}
+  .pal-dots{display:flex;align-items:center;gap:12px}
+  .palette-note .pal-dot{width:30px;height:30px}
+
+  /* Footer contact block, this page only — replaces the old plain "The Palette · Hà Nội"
+     line. Inherits .footer's centered text-align/colour/size; only resets <p> margins
+     down to a tight, deliberate gap between the three lines. */
+  .footer-meta{margin-top:14px}
+  .footer-meta p{margin:0 0 4px}
+  .footer-meta p:last-child{margin-bottom:0}
+
+  /* Thank-you line between the review heading and its buttons. */
+  .connect-reviews-head{margin-bottom:8px}
+  .connect-reviews-note{font-size:.85rem;color:var(--inks);line-height:1.65;margin-bottom:16px;max-width:340px}
+
+  @media(min-width:768px){
+    .hero-head{left:calc(34px + env(safe-area-inset-left))}
+    .hero-logo{height:30px}
+  }
 </style>
 </head>
 <body>
 
 <div class="gate" id="gate">
-  <div class="gate-orb" aria-hidden="true" style="width:70px;height:2px;background:var(--c1);opacity:.6;margin-bottom:40px"></div>
-  <p class="gate-brand">The Palette</p>
+  <div class="gate-orb" aria-hidden="true" style="width:96px;height:96px;background:var(--c1);border-radius:50%;filter:blur(1px);opacity:.7;margin-bottom:34px;animation:float 9s ease-in-out infinite"></div>
+  <div class="gate-logo"><img src="assets/img/logo-white.png" alt="The Palette" width="600" height="334"></div>
   <p class="gate-name">#refined</p>
-  <p class="gate-tag" data-vi>nơi mỗi khoảnh khắc được giữ lại</p>
-  <p class="gate-tag" data-en>where every moment is kept</p>
+  <p class="gate-tag" data-vi>nơi sự tinh tế ôm trọn từng cảm xúc</p>
+  <p class="gate-tag" data-en>a place that cradles your dreams</p>
   <p class="gate-q">Chọn ngôn ngữ · Choose your language</p>
   <div class="lang-btns">
-    <button class="lang-btn" onclick="setLanguage('vi')"><span class="flag" aria-hidden="true">🇻🇳</span><span class="lbl">Tiếng Việt</span><span class="sub">Vào phòng</span></button>
-    <button class="lang-btn" onclick="setLanguage('en')"><span class="flag" aria-hidden="true">🇬🇧</span><span class="lbl">English</span><span class="sub">Enter room</span></button>
+    <button class="lang-btn" onclick="setLanguage('vi')"><span class="flag" aria-hidden="true">🇻🇳</span><span class="lbl">Tiếng Việt</span></button>
+    <button class="lang-btn" onclick="setLanguage('en')"><span class="flag" aria-hidden="true">🇬🇧</span><span class="lbl">English</span></button>
   </div>
 </div>
 
@@ -36,13 +116,13 @@
 
 <div class="hero">
   <div class="hero-bg"><div class="orb" aria-hidden="true"></div></div>
+  <div class="hero-head">
+    <img class="hero-logo reveal" style="animation-delay:.1s" src="assets/img/logo-white.png" alt="The Palette" width="600" height="334">
+  </div>
   <div class="wrap">
-    <p class="eyebrow reveal" style="animation-delay:.1s">The Palette</p>
-    <h1 class="room-name reveal" style="animation-delay:.25s">#refined</h1>
-    <p class="room-tag reveal" style="animation-delay:.4s" data-vi>nơi mỗi khoảnh khắc được giữ lại</p>
-    <p class="room-tag reveal" style="animation-delay:.4s" data-en>where every moment is kept</p>
-    <p class="greeting reveal" style="animation-delay:.55s" data-vi>Chào bạn. Refined mang dáng dấp châu Âu xưa — đỏ coral, sọc kẻ, kệ ống công nghiệp. Một căn phòng có cá tính và biết kể chuyện. Ở đây, chúng tôi mời bạn <b>giữ lại những khoảnh khắc</b>: một tấm polaroid mang về làm kỷ niệm. Cuộn xuống nhé.</p>
-    <p class="greeting reveal" style="animation-delay:.55s" data-en>Hello. Refined carries the air of old Europe — coral red, stripes, industrial pipe shelving. A room with character, one that tells a story. Here, we invite you to <b>keep your moments</b>: a polaroid to take home. Scroll down.</p>
+    <h1 class="room-name reveal" style="animation-delay:.25s">Chào mừng bạn đến với #refined</h1>
+    <p class="greeting reveal" style="animation-delay:.55s" data-vi>Tại #refined, mọi khoảnh khắc dường như lắng đọng lại để sự tinh tế nhẹ nhàng ôm trọn từng cảm xúc. Lấy sắc đỏ lãng mạn làm chủ đạo với những đường nét điểm xuyết tinh tế, căn phòng là không gian hoàn hảo cho những ai muốn đánh dấu một dịp đặc biệt, đắm chìm trong sự lãng mạn, hay đơn giản là lưu giữ những kỷ niệm đẹp với người mình thương. </p>
+    <p class="greeting reveal" style="animation-delay:.55s" data-en>At #refined, every moment seems to settle into stillness, letting a quiet elegance embrace each feeling. Built around a romantic red as its signature tone with subtle, refined details, the room is the perfect space for marking a special occasion, losing yourself in romance, or simply keeping beautiful memories with someone you love.</p>
     <div class="scroll-hint reveal" style="animation-delay:.7s"><span class="ar" aria-hidden="true">↓</span> <span data-vi>cuộn nhẹ một chút</span><span data-en>scroll gently</span></div>
   </div>
 </div>
@@ -50,21 +130,21 @@
 <div class="wrap">
   <section class="section">
     <div class="emo">
-      <p data-vi>Refined là nơi dành cho hai người và một dịp đặc biệt. Ánh sáng ấm, không gian riêng tư, và những khoảnh khắc đáng được giữ lại thật lâu.</p>
-      <p data-en>Refined is made for two people and a special occasion. Warm light, a private space, and moments worth keeping for a long time.</p>
+      <p data-vi>Giữa thế giới vội vã này, đôi khi ta chỉ cần một khoảng lặng để vỗ về mộng mơ và ôm ấp những rung cảm dịu êm. Và #refined chính là chốn bình yên được tạo ra cho những phút giây như thế...</p>
+      <p data-en>In this fast-paced world, sometimes all we need is a quiet moment to nurture our dreams and embrace the gentle emotions within. And #refined is the peaceful retreat created for moments just like these...</p>
     </div>
     <div class="palette-note">
-      <span class="pal-dot" style="background:#D73F4E"></span><span class="pal-dot" style="background:#C9D6E2"></span>
-      <div class="pal-text">
-        <span data-vi>Màu của #refined: 1070-R05B đỏ coral · S 0505-R10B hồng phấn · S 0510-R80B xanh xám</span>
-        <span data-en>The colours of #refined: 1070-R05B đỏ coral · S 0505-R10B hồng phấn · S 0510-R80B xanh xám</span>
+      <div class="pal-title" data-vi>Màu sắc chủ đạo</div>
+      <div class="pal-title" data-en>Signature Colours</div>
+      <div class="pal-dots">
+        <span class="pal-dot" style="background:#9D3E22"></span><span class="pal-dot" style="background:#572C1B"></span>
       </div>
     </div>
 
-    <h2 class="section-label" data-vi>Vài điều tiện tay</h2>
-    <h2 class="section-label" data-en>A few practical things</h2>
-    <p class="section-sub" data-vi>Để bạn thấy thoải mái như ở nhà.</p>
-    <p class="section-sub" data-en>So you feel right at home.</p>
+    <h2 class="section-label" data-vi>Góc nhỏ tiện nghi</h2>
+    <h2 class="section-label" data-en>A Cozy Corner</h2>
+    <p class="section-sub" data-vi>Từng tiện ích được chăm chút tỉ mỉ để nâng niu những khoảnh khắc đặc biệt và ôm ấp từng phút giây đáng nhớ tại #refined</p>
+    <p class="section-sub" data-en>Each amenity has been thoughtfully curated to cherish special moments and embrace every memorable minute at #refined.</p>
 
     <div class="card wifi-card">
       <div class="wifi-info">Wifi<div class="net">#refined</div><div class="pw" id="pw">66668888</div></div>
@@ -72,80 +152,93 @@
     </div>
 
     <details class="card acc">
-      <summary><span data-vi>Điều hòa & nhiệt độ</span><span data-en>Air conditioning & temperature</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <summary><span data-vi>❄️ Điều hòa & nhiệt độ</span><span data-en>❄️ Air conditioning & temperature</span> <span class="chev" aria-hidden="true">⌄</span></summary>
       <div class="acc-body">
-        <div data-vi><p>Điều khiển đặt trên kệ cạnh giường. Bấm nguồn, chọn 25–26°C cho dễ chịu.</p><p>Nút chế độ: hình bông tuyết là làm mát, giọt nước là hút ẩm cho ngày Hà Nội nồm.</p></div>
-        <div data-en><p>The remote is on the shelf by the bed. Press power, set it to 25–26°C for comfort.</p><p>Mode button: the snowflake cools, the water drop dehumidifies for Hanoi's damp days.</p></div>
+        <div data-vi><p>Điều khiển nằm trên kệ TV. Khi mới bật, bạn hãy để khoảng 25–26°C trước, sau đó tăng hoặc giảm dần cho đến khi thấy vừa ý nhé.</p><p>Chế độ: ❄️ Làm mát · 💧 Hút ẩm (hợp với những ngày Hà Nội nồm)</p></div>
+        <div data-en><p>The remote is on the TV cabinet. When you first turn it on, set it to around 25–26°C, then adjust up or down until it feels just right.</p><p>Modes: ❄️ Cool · 💧 Dehumidify (great for Hanoi's humid days)</p></div>
       </div>
     </details>
     <details class="card acc">
-      <summary><span data-vi>Đèn & không khí phòng</span><span data-en>Lights & atmosphere</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <summary><span data-vi>💡 Đèn & không khí phòng</span><span data-en>💡 Lights & atmosphere</span> <span class="chev" aria-hidden="true">⌄</span></summary>
       <div class="acc-body">
-        <div data-vi><p>Công tắc cạnh cửa bật đèn chính. Đèn đầu giường có thể chỉnh sáng — vặn nhẹ cho buổi tối dịu lại.</p></div>
-        <div data-en><p>The switch by the door turns on the main light. The bedside lamp is dimmable — turn it low to soften the evening.</p></div>
+        <div data-vi><p>Công tắc đèn chính và đèn thả nằm ngay cạnh cửa ra vào. Đèn trang trí có thể tùy chỉnh được độ sáng. Buổi tối bạn vặn dịu xuống một chút để căn phòng thêm ấm áp, thư giãn hơn nhé.</p></div>
+        <div data-en><p>The switch for the main light and the pendant light is right by the door. The decorative lamp is dimmable — in the evening, turn it down a little to make the room feel warmer and more relaxing.</p></div>
       </div>
     </details>
     <details class="card acc">
-      <summary><span data-vi>TV & loa</span><span data-en>TV & speaker</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <summary><span data-vi>📺 TV & giải trí</span><span data-en>📺 TV & entertainment</span> <span class="chev" aria-hidden="true">⌄</span></summary>
       <div class="acc-body">
-        <div data-vi><p>TV đã đăng nhập sẵn Netflix & YouTube. Điều khiển trong ngăn kéo tủ. Kết nối loa Bluetooth bằng cách tìm “Refined Sound” trên điện thoại.</p></div>
-        <div data-en><p>The TV is already signed in to Netflix & YouTube. The remote is in the cabinet drawer. Connect the Bluetooth speaker by searching for “Refined Sound” on your phone.</p></div>
+        <div data-vi><p>Điều khiển nằm trên kệ TV. Netflix và YouTube Premium đã đăng nhập sẵn, bạn chọn đúng profile có tên phòng mình nhé.</p><p>Nếu tài khoản bị đăng xuất, bạn nhắn Fanpage hoặc gọi hotline để được hỗ trợ ngay.</p></div>
+        <div data-en><p>The remote is on the TV cabinet. Netflix and YouTube Premium are already signed in — just pick the profile with your room's name.</p><p>If an account gets logged out, message our Fanpage or call the hotline and we'll help right away.</p></div>
       </div>
     </details>
   </section>
 
   <section class="section">
-    <h2 class="section-label" data-vi>Một tấm polaroid mang về</h2>
-    <h2 class="section-label" data-en>A polaroid to take home</h2>
-    <p class="section-sub" data-vi>Máy polaroid là linh hồn của Refined. Chụp một tấm, và mang nó về làm kỷ niệm của riêng bạn.</p>
-    <p class="section-sub" data-en>The polaroid camera is the soul of Refined. Take a photo, and keep it as your own memento.</p>
-    <div class="card">
-      <ol class="steps" data-vi><li>Máy polaroid nằm trên kệ ống cạnh cửa sổ — nơi có ánh sáng đẹp nhất.</li><li>Gạt nút nguồn, đợi ống kính bật ra. Phim đã được lắp sẵn.</li><li>Đứng gần cửa sổ, ánh sáng tự nhiên cho màu đẹp nhất. Bấm nút chụp.</li><li>Đợi tấm hình hiện trong khoảng 1 phút — đừng vẫy, cứ để yên.</li><li>Tấm hình là của bạn — mang về làm kỷ niệm của ngày hôm nay.</li></ol>
-      <ol class="steps" data-en><li>The polaroid sits on the pipe shelf by the window — where the light is loveliest.</li><li>Slide the power switch, wait for the lens to pop out. Film is already loaded.</li><li>Stand near the window; natural light gives the best colour. Press the shutter.</li><li>Wait about a minute for the photo to appear — don&#x27;t shake it, just let it be.</li><li>The photo is yours — take it home as a memento of today.</li></ol>
-    </div>
+    <h2 class="section-label" data-vi>Góc lưu giữ kỷ niệm</h2>
+    <h2 class="section-label" data-en>A Memory-Keeping Corner</h2>
+    <p class="section-sub" data-vi>Tự tay lưu giữ những kỷ niệm đẹp, những khoảnh khắc đặc biệt bằng máy ảnh in liền tại #refined</p>
+    <p class="section-sub" data-en>Capture your favorite memories and special moments with your own hands, using the instant camera at #refined.</p>
+
+    <details class="card acc">
+      <summary><span data-vi>⏻ Khởi động máy ảnh</span><span data-en>⏻ Turn on the camera</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <div class="acc-body">
+        <div data-vi><p>Nhấn giữ nút nguồn phía trên máy để bật.</p></div>
+        <div data-en><p>Press and hold the power button on top of the camera to turn it on.</p></div>
+      </div>
+    </details>
+
+    <details class="card acc">
+      <summary><span data-vi>📸 Chụp & in ảnh ngay</span><span data-en>📸 Shoot & print instantly</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <div class="acc-body">
+        <ol class="steps" data-vi><li>Xoay núm tròn để chọn hiệu ứng, gạt công tắc cạnh nút nguồn nếu cần bật flash.</li><li>Bấm nút chụp, xem lại ảnh rồi bấm 🖨 để in.</li></ol>
+        <ol class="steps" data-en><li>Turn the round dial to pick an effect, and flip the switch next to the power button if you need the flash.</li><li>Press the shutter button, review the photo, then press 🖨 to print.</li></ol>
+      </div>
+    </details>
+
+    <details class="card acc">
+      <summary><span data-vi>📱 In ảnh từ điện thoại</span><span data-en>📱 Print from your phone</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <div class="acc-body">
+        <ol class="steps" data-vi><li>Tải app HeyPhoto và bật Bluetooth.</li><li>Mở app, chọn Thêm thiết bị rồi chọn HPRT Z1-xxxx.</li><li>Chọn ảnh và bấm In.</li></ol>
+        <ol class="steps" data-en><li>Download the HeyPhoto app and turn on Bluetooth.</li><li>Open the app, tap Add device, then select HPRT Z1-xxxx.</li><li>Choose your photo and tap Print.</li></ol>
+        <p data-vi>▶️ Video hướng dẫn: <a href="https://www.youtube.com/watch?v=mXuZoab5BRs" target="_blank" rel="noopener">youtube.com/watch?v=mXuZoab5BRs</a></p>
+        <p data-en>▶️ Tutorial video: <a href="https://www.youtube.com/watch?v=mXuZoab5BRs" target="_blank" rel="noopener">youtube.com/watch?v=mXuZoab5BRs</a></p>
+      </div>
+    </details>
+
+    <details class="card acc">
+      <summary><span data-vi>💡 Lưu ý</span><span data-en>💡 A few notes</span> <span class="chev" aria-hidden="true">⌄</span></summary>
+      <div class="acc-body">
+        <div data-vi><p>Ảnh in liền có màu nhẹ và nét mộc, mang chút chất film hoài cổ — đó chính là nét đáng yêu riêng của nó, không sắc nét như ảnh điện thoại đâu nhé 🎞️</p><p>Mẹo nhỏ: chụp ở nơi đủ sáng hoặc bật flash thì ảnh in ra sẽ rõ và tươi hơn.</p><p>Mỗi lượt lưu trú được in tối đa 2 tấm, bạn chọn kỹ nhé. Khi đang in, bạn đừng lắc máy hay kéo giấy nhé.</p></div>
+        <div data-en><p>Instant photos come out soft and a little raw, with that nostalgic film look — that's exactly its charm, not as sharp as a phone photo 🎞️</p><p>Tip: shoot somewhere well-lit or turn on the flash for a clearer, brighter print.</p><p>Each stay comes with up to 2 prints, so choose your shots carefully. And please don't shake the camera or pull on the paper while it's printing.</p></div>
+      </div>
+    </details>
   </section>
 
   <section class="section">
-    <h2 class="section-label" data-vi>Đói bụng chưa?</h2>
-    <h2 class="section-label" data-en>Hungry yet?</h2>
-    <p class="section-sub" data-vi>Chúng tôi đã chọn sẵn vài quán cà phê và quán ăn ngon quanh nhà cho bạn.</p>
-    <p class="section-sub" data-en>We've picked a few good coffee spots and eateries around the house for you.</p>
+    <h2 class="section-label" data-vi>Ăn – Chơi – Cà phê quanh đây</h2>
+    <h2 class="section-label" data-en>Eat – Play – Coffee Nearby</h2>
+    <p class="section-sub" data-vi>Một vài địa điểm chúng mình yêu thích quanh The Palette — từ những quán ăn ngon, góc cà phê xinh đến những nơi để đi chơi và khám phá.</p>
+    <p class="section-sub" data-en>A few of our favorite spots around The Palette — from great places to eat and cute coffee corners, to places to go out and explore.</p>
     <div class="food-card">
       <div class="fc-emoji" aria-hidden="true">🍜</div>
-      <h3 data-vi>Bản đồ ăn uống của The Palette</h3>
-      <h3 data-en>The Palette's food & coffee guide</h3>
-      <p data-vi>Cà phê, bữa sáng, bữa tối, ăn vặt — trong vài phút đi bộ.</p>
-      <p data-en>Coffee, breakfast, dinner, snacks — all within a short walk.</p>
-      <a href="food.html"><span data-vi>Xem gợi ý quán →</span><span data-en>See where to eat →</span></a>
+      <h3 data-vi>Bản đồ Ăn – Chơi – Cà phê</h3>
+      <h3 data-en>Eat – Play – Coffee Map</h3>
+      <a href="food.html"><span data-vi>Xem bản đồ →</span><span data-en>View the map →</span></a>
     </div>
   </section>
 
   <section class="section">
-    <h2 class="section-label" data-vi>📍 Vị trí của The Palette</h2>
-    <h2 class="section-label" data-en>📍 Find The Palette</h2>
-    <p class="section-sub" data-vi>The Palette nằm tại trung tâm Hà Nội, thuận tiện để khám phá những quán cà phê, nhà hàng và các địa điểm nổi tiếng chỉ trong vài phút.</p>
-    <p class="section-sub" data-en>Perfectly located in the heart of Hanoi, The Palette offers easy access to cafés, local restaurants, and many of the city's most popular attractions.</p>
-
-    <div class="map-frame-wrap">
-      <iframe src="https://www.google.com/maps?q=21.0149969,105.848583&z=16&output=embed" title="The Palette – Google Maps location" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-
-    <a class="map-btn" href="https://maps.app.goo.gl/qJSwjRrWf88gBv7N6" target="_blank" rel="noopener">
-      <span data-vi>📍 Mở Google Maps</span><span data-en>📍 Open in Google Maps</span>
-    </a>
-  </section>
-
-  <section class="section">
-    <h2 class="section-label" data-vi>Kết nối với chúng tôi</h2>
-    <h2 class="section-label" data-en>Stay Connected</h2>
-    <p class="section-sub" data-vi>Có câu hỏi trước hoặc trong kỳ nghỉ của bạn? Chúng tôi luôn sẵn lòng hỗ trợ — hãy liên hệ bất cứ lúc nào, hoặc theo dõi hành trình của chúng tôi trên mạng xã hội.</p>
-    <p class="section-sub" data-en>Have a question before or during your stay? We're always happy to help — reach out anytime, or follow our journey on social media.</p>
+    <h2 class="section-label" data-vi>Kết nối với The Palette</h2>
+    <h2 class="section-label" data-en>Stay Connected with The Palette</h2>
+    <p class="section-sub" data-vi>Cần giúp đỡ bất cứ điều gì trong thời gian lưu trú, hay muốn giữ liên lạc cho những chuyến đi sau? Bạn cứ nhắn The Palette qua đây nhé</p>
+    <p class="section-sub" data-en>Need anything during your stay, or simply want to stay in touch for your next getaway? Feel free to reach out to The Palette anytime.</p>
 
     <div class="card connect">
       <ul class="loc-list">
         <li>
           <a href="tel:0839898633" aria-label="Call The Palette">
-            <span class="loc-icon" aria-hidden="true">📞</span>
+            <span class="loc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
             <div class="loc-text">
               <div class="loc-label" data-vi>Điện thoại</div>
               <div class="loc-label" data-en>Phone</div>
@@ -155,7 +248,7 @@
         </li>
         <li>
           <a href="mailto:thepalette.homestay@gmail.com" aria-label="Email The Palette">
-            <span class="loc-icon" aria-hidden="true">✉️</span>
+            <span class="loc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
             <div class="loc-text">
               <div class="loc-label">Email</div>
               <p>thepalette.homestay@gmail.com</p>
@@ -163,8 +256,17 @@
           </a>
         </li>
         <li>
+          <a href="https://www.facebook.com/people/The-Palette-Homestay-H%C3%A0-N%E1%BB%99i/61591327494341/#" target="_blank" rel="noopener" aria-label="The Palette on Facebook (opens in a new tab)">
+            <span class="loc-icon" aria-hidden="true"><svg viewBox="0 0 320 512" fill="currentColor" width="16" height="18"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></span>
+            <div class="loc-text">
+              <div class="loc-label">Facebook</div>
+              <p>@The Palette - Homestay Hà Nội</p>
+            </div>
+          </a>
+        </li>
+        <li>
           <a href="https://www.instagram.com/thepalette.homestay" target="_blank" rel="noopener" aria-label="The Palette on Instagram (opens in a new tab)">
-            <span class="loc-icon" aria-hidden="true">📷</span>
+            <span class="loc-icon" aria-hidden="true"><svg viewBox="0 0 448 512" fill="currentColor" width="18" height="18"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></span>
             <div class="loc-text">
               <div class="loc-label">Instagram</div>
               <p>@thepalette.homestay</p>
@@ -173,7 +275,7 @@
         </li>
         <li>
           <a href="https://www.tiktok.com/@thepalette.homestay" target="_blank" rel="noopener" aria-label="The Palette on TikTok (opens in a new tab)">
-            <span class="loc-icon" aria-hidden="true">🎵</span>
+            <span class="loc-icon" aria-hidden="true"><svg viewBox="0 0 448 512" fill="currentColor" width="18" height="18"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></span>
             <div class="loc-text">
               <div class="loc-label">TikTok</div>
               <p>@thepalette.homestay</p>
@@ -185,20 +287,26 @@
       <div class="connect-reviews">
         <div class="connect-reviews-head">
           <span aria-hidden="true">⭐</span>
-          <span data-vi>Đánh giá của khách</span><span data-en>Guest Reviews</span>
+          <span data-vi>Góc review cho The Palette</span><span data-en>Share Your Experience</span>
         </div>
+        <p class="connect-reviews-note" data-vi>Cảm ơn bạn đã chọn The Palette làm trạm dừng chân. Nếu có thể, hãy dành chút thời gian để lại đánh giá trên Google và Facebook giúp The Palette nhé!</p>
+        <p class="connect-reviews-note" data-en>Thank you for choosing The Palette as your stop along the way. If you have a moment, a few words on Google or Facebook would mean the world to us.</p>
         <div class="review-btns">
           <a class="review-btn" href="https://share.google/IRmTa4k5tqgM6xN73" target="_blank" rel="noopener" aria-label="Read our Google reviews (opens in a new tab)"><span data-vi>Google Reviews →</span><span data-en>Google Reviews →</span></a>
-          <a class="review-btn review-btn-outline" href="https://www.facebook.com/YOUR_PAGE/reviews" target="_blank" rel="noopener" aria-label="Read our Facebook reviews (opens in a new tab)"><span data-vi>Facebook Reviews →</span><span data-en>Facebook Reviews →</span></a>
+          <a class="review-btn review-btn-outline" href="https://www.facebook.com/YOUR_PAGE/reviews" target="_blank" rel="noopener" aria-label="Read our Facebook reviews (opens in a new tab)"><span data-vi>Facebook →</span><span data-en>Facebook →</span></a>
         </div>
       </div>
     </div>
   </section>
 
   <div class="footer">
-    <div class="slogan" data-vi>Nơi cảm xúc thuộc về.</div>
-    <div class="slogan" data-en>A place feelings belong.</div>
-    The Palette · <span data-vi>Hà Nội</span><span data-en>Hanoi</span>
+    <div class="slogan" data-vi>Chúc bạn có một hành trình thật trọn vẹn và nhiều niềm vui cùng #refined</div>
+    <div class="slogan" data-en>Wishing you a beautiful, joyful, and truly memorable stay at #refined.</div>
+    <div class="footer-meta">
+      <p>The Palette Homestay - A Collection of Moods 🌈</p>
+      <p>📍 35 Nguyen Binh Khiem, Hai Ba Trung, Hanoi</p>
+      <p>☎ +84 839 898 633</p>
+    </div>
   </div>
 </div>
 
