@@ -20,6 +20,18 @@
      --c1 fill, so it keeps the sitewide dark --ink text for contrast against the page. */
   .map-btn,.shuffle-btn,.review a,.review-btn:not(.review-btn-outline),.concierge .c-fb,.steps li::before,.loc-icon{color:var(--cream)}
 
+  /* Gate background — flat #9D3E22, this page only (overrides base.css's shared .gate
+     radial-gradient/orb treatment). Dark rust fails contrast with the sitewide --ink
+     gate text, so gate-name/-tag/-q switch to cream here too. */
+  .gate{background:#9D3E22}
+  .gate-name,.gate-tag,.gate-q{color:var(--cream)}
+
+  /* Quote card, Wifi card, and the Food/Play/Coffee map card — flat #9D3E22 instead
+     of the shared .emo/.wifi-card/.food-card c1s/c2s pastel gradient (base.css). Same
+     contrast issue as the gate above, so their text switches to cream too. */
+  .emo,.wifi-card,.food-card{background:#9D3E22}
+  .emo p,.wifi-info,.wifi-info .net,.wifi-info .pw,.food-card p,.food-card h3{color:var(--cream)}
+
   /* Hero — room photo behind a warm scrim, so the white logo and text stay legible.
      The source photo is a tall 4500x8000 portrait shot. On mobile (where the hero's
      ~86vh box is itself tall/narrow) a plain cover fills it with barely any crop.
@@ -97,7 +109,6 @@
 <body>
 
 <div class="gate" id="gate">
-  <div class="gate-orb" aria-hidden="true" style="width:96px;height:96px;background:var(--c1);border-radius:50%;filter:blur(1px);opacity:.7;margin-bottom:34px;animation:float 9s ease-in-out infinite"></div>
   <div class="gate-logo"><img src="assets/img/logo-white.png" alt="The Palette" width="600" height="334"></div>
   <p class="gate-name">#refined</p>
   <p class="gate-tag" data-vi>nơi sự tinh tế ôm trọn từng cảm xúc</p>
@@ -224,7 +235,7 @@
       <div class="fc-emoji" aria-hidden="true">🍜</div>
       <h3 data-vi>Bản đồ Ăn – Chơi – Cà phê</h3>
       <h3 data-en>Eat – Play – Coffee Map</h3>
-      <a href="food.html"><span data-vi>Xem bản đồ →</span><span data-en>View the map →</span></a>
+      <a href="food.html?room=refined"><span data-vi>Xem bản đồ →</span><span data-en>View the map →</span></a>
     </div>
   </section>
 

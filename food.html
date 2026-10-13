@@ -42,6 +42,18 @@
   .spot-foot{display:flex;justify-content:flex-end;align-items:center;margin-top:14px;gap:10px}
   .spot-map{background:var(--c1);color:var(--ink);text-decoration:none;padding:9px 16px;border-radius:12px;font-size:.82rem;font-weight:600;white-space:nowrap}
 
+  /* Room-accent override — activated via ?room=refined (etc.), which the inline
+     script turns into body[data-room]. Recolors the filter pills and "Open Google
+     Maps" buttons to match the room that linked here instead of this page's own
+     default gold/sage. Dark rust fails contrast with --ink, so refined's buttons
+     switch to cream text too. */
+  body[data-room="refined"] .filter{border-color:#9D3E22}
+  body[data-room="refined"] .spot-map{background:#9D3E22;color:var(--cream)}
+  body[data-room="thoughtful"] .filter{border-color:#919361}
+  body[data-room="thoughtful"] .spot-map{background:#919361;color:var(--cream)}
+  body[data-room="playful"] .filter{border-color:#85ABB8}
+  body[data-room="playful"] .spot-map{background:#85ABB8;color:var(--cream)}
+
   /* Footer contact block — reused verbatim from dreamy.html's own footer-meta,
      so both pages share the exact same footer implementation. */
   .footer-meta{margin-top:14px}
@@ -535,6 +547,22 @@
     if (!badge) return;
     badge.textContent = group.querySelectorAll('.spot[data-cat="' + group.dataset.group + '"]').length;
   });
+
+  // This page is shared across all rooms, so the closing slogan's #dreamy tag — and
+  // the filter pills / "Open Google Maps" buttons, recoloured via the body[data-room]
+  // CSS above — are just the default. A room page can link here with ?room=refined
+  // (etc.) to have its own tag and accent colour show up instead. No param (or an
+  // unknown one) keeps #dreamy and this page's own gold/sage palette as-is.
+  (function(){
+    var room = new URLSearchParams(location.search).get('room');
+    var known = ['refined', 'playful', 'thoughtful'];
+    if (room && known.indexOf(room) !== -1) {
+      document.body.dataset.room = room;
+      document.querySelectorAll('.footer .slogan').forEach(function(el){
+        el.textContent = el.textContent.replace('#dreamy', '#' + room);
+      });
+    }
+  })();
 </script>
 </body>
 </html>

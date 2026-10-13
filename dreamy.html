@@ -63,6 +63,19 @@
   .gate-logo{display:inline-flex;background:var(--ink);border-radius:14px;padding:11px 18px;margin-bottom:28px}
   .gate-logo img{height:40px;width:auto;display:block}
 
+  /* Gate background — flat #E8BB68, this page only (overrides base.css's shared
+     .gate radial-gradient/orb treatment). .gate-tag/.gate-q use the sitewide --inks
+     for secondary text, which was tuned for the old much-paler cream gate bg; bumped
+     to --ink here so they keep solid contrast against the gold. */
+  .gate{background:#E8BB68}
+  .gate-tag,.gate-q{color:var(--ink)}
+
+  /* Quote card, Wifi card, and the Food/Play/Coffee map card — flat #E8BB68 instead
+     of the shared .emo/.wifi-card/.food-card c1s/c2s pastel gradient (base.css),
+     this page only. Same --inks-to--ink contrast bump as the gate, above. */
+  .emo,.wifi-card,.food-card{background:#E8BB68}
+  .wifi-info,.food-card p{color:var(--ink)}
+
   /* Palette note, this page only — title + two colour circles, no code/text.
      .palette-note/.pal-dot are shared with the other room pages, so this stays scoped here. */
   .palette-note{flex-direction:column;align-items:flex-start;gap:12px}
@@ -90,7 +103,6 @@
 <body>
 
 <div class="gate" id="gate">
-  <div class="gate-orb" aria-hidden="true" style="width:96px;height:96px;background:var(--c1);border-radius:50%;filter:blur(1px);opacity:.7;margin-bottom:34px;animation:float 9s ease-in-out infinite"></div>
   <div class="gate-logo"><img src="assets/img/logo-white.png" alt="The Palette" width="600" height="334"></div>
   <p class="gate-name">#dreamy</p>
   <p class="gate-tag" data-vi>nơi vỗ về những mộng mơ</p>
