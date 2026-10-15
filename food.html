@@ -9,8 +9,20 @@
 <link rel="preload" href="assets/fonts/DarleySans-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/base.css">
 <style>
+  /* Montserrat Light — this page only, for body/description copy. Headings and
+     titles keep the sitewide Darley Sans (--font-display, untouched below);
+     only --font-body is overridden, same "change one line" hook base.css's
+     own :root comment already sets up for swapping in a second typeface. */
+  @font-face{
+    font-family:'Montserrat Light';
+    src:url('assets/fonts/Montserrat-Light.ttf') format('truetype');
+    font-weight:300;
+    font-style:normal;
+    font-display:swap;
+  }
+
   /* food.html palette — warm gold & sage, shared by all rooms via their food-card links. */
-  :root{--c1:#F0CE7A;--c1s:#FAEECE;--c2:#A9C4B5;--c2s:#DCEAE2;--cream:#FBF8F2;--ink:#43392E;--inks:#7D7060;--white:#FFFFFF;}
+  :root{--c1:#F0CE7A;--c1s:#FAEECE;--c2:#A9C4B5;--c2s:#DCEAE2;--cream:#FBF8F2;--ink:#43392E;--inks:#7D7060;--white:#FFFFFF;--font-body:'Montserrat Light','Inter',sans-serif;}
 
   .top{padding:52px 0 12px;position:relative}
   /* Brand signature above the title. The logo asset is white, so it sits on a small
