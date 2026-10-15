@@ -9,30 +9,20 @@
 <link rel="preload" href="assets/fonts/DarleySans-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/base.css">
 <style>
-  /* #playful palette — dusty blue & warm gold, pulled from the room photo (the cool
-     blue-teal cast across the walls/linens and the PASTA poster vs. the gold vase and
-     brass lamp). Blue leads as the primary accent, gold is the secondary/border tone. */
-  :root{--c1:#85ABB8;--c1s:#DDE6E5;--c2:#E8BB68;--c2s:#F9EBCE;--cream:#FFFDF6;--ink:#4A4433;--inks:#7D755D;--white:#FFFFFF;}
+  /* #playful palette — pale mint & soft cream, the room's signature colours.
+     Mint leads as the primary accent, cream is the secondary/border tone. */
+  :root{--c1:#DFF2ED;--c1s:#ECF7F4;--c2:#F2EFE9;--c2s:#F7F5F2;--cream:#FFFDF6;--ink:#4A4433;--inks:#7D755D;--white:#FFFFFF;}
   .orb{position:absolute;top:8%;right:-30px;width:150px;height:150px;background:var(--c1);border-radius:50%;filter:blur(26px);opacity:.3;animation:float 9s ease-in-out infinite;}
 
-  /* --c1 is a mid-tone blue — borderline contrast with the sitewide dark --ink text/
-     icon colour used on solid buttons and icon circles, so those switch to cream here.
-     .review-btn-outline keeps dark --ink: it's a transparent/bordered button, not a
-     solid --c1 fill. */
-  .map-btn,.shuffle-btn,.review a,.review-btn:not(.review-btn-outline),.concierge .c-fb,.steps li::before,.loc-icon{color:var(--cream)}
-
-  /* Gate background — flat #DFF2ED, this page only (overrides base.css's shared .gate
-     radial-gradient/orb treatment). gate-tag/-q use the sitewide --inks, bumped to
-     --ink for a touch more contrast against this pale mint. */
+  /* Gate background — flat #DFF2ED (--c1), this page only (overrides base.css's
+     shared .gate radial-gradient/orb treatment). */
   .gate{background:#DFF2ED}
-  .gate-name,.gate-tag,.gate-q{color:var(--ink)}
-  .lang-btn{border-color:#F2EFE9}
 
-  /* Quote card, Wifi card, and the Food/Play/Coffee map card — flat #85ABB8 instead
-     of the shared .emo/.wifi-card/.food-card c1s/c2s pastel gradient (base.css).
-     .wifi-info/.food-card p use the sitewide --inks for secondary text, too light
-     against this blue — bumped to --ink (still the better-contrast of the two). */
-  .emo,.wifi-card,.food-card{background:#85ABB8}
+  /* Quote card, Wifi card, and the Food/Play/Coffee map card — flat #DFF2ED (--c1)
+     instead of the shared .emo/.wifi-card/.food-card c1s/c2s pastel gradient
+     (base.css). .wifi-info/.food-card p use the sitewide --inks for secondary
+     text; bumped to the stronger --ink for a bit more contrast against the mint. */
+  .emo,.wifi-card,.food-card{background:#DFF2ED}
   .wifi-info,.food-card p{color:var(--ink)}
 
   /* Hero — room photo behind a warm scrim, so the white logo and text stay legible.
@@ -151,7 +141,7 @@
       <div class="pal-title" data-vi>Màu sắc chủ đạo</div>
       <div class="pal-title" data-en>Signature Colours</div>
       <div class="pal-dots">
-        <span class="pal-dot" style="background:#85ABB8"></span><span class="pal-dot" style="background:#E8BB68"></span>
+        <span class="pal-dot" style="background:#DFF2ED"></span><span class="pal-dot" style="background:#F2EFE9"></span>
       </div>
     </div>
 
