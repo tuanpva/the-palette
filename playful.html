@@ -21,6 +21,12 @@
      solid --c1 fill. */
   .map-btn,.shuffle-btn,.review a,.review-btn:not(.review-btn-outline),.concierge .c-fb,.steps li::before,.loc-icon{color:var(--cream)}
 
+  /* Gate background — flat #85ABB8, this page only (overrides base.css's shared .gate
+     radial-gradient/orb treatment). gate-tag/-q use the sitewide --inks, too light
+     against this blue — bumped to --ink, same contrast call as the cards below. */
+  .gate{background:#85ABB8}
+  .gate-name,.gate-tag,.gate-q{color:var(--ink)}
+
   /* Quote card, Wifi card, and the Food/Play/Coffee map card — flat #85ABB8 instead
      of the shared .emo/.wifi-card/.food-card c1s/c2s pastel gradient (base.css).
      .wifi-info/.food-card p use the sitewide --inks for secondary text, too light
