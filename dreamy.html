@@ -31,6 +31,12 @@
      kept in Darley Sans instead. */
   .review-btn,.acc summary,.wifi-info{font-family:var(--font-display)}
 
+  /* "Sao chép" (copy wifi password) and "Xem bản đồ" (food-card map link) were
+     always a flat --ink/--cream button regardless of room — now flat --c2
+     (this room's secondary colour) instead. --c2 here is pale, so dark --ink
+     text reads far better than white would. */
+  .copy-btn,.food-card a{background:var(--c2);color:var(--ink)}
+
   /* Hero — room photo behind a warm scrim, so the white logo and text stay legible.
      The source photo is a tall 4500x8000 portrait shot. On mobile (where the hero's
      ~86vh box is itself tall/narrow) a plain cover fills it with barely any crop.

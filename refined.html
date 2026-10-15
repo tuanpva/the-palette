@@ -32,6 +32,12 @@
      kept in Darley Sans instead. */
   .review-btn,.acc summary,.wifi-info{font-family:var(--font-display)}
 
+  /* "Sao chép" (copy wifi password) and "Xem bản đồ" (food-card map link) were
+     always a flat --ink/--cream button regardless of room — now flat --c2
+     (this room's secondary colour) instead. --c2 here is pale, so dark --ink
+     text reads far better than white would. */
+  .copy-btn,.food-card a{background:var(--c2);color:var(--ink)}
+
   /* --c1 here is a dark rust red, too dark for the sitewide --ink text/icon colour used
      on buttons and icon circles in the paler rooms — switch those to cream for contrast.
      .review-btn-outline is excluded: it's a transparent/bordered button, not a solid
