@@ -25,9 +25,11 @@
   :root{--c1:#FDECA4;--c1s:#FBF3D2;--c2:#B9DCEA;--c2s:#DCEAF0;--cream:#FFFDF6;--ink:#4A4433;--inks:#7D755D;--white:#FFFFFF;--font-body:'Montserrat Light','Inter',sans-serif;}
   .orb{position:absolute;top:8%;right:-30px;width:150px;height:150px;background:var(--c1);border-radius:50%;filter:blur(26px);opacity:.3;animation:float 9s ease-in-out infinite;}
 
-  /* Google Reviews / Facebook buttons have no font-family of their own in base.css,
-     so they'd inherit the new --font-body above — kept in Darley Sans instead. */
-  .review-btn{font-family:var(--font-display)}
+  /* Google Reviews / Facebook buttons, accordion titles ("Wifi" label + every
+     card's <summary>: amenities, coffee steps, etc.) have no font-family of
+     their own in base.css, so they'd inherit the new --font-body above —
+     kept in Darley Sans instead. */
+  .review-btn,.acc summary,.wifi-info{font-family:var(--font-display)}
 
   /* Hero — room photo behind a warm scrim, so the white logo and text stay legible.
      The source photo is a tall 4500x8000 portrait shot. On mobile (where the hero's
