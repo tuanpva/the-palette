@@ -37,6 +37,10 @@
      (this room's secondary colour) instead. --c2 here is pale, so dark --ink
      text reads far better than white would. */
   .copy-btn,.food-card a{background:var(--c2);color:var(--ink)}
+  /* base.css's .copy-btn.done{background:#7BA05B} is more specific than the
+     plain .copy-btn rule above, so it'd still win and flash green on copy —
+     matched back to the same --c2 here to keep the button's colour steady. */
+  .copy-btn.done{background:var(--c2)}
 
   /* --c1 here is a dark rust red, too dark for the sitewide --ink text/icon colour used
      on buttons and icon circles in the paler rooms — switch those to cream for contrast.

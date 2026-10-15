@@ -32,6 +32,11 @@
      kept in Darley Sans instead. */
   .review-btn,.acc summary,.wifi-info{font-family:var(--font-display)}
 
+  /* base.css's .copy-btn.done{background:#7BA05B} is more specific than its own
+     plain .copy-btn rule (background:var(--ink)), so clicking "Sao chép" briefly
+     flashes green — matched back to --ink here to keep the button's colour steady. */
+  .copy-btn.done{background:var(--ink)}
+
   /* Gate background — flat #DFF2ED (--c1), this page only (overrides base.css's
      shared .gate radial-gradient/orb treatment). */
   .gate{background:#DFF2ED}

@@ -36,6 +36,10 @@
      the white .card boxes (amenities accordions etc.) instead, with the same
      dark --ink text those cards use by default. */
   .copy-btn,.food-card a{background:var(--white);color:var(--ink);box-shadow:var(--shadow)}
+  /* base.css's .copy-btn.done{background:#7BA05B} is more specific than the
+     plain .copy-btn rule above, so it'd still win and flash green on copy —
+     matched back to the same white here to keep the button's colour steady. */
+  .copy-btn.done{background:var(--white)}
 
   /* Hero — room photo behind a warm scrim, so the white logo and text stay legible.
      The source photo is a tall 4500x8000 portrait shot. On mobile (where the hero's

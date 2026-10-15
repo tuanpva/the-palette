@@ -33,6 +33,11 @@
      kept in Darley Sans instead. */
   .review-btn,.acc summary,.wifi-info{font-family:var(--font-display)}
 
+  /* base.css's .copy-btn.done{background:#7BA05B} is more specific than its own
+     plain .copy-btn rule (background:var(--ink)), so clicking "Sao chép" briefly
+     flashes green — matched back to --ink here to keep the button's colour steady. */
+  .copy-btn.done{background:var(--ink)}
+
   /* --c1 is a mid-dark olive — too dark for the sitewide --ink text/icon colour used
      on buttons and icon circles, so those switch to cream here. Gate and the Quote/
      Wifi/Food cards get a flat #919361 background (overriding base.css's shared
